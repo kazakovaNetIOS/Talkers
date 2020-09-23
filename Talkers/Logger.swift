@@ -10,7 +10,7 @@ import Foundation
 
 class Logger {
     
-    public static var isLoggingOn: Bool = true
+    public static var isLoggingOn: Bool = false
     
     public static func printInLog(_ text: String) {
         if !isLoggingOn {

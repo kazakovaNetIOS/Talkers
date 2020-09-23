@@ -8,21 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D463E250AD21300E5A610 /* AppDelegate.swift */; };
-		560D4643250AD21300E5A610 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4642250AD21300E5A610 /* ViewController.swift */; };
+		560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4642250AD21300E5A610 /* ProfileViewController.swift */; };
 		560D4646250AD21300E5A610 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* Main.storyboard */; };
 		560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560D4647250AD21A00E5A610 /* Assets.xcassets */; };
 		560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */; };
+		568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */; };
+		568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */; };
+		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
+		568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE50B251B3315001277F1 /* Roboto-Regular.otf */; };
 		56BD29ED2510C441003633A3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD29EC2510C441003633A3 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		560D463B250AD21300E5A610 /* Talkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		560D463E250AD21300E5A610 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		560D4642250AD21300E5A610 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		560D4642250AD21300E5A610 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		560D4645250AD21300E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		560D4647250AD21A00E5A610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560D464A250AD21A00E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560D464C250AD21A00E5A610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		568AE50B251B3315001277F1 /* Roboto-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.otf"; sourceTree = "<group>"; };
 		56BD29EC2510C441003633A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,14 +65,26 @@
 			isa = PBXGroup;
 			children = (
 				560D463E250AD21300E5A610 /* AppDelegate.swift */,
-				560D4642250AD21300E5A610 /* ViewController.swift */,
+				560D4642250AD21300E5A610 /* ProfileViewController.swift */,
 				560D4644250AD21300E5A610 /* Main.storyboard */,
 				560D4647250AD21A00E5A610 /* Assets.xcassets */,
 				560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */,
 				560D464C250AD21A00E5A610 /* Info.plist */,
 				56BD29EC2510C441003633A3 /* Logger.swift */,
+				568AE4BA251B1C4E001277F1 /* Fonts */,
 			);
 			path = Talkers;
+			sourceTree = "<group>";
+		};
+		568AE4BA251B1C4E001277F1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				568AE50B251B3315001277F1 /* Roboto-Regular.otf */,
+				568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */,
+				568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */,
+				568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,7 +114,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1170;
-				LastUpgradeCheck = 1170;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Natalia Kazakova";
 				TargetAttributes = {
 					560D463A250AD21300E5A610 = {
@@ -125,9 +145,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */,
 				560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */,
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
 				560D4646250AD21300E5A610 /* Main.storyboard in Resources */,
+				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
+				568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */,
+				568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				560D4643250AD21300E5A610 /* ViewController.swift in Sources */,
+				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 			);
@@ -192,6 +216,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -252,6 +277,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
