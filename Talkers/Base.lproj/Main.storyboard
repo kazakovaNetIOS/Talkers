@@ -1,24 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.otf">
+            <string>Roboto-Regular</string>
+        </array>
+        <array key="SF-Pro-Display-Bold.otf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="Talkers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lco-je-ML4">
+                                <rect key="frame" x="67.5" y="45" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="QhI-ak-IjB"/>
+                                    <constraint firstAttribute="height" constant="240" id="qFC-bV-qE9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Natalia Kazakova" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXM-jA-Ebc">
+                                <rect key="frame" x="94.5" y="317" width="186" height="29"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiE-fG-fb3">
+                                <rect key="frame" x="56" y="602" width="263" height="35"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="19"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="profileSaveAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8BS-NE-dPM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5t-cL-ete">
+                                <rect key="frame" x="67.5" y="45" width="240" height="240"/>
+                                <color key="backgroundColor" red="0.89411764705882346" green="0.90980392156862744" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="120"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX/UI designer, web-designer Moscow, Russia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R53-mF-nTW">
+                                <rect key="frame" x="72.5" y="378" width="230" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="tJH-7j-PIg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylj-Gk-iwW">
+                                <rect key="frame" x="263.5" y="259" width="44" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="FLr-WW-hPK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="IPN-MV-jEy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="16"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="profileImageEditAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZiD-TU-F73"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="R53-mF-nTW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Hd-mN-qkg"/>
+                            <constraint firstItem="R5t-cL-ete" firstAttribute="trailing" secondItem="lco-je-ML4" secondAttribute="trailing" id="45K-TK-qpa"/>
+                            <constraint firstItem="R5t-cL-ete" firstAttribute="top" secondItem="lco-je-ML4" secondAttribute="top" id="Boy-Kf-DhX"/>
+                            <constraint firstItem="YiE-fG-fb3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="56" id="DD8-xY-pNM"/>
+                            <constraint firstItem="R5t-cL-ete" firstAttribute="leading" secondItem="lco-je-ML4" secondAttribute="leading" id="Dci-42-rsK"/>
+                            <constraint firstItem="lco-je-ML4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EKi-ci-HNz"/>
+                            <constraint firstItem="lco-je-ML4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="ET3-xh-F0h"/>
+                            <constraint firstItem="ylj-Gk-iwW" firstAttribute="trailing" secondItem="lco-je-ML4" secondAttribute="trailing" id="F4M-XY-knH"/>
+                            <constraint firstItem="ylj-Gk-iwW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lco-je-ML4" secondAttribute="leading" id="GF8-Nh-zOG"/>
+                            <constraint firstAttribute="bottom" secondItem="YiE-fG-fb3" secondAttribute="bottom" constant="30" id="Iv3-Tw-1hW"/>
+                            <constraint firstItem="R5t-cL-ete" firstAttribute="bottom" secondItem="lco-je-ML4" secondAttribute="bottom" id="PLn-7m-Kn0"/>
+                            <constraint firstItem="R53-mF-nTW" firstAttribute="top" secondItem="xXM-jA-Ebc" secondAttribute="bottom" constant="32" id="QDU-q4-4ZG"/>
+                            <constraint firstItem="xXM-jA-Ebc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bw1-mP-c7V"/>
+                            <constraint firstItem="ylj-Gk-iwW" firstAttribute="bottom" secondItem="lco-je-ML4" secondAttribute="bottom" constant="14" id="f7J-iR-PRI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YiE-fG-fb3" secondAttribute="trailing" constant="56" id="k4y-jI-HiP"/>
+                            <constraint firstItem="xXM-jA-Ebc" firstAttribute="top" secondItem="lco-je-ML4" secondAttribute="bottom" constant="32" id="kz8-lE-kKd"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="profileImage" destination="lco-je-ML4" id="TLf-kK-9DB"/>
+                        <outlet property="profileInitialsLabel" destination="R5t-cL-ete" id="xJt-NM-TSI"/>
+                        <outlet property="profileNameLabel" destination="xXM-jA-Ebc" id="MJ7-rA-uaE"/>
+                        <outlet property="profilePositionLabel" destination="R53-mF-nTW" id="7Dd-8w-9xv"/>
+                        <outlet property="profileSaveButton" destination="YiE-fG-fb3" id="P2T-Xl-QmC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="138.40000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
