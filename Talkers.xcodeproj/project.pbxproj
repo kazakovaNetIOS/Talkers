@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D463E250AD21300E5A610 /* AppDelegate.swift */; };
 		560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4642250AD21300E5A610 /* ProfileViewController.swift */; };
-		560D4646250AD21300E5A610 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* Main.storyboard */; };
+		560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* ProfileViewController.storyboard */; };
 		560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560D4647250AD21A00E5A610 /* Assets.xcassets */; };
 		560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */; };
+		567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */; };
+		567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3CF5252261B40078A709 /* ConversationsListViewController.swift */; };
+		567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CFD252262D70078A709 /* ConversationViewController.storyboard */; };
+		567F3D01252262F40078A709 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D00252262F40078A709 /* ConversationViewController.swift */; };
 		568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */; };
 		568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */; };
 		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
@@ -23,10 +27,14 @@
 		560D463B250AD21300E5A610 /* Talkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		560D463E250AD21300E5A610 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		560D4642250AD21300E5A610 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		560D4645250AD21300E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		560D4645250AD21300E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ProfileViewController.storyboard; sourceTree = "<group>"; };
 		560D4647250AD21A00E5A610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560D464A250AD21A00E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560D464C250AD21A00E5A610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsListViewController.storyboard; sourceTree = "<group>"; };
+		567F3CF5252261B40078A709 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
+		567F3CFD252262D70078A709 /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
+		567F3D00252262F40078A709 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
@@ -65,15 +73,67 @@
 			isa = PBXGroup;
 			children = (
 				560D463E250AD21300E5A610 /* AppDelegate.swift */,
-				560D4642250AD21300E5A610 /* ProfileViewController.swift */,
-				560D4644250AD21300E5A610 /* Main.storyboard */,
-				560D4647250AD21A00E5A610 /* Assets.xcassets */,
-				560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */,
 				560D464C250AD21A00E5A610 /* Info.plist */,
 				56BD29EC2510C441003633A3 /* Logger.swift */,
-				568AE4BA251B1C4E001277F1 /* Fonts */,
+				567F3D08252266230078A709 /* Assets */,
+				567F3CFA252262240078A709 /* UI */,
 			);
 			path = Talkers;
+			sourceTree = "<group>";
+		};
+		567F3CF4252261600078A709 /* ConversationsList */ = {
+			isa = PBXGroup;
+			children = (
+				567F3CF5252261B40078A709 /* ConversationsListViewController.swift */,
+				567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */,
+			);
+			path = ConversationsList;
+			sourceTree = "<group>";
+		};
+		567F3CFA252262240078A709 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				567F3CFC252262C30078A709 /* Conversation */,
+				567F3CF4252261600078A709 /* ConversationsList */,
+				567F3D04252265380078A709 /* LaunchScreen */,
+				567F3D05252265B90078A709 /* Profile */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		567F3CFC252262C30078A709 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				567F3D00252262F40078A709 /* ConversationViewController.swift */,
+				567F3CFD252262D70078A709 /* ConversationViewController.storyboard */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		567F3D04252265380078A709 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		567F3D05252265B90078A709 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				560D4642250AD21300E5A610 /* ProfileViewController.swift */,
+				560D4644250AD21300E5A610 /* ProfileViewController.storyboard */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		567F3D08252266230078A709 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				560D4647250AD21A00E5A610 /* Assets.xcassets */,
+				568AE4BA251B1C4E001277F1 /* Fonts */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		568AE4BA251B1C4E001277F1 /* Fonts */ = {
@@ -147,9 +207,11 @@
 			files = (
 				568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */,
 				560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */,
+				567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */,
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
-				560D4646250AD21300E5A610 /* Main.storyboard in Resources */,
+				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
 				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
+				567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */,
 				568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */,
 				568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */,
 			);
@@ -163,6 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
+				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
+				567F3D01252262F40078A709 /* ConversationViewController.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 			);
@@ -171,12 +235,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		560D4644250AD21300E5A610 /* Main.storyboard */ = {
+		560D4644250AD21300E5A610 /* ProfileViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				560D4645250AD21300E5A610 /* Base */,
 			);
-			name = Main.storyboard;
+			name = ProfileViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */ = {

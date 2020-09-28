@@ -171,3 +171,12 @@ extension UIAlertController {
         }
     }
 }
+
+// MARK: - Instantiation from storybord
+
+extension ProfileViewController {
+    static func storyboardInstance() -> ProfileViewController? {
+        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+        return storyboard.instantiateInitialViewController() as? ProfileViewController
+    }
+}
