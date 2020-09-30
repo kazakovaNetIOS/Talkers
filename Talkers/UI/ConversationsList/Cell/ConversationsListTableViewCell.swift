@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol ConfigurableView {
-    
-    associatedtype ConfigurationModel
-    
-    func configure(with model: ConfigurationModel)
-}
+typealias ConversationModel = ConversationsListTableViewCell.ConversationCellModel
 
 class ConversationsListTableViewCell: UITableViewCell {
     
@@ -48,8 +43,12 @@ extension ConversationsListTableViewCell: ConfigurableView {
         setMessage(with: model)
         setDate(with: model)
         setIsOnline(with: model.isOnline)
-    }
-    
+    }    
+}
+
+// MARK: - Private
+
+extension ConversationsListTableViewCell {
     private func setName(with name: String) {
         nameLabel?.text = name
     }
@@ -82,13 +81,19 @@ extension ConversationsListTableViewCell: ConfigurableView {
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
-        // TODO сравнение дат по дням
-        let dateTemplate = model.date < Date() ? "dd MMM" : "HH:mm"
+        let dateTemplate = isConversationDateInPast(model.date) ? "dd MMM" : "HH:mm"
         dateFormatter.setLocalizedDateFormatFromTemplate(dateTemplate)
         dateLabel?.text = dateFormatter.string(from: model.date)
     }
     
     private func setIsOnline(with isOnline: Bool) {
         contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+    }
+    
+    private func isConversationDateInPast(_ date: Date) -> Bool {
+        var calender = Calendar.current
+        calender.timeZone = TimeZone.current
+        let result = calender.compare(date, to: Date(), toGranularity: .day)
+        return result == .orderedAscending
     }
 }

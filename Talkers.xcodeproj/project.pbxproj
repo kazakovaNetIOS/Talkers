@@ -18,7 +18,12 @@
 		567F3D01252262F40078A709 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D00252262F40078A709 /* ConversationViewController.swift */; };
 		567F3D192523EB440078A709 /* ConversationsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D172523EB440078A709 /* ConversationsListTableViewCell.swift */; };
 		567F3D1A2523EB440078A709 /* ConversationsListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567F3D182523EB440078A709 /* ConversationsListTableViewCell.xib */; };
-		567F3D2025246ED50078A709 /* DummyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D1F25246ED50078A709 /* DummyDataSource.swift */; };
+		567F3D2025246ED50078A709 /* DummyConversationListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D1F25246ED50078A709 /* DummyConversationListDataSource.swift */; };
+		567F3D262524C7CF0078A709 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D242524C7CF0078A709 /* ConversationTableViewCell.swift */; };
+		567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567F3D252524C7CF0078A709 /* IncomingConversationTableViewCell.xib */; };
+		567F3D2B2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567F3D2A2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib */; };
+		567F3D2F2524D4C50078A709 /* DummyConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D2E2524D4C50078A709 /* DummyConversationDataSource.swift */; };
+		567F3D33252508470078A709 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D32252508470078A709 /* ConfigurableView.swift */; };
 		568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */; };
 		568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */; };
 		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
@@ -40,7 +45,12 @@
 		567F3D00252262F40078A709 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		567F3D172523EB440078A709 /* ConversationsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListTableViewCell.swift; sourceTree = "<group>"; };
 		567F3D182523EB440078A709 /* ConversationsListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationsListTableViewCell.xib; sourceTree = "<group>"; };
-		567F3D1F25246ED50078A709 /* DummyDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataSource.swift; sourceTree = "<group>"; };
+		567F3D1F25246ED50078A709 /* DummyConversationListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyConversationListDataSource.swift; sourceTree = "<group>"; };
+		567F3D242524C7CF0078A709 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		567F3D252524C7CF0078A709 /* IncomingConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingConversationTableViewCell.xib; sourceTree = "<group>"; };
+		567F3D2A2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingConversationTableViewCell.xib; sourceTree = "<group>"; };
+		567F3D2E2524D4C50078A709 /* DummyConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyConversationDataSource.swift; sourceTree = "<group>"; };
+		567F3D32252508470078A709 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
 		568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
@@ -103,6 +113,7 @@
 				567F3CF4252261600078A709 /* ConversationsList */,
 				567F3D04252265380078A709 /* LaunchScreen */,
 				567F3D05252265B90078A709 /* Profile */,
+				567F3D32252508470078A709 /* ConfigurableView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -110,6 +121,7 @@
 		567F3CFC252262C30078A709 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				567F3D222524C74F0078A709 /* Cells */,
 				567F3D00252262F40078A709 /* ConversationViewController.swift */,
 				567F3CFD252262D70078A709 /* ConversationViewController.storyboard */,
 			);
@@ -154,8 +166,9 @@
 		567F3D0E252373220078A709 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				567F3D2E2524D4C50078A709 /* DummyConversationDataSource.swift */,
+				567F3D1F25246ED50078A709 /* DummyConversationListDataSource.swift */,
 				56BD29EC2510C441003633A3 /* Logger.swift */,
-				567F3D1F25246ED50078A709 /* DummyDataSource.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -167,6 +180,16 @@
 				567F3D182523EB440078A709 /* ConversationsListTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		567F3D222524C74F0078A709 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				567F3D242524C7CF0078A709 /* ConversationTableViewCell.swift */,
+				567F3D252524C7CF0078A709 /* IncomingConversationTableViewCell.xib */,
+				567F3D2A2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		568AE4BA251B1C4E001277F1 /* Fonts */ = {
@@ -238,10 +261,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567F3D2B2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib in Resources */,
 				568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */,
 				560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */,
 				567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */,
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
+				567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */,
 				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
 				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
 				567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */,
@@ -258,9 +283,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567F3D262524C7CF0078A709 /* ConversationTableViewCell.swift in Sources */,
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
-				567F3D2025246ED50078A709 /* DummyDataSource.swift in Sources */,
+				567F3D2025246ED50078A709 /* DummyConversationListDataSource.swift in Sources */,
 				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
+				567F3D2F2524D4C50078A709 /* DummyConversationDataSource.swift in Sources */,
+				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				567F3D192523EB440078A709 /* ConversationsListTableViewCell.swift in Sources */,
 				567F3D01252262F40078A709 /* ConversationViewController.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,

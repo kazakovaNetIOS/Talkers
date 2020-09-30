@@ -8,8 +8,8 @@
 
 import Foundation
 
-class DummyDataSource {
-    static var chat = [
+class DummyConversationListDataSource {
+    private static var chat = [
         [
             MessageModel(name: "Лев Толстой", message: "Последнее время мне стало жить тяжело. Я вижу, я стал понимать слишком много.", date: Date(), isOnline: true, hasUnreadMessage: true),
             MessageModel(name: "Сергей Довлатов", message: "", date: from(year: 2020, month: 9, day: 28), isOnline: true, hasUnreadMessage: false),
@@ -36,7 +36,7 @@ class DummyDataSource {
         ]
     ]
     
-    static func from(year: Int, month: Int, day: Int) -> Date {
+    private static func from(year: Int, month: Int, day: Int) -> Date {
         guard let gregorianCalendar = NSCalendar(calendarIdentifier: .gregorian) else {
             return Date()
         }
@@ -51,6 +51,26 @@ class DummyDataSource {
         }
         
         return date
+    }
+    
+    static func getMessage(by indexPath: IndexPath) -> MessageModel {
+        if indexPath.section == 1 {
+            return chat[indexPath.section].filter { !$0.isEmptyMessage }[indexPath.row]
+        } else {
+            return chat[indexPath.section][indexPath.row]
+        }
+    }
+    
+    static func getMessagesCount(for section: Int) -> Int {
+        if section == 1 {
+            return chat[section].filter { !$0.isEmptyMessage }.count
+        } else {
+            return chat[section].count
+        }
+    }
+    
+    static func getSectionCount() -> Int {
+        return chat.count
     }
 }
 

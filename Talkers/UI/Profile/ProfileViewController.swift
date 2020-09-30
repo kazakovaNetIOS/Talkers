@@ -16,38 +16,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var profileInitialsLabel: UILabel!
     @IBOutlet weak var profileSaveButton: UIButton!
     
-    // MARK: - Init
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        // Вызывает ошибку Unexpectedly found nil while implicitly unwrapping,
-        // так как в этот момент еще не отработал метод loadView(), который
-        // создает представление для контроллера
-        // print("Frame profileSaveButton on \(#function): \(profileSaveButton.frame)")
-    }
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // view еще не получило актуальных размеров, изменять их в этом методе нельзя
-        print("Frame profileSaveButton on \(#function): \(profileSaveButton.frame)")
+        super.viewDidLoad()        
         
         shapeIntoCircle(for: profileInitialsLabel)
         shapeIntoCircle(for: profileImage)
         
         profileSaveButton.layer.cornerRadius = 14
         profileSaveButton.layer.masksToBounds = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // view отображено на экране, встроено в иерархию представлений и имеет
-        // актуальные размеры, которыми можно оперировать
-        print("Frame profileSaveButton on \(#function): \(profileSaveButton.frame)")
     }
     
     // MARK: - IBActions
@@ -64,6 +42,10 @@ class ProfileViewController: UIViewController {
     
     @IBAction func profileSaveAction(_ sender: Any) {
         // TODO: - Stub
+    }
+    
+    @IBAction func profileCloseAction(_ sender: Any) {
+        self.dismiss(animated: true)
     }
     
     // MARK: - Private
