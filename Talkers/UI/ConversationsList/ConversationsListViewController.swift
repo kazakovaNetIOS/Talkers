@@ -12,25 +12,6 @@ typealias MessageModel = ConversationsListTableViewCell.ConversationCellModel
 
 class ConversationsListViewController: UIViewController {
     
-    let chat = [[MessageModel(
-                    name: "Лев Толстой",
-                    message: "Последнее время мне стало жить тяжело. Я вижу, я стал понимать слишком много.",
-                    date: Date(),
-                    isOnline: true,
-                    hasUnreadMessage: true),
-                 MessageModel(
-                    name: "Сергей Довлатов",
-                    message: "",
-                    date: Date(),
-                    isOnline: true,
-                    hasUnreadMessage: false)],
-                [MessageModel(
-                    name: "Иван Тургенев",
-                    message: "Как все русские дворяне, он в молодости учился музыке и, как почти все русские дворяне, играл очень плохо; но он страстно любил музыку.",
-                    date: Date(),
-                    isOnline: false,
-                    hasUnreadMessage: false)]]
-    
     private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
     
     @IBOutlet weak var conversationsListTableView: UITableView!
@@ -58,11 +39,14 @@ class ConversationsListViewController: UIViewController {
 
 extension ConversationsListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return chat.count
+        return DummyDataSource.chat.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chat[section].count
+        if section == 1 {
+            return DummyDataSource.chat[section].filter { !$0.isEmptyMessage }.count
+        }
+        return DummyDataSource.chat[section].count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -77,8 +61,14 @@ extension ConversationsListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = chat[indexPath.section][indexPath.row]
-        // TODO не отображать пустые диалоги
+        let message: MessageModel
+        
+        if indexPath.section == 1 {
+            message = DummyDataSource.chat[indexPath.section].filter { !$0.isEmptyMessage }[indexPath.row]
+        } else {
+            message = DummyDataSource.chat[indexPath.section][indexPath.row]
+        }
+        
         guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: cellIdentifier, for: indexPath)
                 as? ConversationsListTableViewCell
