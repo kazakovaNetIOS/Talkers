@@ -42,6 +42,12 @@ class ConversationsListViewController: UIViewController {
             present(profileViewController, animated: true)
         }
     }
+    
+    @IBAction func settingsIconTapped(_ sender: Any) {
+        if let themesViewController = ThemesViewController.storyboardInstance() {
+            navigationController?.pushViewController(themesViewController, animated: true)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource

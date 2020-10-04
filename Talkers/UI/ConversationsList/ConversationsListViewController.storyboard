@@ -32,6 +32,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="W5Z-bw-caF">
+                        <barButtonItem key="leftBarButtonItem" image="settings" id="IYH-mS-3Gz">
+                            <connections>
+                                <action selector="settingsIconTapped:" destination="J5H-0z-0ei" id="Biw-se-7bM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="profile" id="7h9-CN-kl5">
                             <connections>
                                 <action selector="profileIconTapped:" destination="J5H-0z-0ei" id="kHb-ZE-Jh1"/>
@@ -68,6 +73,7 @@
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="profile" width="33" height="33"/>
+        <image name="settings" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
