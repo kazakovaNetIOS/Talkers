@@ -10,6 +10,8 @@ import UIKit
 
 @IBDesignable class ThemeButton: UIView {
     
+    var buttonTapped: () -> Void = { }
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var messagesWrapper: UIView!
     @IBOutlet weak var incomingMessage: UIView!
@@ -33,7 +35,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var labelColor: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) {
+    @IBInspectable var labelColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) {
         didSet {
             titleLabel.textColor = labelColor
         }
@@ -78,11 +80,22 @@ private extension ThemeButton {
     }
     
     func initMessageWrapperView() {
-        messagesWrapper.layer.cornerRadius = 8.0
+        messagesWrapper.layer.cornerRadius = 14.0
+        messagesWrapper.layer.borderWidth = 1.0
+        messagesWrapper.layer.borderColor = #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
     }
     
     func initMessageBoxes() {
         incomingMessage.layer.cornerRadius = 8.0
         outgoingMessage.layer.cornerRadius = 8.0
+    }
+}
+
+// MARK: - Public
+
+extension ThemeButton {
+    func isSelected(_ selected: Bool) {
+        messagesWrapper.layer.borderWidth = selected ? 3.0 : 1.0
+        messagesWrapper.layer.borderColor = selected ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
     }
 }

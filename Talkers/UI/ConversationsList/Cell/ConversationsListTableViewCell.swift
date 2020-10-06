@@ -87,7 +87,7 @@ extension ConversationsListTableViewCell {
     }
     
     private func setIsOnline(with isOnline: Bool) {
-        contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
     }
     
     private func isConversationDateInPast(_ date: Date) -> Bool {

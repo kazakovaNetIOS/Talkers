@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SF-Pro-Text-Regular.otf">
-            <string>SFProText-Regular</string>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
         </array>
     </customFonts>
     <objects>
@@ -60,19 +60,19 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsT-TO-XOf">
-                            <rect key="frame" x="0.0" y="102" width="328" height="20"/>
+                            <rect key="frame" x="0.0" y="106" width="328" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="Jre-v2-tbi"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="19"/>
-                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="19"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="RsT-TO-XOf" secondAttribute="trailing" id="Agc-hX-hs3"/>
                         <constraint firstItem="RsT-TO-XOf" firstAttribute="leading" secondItem="HQj-nu-nrD" secondAttribute="leading" id="H4c-zq-Zmu"/>
-                        <constraint firstItem="RsT-TO-XOf" firstAttribute="top" secondItem="wjM-1A-qwi" secondAttribute="bottom" constant="16" id="LsJ-uB-9DL"/>
+                        <constraint firstItem="RsT-TO-XOf" firstAttribute="top" secondItem="wjM-1A-qwi" secondAttribute="bottom" constant="20" id="LsJ-uB-9DL"/>
                         <constraint firstItem="wjM-1A-qwi" firstAttribute="top" secondItem="HQj-nu-nrD" secondAttribute="top" constant="16" id="Suz-7u-l4o"/>
                         <constraint firstItem="wjM-1A-qwi" firstAttribute="leading" secondItem="HQj-nu-nrD" secondAttribute="leading" id="VWk-pp-PZE"/>
                         <constraint firstAttribute="trailing" secondItem="wjM-1A-qwi" secondAttribute="trailing" id="a7e-wo-SEG"/>
