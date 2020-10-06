@@ -14,6 +14,8 @@
 		560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */; };
 		5612ED93252A723E003A5955 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED92252A723E003A5955 /* ThemesViewController.swift */; };
 		5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED95252A725D003A5955 /* ThemesViewController.storyboard */; };
+		5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED98252A76D2003A5955 /* ThemeButton.swift */; };
+		5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED9B252A772D003A5955 /* ThemeButton.xib */; };
 		567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */; };
 		567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3CF5252261B40078A709 /* ConversationsListViewController.swift */; };
 		567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CFD252262D70078A709 /* ConversationViewController.storyboard */; };
@@ -43,6 +45,8 @@
 		560D464C250AD21A00E5A610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5612ED92252A723E003A5955 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		5612ED95252A725D003A5955 /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
+		5612ED98252A76D2003A5955 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
+		5612ED9B252A772D003A5955 /* ThemeButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeButton.xib; sourceTree = "<group>"; };
 		567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsListViewController.storyboard; sourceTree = "<group>"; };
 		567F3CF5252261B40078A709 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		567F3CFD252262D70078A709 /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
@@ -103,10 +107,20 @@
 		5612ED91252A7205003A5955 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				5612ED9E252A7736003A5955 /* ThemeButton */,
 				5612ED92252A723E003A5955 /* ThemesViewController.swift */,
 				5612ED95252A725D003A5955 /* ThemesViewController.storyboard */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		5612ED9E252A7736003A5955 /* ThemeButton */ = {
+			isa = PBXGroup;
+			children = (
+				5612ED98252A76D2003A5955 /* ThemeButton.swift */,
+				5612ED9B252A772D003A5955 /* ThemeButton.xib */,
+			);
+			path = ThemeButton;
 			sourceTree = "<group>";
 		};
 		567F3CF4252261600078A709 /* ConversationsList */ = {
@@ -280,6 +294,7 @@
 				560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */,
 				567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */,
 				5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */,
+				5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */,
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
 				567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */,
 				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
@@ -309,6 +324,7 @@
 				5612ED93252A723E003A5955 /* ThemesViewController.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
+				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,10 +16,87 @@
                     <view key="view" contentMode="scaleToFill" id="LXU-Nr-QPB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CXj-CJ-MJw">
+                                <rect key="frame" x="40" y="152" width="334" height="646"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K47-1o-Hsu" customClass="ThemeButton" customModule="Talkers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="204.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="incomingColor">
+                                                <color key="value" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="outgoingColor">
+                                                <color key="value" red="0.86274509799999999" green="0.96862745100000003" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="chatBackgroundColor">
+                                                <color key="value" red="1" green="1" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="labelColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="labelText" value="Classic"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fz1-Tf-V8M" customClass="ThemeButton" customModule="Talkers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="220.5" width="334" height="205"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="incomingColor">
+                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="outgoingColor">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="chatBackgroundColor">
+                                                <color key="value" red="0.90866065029999998" green="0.91257077460000002" blue="0.92039293050000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="labelColor">
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="labelText" value="Day"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-gK-agt" customClass="ThemeButton" customModule="Talkers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="441.5" width="334" height="204.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="incomingColor">
+                                                <color key="value" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="outgoingColor">
+                                                <color key="value" red="0.31764705882352939" green="0.31764705882352939" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="chatBackgroundColor">
+                                                <color key="value" red="0.023529411764705882" green="0.023529411764705882" blue="0.023529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="labelColor">
+                                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="labelText" value="Night"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="MiO-io-2gC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CXj-CJ-MJw" firstAttribute="leading" secondItem="MiO-io-2gC" secondAttribute="leading" constant="40" id="24y-uW-naW"/>
+                            <constraint firstItem="MiO-io-2gC" firstAttribute="trailing" secondItem="CXj-CJ-MJw" secondAttribute="trailing" constant="40" id="3HD-Lq-3ox"/>
+                            <constraint firstItem="MiO-io-2gC" firstAttribute="bottom" secondItem="CXj-CJ-MJw" secondAttribute="bottom" constant="64" id="JdC-xJ-Fo2"/>
+                            <constraint firstItem="CXj-CJ-MJw" firstAttribute="top" secondItem="MiO-io-2gC" secondAttribute="top" constant="64" id="ZcE-uc-jeG"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="zNw-VF-RdE"/>
+                    <navigationItem key="navigationItem" title="Settings" id="zNw-VF-RdE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="zAu-C1-nC9"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="classicThemeButton" destination="K47-1o-Hsu" id="FIB-Tl-JpU"/>
+                        <outlet property="dayThemeButton" destination="Fz1-Tf-V8M" id="EiM-Y0-sXC"/>
+                        <outlet property="nightThemeButton" destination="qcE-gK-agt" id="jDy-x0-wfO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x9A-XN-3he" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

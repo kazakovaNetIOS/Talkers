@@ -10,11 +10,19 @@ import UIKit
 
 class ThemesViewController: UIViewController {
 
+    @IBOutlet weak var classicThemeButton: ThemeButton!
+    @IBOutlet weak var dayThemeButton: ThemeButton!
+    @IBOutlet weak var nightThemeButton: ThemeButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
+}
+
+// MARK: - Private
+
+private extension ThemesViewController {
 }
 
 
