@@ -91,12 +91,13 @@ extension ConversationsListTableViewCell {
     private func setIsOnline(with isOnline: Bool) {
         switch ThemeManager.shared.themeSettings.theme {
             case .classic:
-                contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : ThemeManager.shared.themeSettings.chatBackgroundColor
             case .day:
-                contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.6043051751, green: 0.6833598076, blue: 1, alpha: 0.2960273973) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.6043051751, green: 0.6833598076, blue: 1, alpha: 0.2960273973) : ThemeManager.shared.themeSettings.chatBackgroundColor
             case .night:
-                lastMessageLabel?.textColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.5) : ThemeManager.shared.themeSettings.labelColor
-                nameLabel?.textColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.5) : ThemeManager.shared.themeSettings.labelColor
+                lastMessageLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
+                nameLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
+                dateLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
         }
     }
     
@@ -111,5 +112,6 @@ extension ConversationsListTableViewCell {
         contentView.backgroundColor = settings.chatBackgroundColor
         lastMessageLabel?.textColor = settings.labelColor
         nameLabel?.textColor = settings.labelColor
+        dateLabel?.textColor = settings.labelColor
     }
 }
