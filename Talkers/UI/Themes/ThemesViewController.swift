@@ -81,6 +81,13 @@ private extension ThemesViewController {
         guard let delegate = self.delegate, let themeSelected = self.themeSelected else { return }
         
         delegate.themeDidSelect(with: settings)
+        
+        // retain cycle мог бы возникнуть, если бы в это замыкание например, передавалась ссылка на ThemesViewController,
+        // а внутри кода замыкания в capture list эта ссылка не была бы помечена как weak.
+        // При таком сценарии получалась бы связка сильных ссылок: контроллер ссылается на замыкание,
+        // замыкание держит контроллер
+        // В моем коде в замыкание передается структура, которая является value-типом и не может образовать
+        // цикл сильных ссылок
         themeSelected(settings)
         
         changeColorsForTheme(with: settings)

@@ -62,7 +62,8 @@ final class ThemeManager {
 
 extension ThemeManager: ThemesPickerDelegate {
     func themeDidSelect(with settings: ThemeSettings) {
-        applyTheme(with: settings)
+        // TODO Закомментировано по заданию
+//        applyTheme(with: settings)
     }
 }
 
