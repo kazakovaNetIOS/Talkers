@@ -32,6 +32,9 @@ class ConversationsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setNavigationBarForTheme()
+        conversationsListTableView.reloadData()
+            
         self.navigationItem.title = "Tinkoff Chat"
     }
     

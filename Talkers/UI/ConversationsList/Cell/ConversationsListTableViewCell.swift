@@ -31,6 +31,12 @@ class ConversationsListTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    override func prepareForReuse() {
+        contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
+        lastMessageLabel?.textColor = ThemeManager.shared.themeSettings.labelColor
+        nameLabel?.textColor = ThemeManager.shared.themeSettings.labelColor
+    }
 }
 
 // MARK: - ConfigurableView
@@ -87,6 +93,10 @@ extension ConversationsListTableViewCell {
     }
     
     private func setIsOnline(with isOnline: Bool) {
+        if ThemeManager.shared.themeSettings.theme == .night {
+            return
+        }
+        
         contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
     }
     

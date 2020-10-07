@@ -23,6 +23,13 @@ class ConversationViewController: UIViewController {
         
         configureTableView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNavigationBarForTheme()
+        conversationTableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource

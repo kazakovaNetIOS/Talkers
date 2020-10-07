@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ThemesPickerDelegate {
-    func themeSelected(with settings: ThemeSettings)
+    func themeDidSelect(with settings: ThemeSettings)
 }
 
 class ThemesViewController: UIViewController {
@@ -23,13 +23,28 @@ class ThemesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        switch ThemeManager.shared.themeSettings.theme {
+            case .classic:
+                classicThemeButton.isSelected(true)
+            case .day:
+                dayThemeButton.isSelected(true)
+            case .night:
+                nightThemeButton.isSelected(true)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        changeColorsForTheme(with: ThemeManager.shared.themeSettings)
     }
     
     @IBAction func classicThemeButtonTapped(_ gesture: UITapGestureRecognizer) {
         resetButtonsSelectedState()
         classicThemeButton.isSelected(true)
         
-        view.backgroundColor = classicThemeButton.chatBackgroundColor
+        classicThemeButton.themeSettings.theme = .classic
         
         processThemeSelected(with: classicThemeButton.themeSettings)
     }
@@ -38,7 +53,7 @@ class ThemesViewController: UIViewController {
         resetButtonsSelectedState()
         dayThemeButton.isSelected(true)
         
-        view.backgroundColor = dayThemeButton.chatBackgroundColor
+        dayThemeButton.themeSettings.theme = .day
         
         processThemeSelected(with: dayThemeButton.themeSettings)
     }
@@ -47,7 +62,7 @@ class ThemesViewController: UIViewController {
         resetButtonsSelectedState()
         nightThemeButton.isSelected(true)
         
-        view.backgroundColor = nightThemeButton.chatBackgroundColor
+        nightThemeButton.themeSettings.theme = .night
         
         processThemeSelected(with: nightThemeButton.themeSettings)
     }
@@ -65,8 +80,23 @@ private extension ThemesViewController {
     func processThemeSelected(with settings: ThemeSettings) {
         guard let delegate = self.delegate, let themeSelected = self.themeSelected else { return }
         
-        delegate.themeSelected(with: settings)
+        delegate.themeDidSelect(with: settings)
         themeSelected(settings)
+        
+        changeColorsForTheme(with: settings)
+    }
+    
+    func changeColorsForTheme(with settings: ThemeSettings) {
+        setNavigationBarForTheme()
+        
+        view.backgroundColor = settings.chatBackgroundColor
+        setButtonsLabelColor(color: settings.labelColor)
+    }
+    
+    func setButtonsLabelColor(color: UIColor) {
+        classicThemeButton.setDisplayLabelTextColor(with: color)
+        dayThemeButton.setDisplayLabelTextColor(with: color)
+        nightThemeButton.setDisplayLabelTextColor(with: color)
     }
 }
 

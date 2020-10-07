@@ -103,4 +103,8 @@ extension ThemeButton {
         messagesWrapper.layer.borderWidth = selected ? 3.0 : 1.0
         messagesWrapper.layer.borderColor = selected ? #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1) : #colorLiteral(red: 0.5921568627, green: 0.5921568627, blue: 0.5921568627, alpha: 1)
     }
+    
+    func setDisplayLabelTextColor(with color: UIColor) {
+        titleLabel.textColor = color
+    }
 }
