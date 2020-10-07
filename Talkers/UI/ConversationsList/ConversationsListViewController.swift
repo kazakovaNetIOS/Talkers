@@ -44,7 +44,9 @@ class ConversationsListViewController: UIViewController {
     }
     
     @IBAction func settingsIconTapped(_ sender: Any) {
-        if let themesViewController = ThemesViewController.storyboardInstance() {
+        if let themesViewController = ThemesViewController.storyboardInstance(
+            delegate: ThemeManager.shared,
+            onThemeSelectedListener: ThemeManager.shared.onThemeSelectedListener) {
             navigationController?.pushViewController(themesViewController, animated: true)
         }
     }
