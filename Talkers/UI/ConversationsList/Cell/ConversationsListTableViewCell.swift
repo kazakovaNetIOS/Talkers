@@ -31,12 +31,6 @@ class ConversationsListTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
-    override func prepareForReuse() {
-        contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
-        lastMessageLabel?.textColor = ThemeManager.shared.themeSettings.labelColor
-        nameLabel?.textColor = ThemeManager.shared.themeSettings.labelColor
-    }
 }
 
 // MARK: - ConfigurableView
@@ -45,6 +39,8 @@ extension ConversationsListTableViewCell: ConfigurableView {
     typealias ConfigurationModel = ConversationCellModel
     
     func configure(with model: ConversationCellModel) {
+        changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+        
         setName(with: model.name)
         setMessage(with: model)
         setDate(with: model)
@@ -93,11 +89,15 @@ extension ConversationsListTableViewCell {
     }
     
     private func setIsOnline(with isOnline: Bool) {
-        if ThemeManager.shared.themeSettings.theme == .night {
-            return
+        switch ThemeManager.shared.themeSettings.theme {
+            case .classic:
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+            case .day:
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.6043051751, green: 0.6833598076, blue: 1, alpha: 0.2960273973) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+            case .night:
+                lastMessageLabel?.textColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.5) : ThemeManager.shared.themeSettings.labelColor
+                nameLabel?.textColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.5) : ThemeManager.shared.themeSettings.labelColor
         }
-        
-        contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
     }
     
     private func isConversationDateInPast(_ date: Date) -> Bool {
@@ -105,5 +105,11 @@ extension ConversationsListTableViewCell {
         calender.timeZone = TimeZone.current
         let result = calender.compare(date, to: Date(), toGranularity: .day)
         return result == .orderedAscending
+    }
+    
+    func changeColorsForTheme(with settings: ThemeSettings) {
+        contentView.backgroundColor = settings.chatBackgroundColor
+        lastMessageLabel?.textColor = settings.labelColor
+        nameLabel?.textColor = settings.labelColor
     }
 }

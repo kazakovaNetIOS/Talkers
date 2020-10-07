@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Logger.printInLog("Application moved from initialize to launch: \(#function)")
-        initializeTheme()
         return true
     }
     
@@ -42,9 +41,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         Logger.printInLog("\(#function) called when app is about to be purged from memory")
-    }
-    
-    func initializeTheme() {
-        Theme.current.apply()
     }
 }
