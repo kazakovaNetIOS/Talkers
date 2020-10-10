@@ -255,6 +255,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 560D464F250AD21A00E5A610 /* Build configuration list for PBXNativeTarget "Talkers" */;
 			buildPhases = (
+				56107B2E253262730049BFA7 /* ShellScript */,
 				560D4637250AD21300E5A610 /* Sources */,
 				560D4638250AD21300E5A610 /* Frameworks */,
 				560D4639250AD21300E5A610 /* Resources */,
@@ -324,6 +325,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		56107B2E253262730049BFA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		560D4637250AD21300E5A610 /* Sources */ = {

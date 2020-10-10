@@ -8,7 +8,9 @@
 
 import Foundation
 
-class DummyConversationListDataSource {
+// swiftlint:disable line_length
+// swiftlint:disable indentation_width
+enum DummyConversationListDataSource {
     private static var chat = [
         [
             MessageModel(name: "Лев Толстой", message: "Последнее время мне стало жить тяжело. Я вижу, я стал понимать слишком много.", date: Date(), isOnline: true, hasUnreadMessage: true),
@@ -35,24 +37,26 @@ class DummyConversationListDataSource {
             MessageModel(name: "Михаил Булгаков", message: "Нет документа, нет и человека.", date: from(year: 2020, month: 1, day: 1), isOnline: false, hasUnreadMessage: false)
         ]
     ]
-    
+    // swiftlint:enable line_length
+    // swiftlint:enable indentation_width
+
     private static func from(year: Int, month: Int, day: Int) -> Date {
         guard let gregorianCalendar = NSCalendar(calendarIdentifier: .gregorian) else {
             return Date()
         }
-        
+
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
         dateComponents.day = day
-        
+
         guard let date = gregorianCalendar.date(from: dateComponents) else {
             return Date()
         }
-        
+
         return date
     }
-    
+
     static func getMessage(by indexPath: IndexPath) -> MessageModel {
         if indexPath.section == 1 {
             return chat[indexPath.section].filter { !$0.isEmptyMessage }[indexPath.row]
@@ -60,7 +64,7 @@ class DummyConversationListDataSource {
             return chat[indexPath.section][indexPath.row]
         }
     }
-    
+
     static func getMessagesCount(for section: Int) -> Int {
         if section == 1 {
             return chat[section].filter { !$0.isEmptyMessage }.count
@@ -68,9 +72,8 @@ class DummyConversationListDataSource {
             return chat[section].count
         }
     }
-    
+
     static func getSectionCount() -> Int {
         return chat.count
     }
 }
-
