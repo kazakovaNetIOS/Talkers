@@ -8,13 +8,15 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: BaseViewController {
   @IBOutlet weak var profileImage: UIImageView!
-  @IBOutlet weak var profileNameLabel: UILabel!
-  @IBOutlet weak var profilePositionLabel: UILabel!
+  @IBOutlet weak var profilePositionTextView: UITextView!
   @IBOutlet weak var profileInitialsLabel: UILabel!
-  @IBOutlet weak var profileSaveButton: UIButton!
+  @IBOutlet weak var GCDSaveButton: UIButton!
+  @IBOutlet weak var operationSaveButton: UIButton!
   @IBOutlet weak var profileImageEditButton: UIButton!
+  @IBOutlet weak var profileNameTextField: UITextField!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
   // MARK: - Lifecycle
 
@@ -24,8 +26,11 @@ class ProfileViewController: UIViewController {
     shapeIntoCircle(for: profileInitialsLabel)
     shapeIntoCircle(for: profileImage)
 
-    profileSaveButton.layer.cornerRadius = 14
-    profileSaveButton.layer.masksToBounds = true
+    GCDSaveButton.layer.cornerRadius = 14
+    GCDSaveButton.layer.masksToBounds = true
+
+    operationSaveButton.layer.cornerRadius = 14
+    operationSaveButton.layer.masksToBounds = true
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +43,11 @@ class ProfileViewController: UIViewController {
 
   @IBAction func profileImageEditAction(_ sender: Any) {
     if !isImageSourcesAvailable() {
-      showError()
+      let alertSettings = AlertMessageSettings(
+        title: "Ошибка",
+        message: "Нет доступных источников изображения",
+        defaultActionTitle: "Ок")
+      showAlert(with: alertSettings)
       return
     }
 
@@ -46,18 +55,94 @@ class ProfileViewController: UIViewController {
     present(actionSheet, animated: true)
   }
 
-  @IBAction func profileSaveAction(_ sender: Any) {
-    // TODO: - Stub
+  @IBAction func profileGSDSaveAction(_ sender: Any) {
+    updateUIOnSave()
+
+    let userProfile = UserProfile(name: "name", position: "position", avatar: UIImage())
+    FileStorageManager.shared.saveToFileWithGCD(profile: userProfile) { [weak self] isError in
+      DispatchQueue.main.async {
+        self?.updateUIOnEndSavingProcess(isError: isError)
+        print("GSD")
+      }
+    }
+  }
+
+  @IBAction func profileOperationSaveAction(_ sender: Any) {
+    updateUIOnSave()
+
+    let userProfile = UserProfile(name: "name", position: "position", avatar: UIImage())
+    FileStorageManager.shared.saveToFileWithOperation(profile: userProfile) {[weak self] isError in
+      DispatchQueue.main.async {
+        self?.updateUIOnEndSavingProcess(isError: isError)
+        print("Operation")
+      }
+    }
   }
 
   @IBAction func profileCloseAction(_ sender: Any) {
     self.dismiss(animated: true)
+  }
+
+  @IBAction func profileEditAction(_ sender: Any) {
+    switchEditingMode(isEditing: true)
   }
 }
 
 // MARK: - Private
 
 private extension ProfileViewController {
+  func updateUIOnEndSavingProcess(isError: Bool) {
+    hideProgress()
+
+    if isError {
+      let alertSettings = AlertMessageSettings(
+        title: "Ошибка",
+        message: "Не удалось сохранить данные",
+        defaultActionTitle: "Повторить",
+        defaultActionHandler: {
+          print("Повторить")
+        },
+      cancelActionTitle: "Ок")
+      showAlert(with: alertSettings)
+    } else {
+      showAlert(with: AlertMessageSettings(title: "Данные сохранены", message: "", defaultActionTitle: "Ок"))
+    }
+  }
+
+  func updateUIOnSave() {
+    switchEditingMode(isEditing: false)
+    showProgress()
+  }
+
+  func showProgress() {
+    activityIndicator.startAnimating()
+    activityIndicator.isHidden = false
+  }
+
+  func hideProgress() {
+    activityIndicator.stopAnimating()
+  }
+
+  func switchEditingMode(isEditing: Bool) {
+    profileNameFieldStateChange(isEditing: isEditing)
+    profilePositionFieldStateChange(isEditing: isEditing)
+  }
+
+  func profileNameFieldStateChange(isEditing: Bool) {
+    profileNameTextField.isUserInteractionEnabled = isEditing
+    profileNameTextField.borderStyle = isEditing ? .roundedRect : .none
+    if isEditing {
+      profileNameTextField.becomeFirstResponder()
+    }
+  }
+
+  func profilePositionFieldStateChange(isEditing: Bool) {
+    profilePositionTextView.isUserInteractionEnabled = isEditing
+    profilePositionTextView.layer.borderWidth = isEditing ? 0.25 : 0.0
+    profilePositionTextView.layer.borderColor = isEditing ? UIColor.lightGray.cgColor : .none
+    profilePositionTextView.layer.cornerRadius = 5.0
+  }
+
   func shapeIntoCircle(for view: UIView) {
     view.layer.cornerRadius = view.bounds.width / 2
     view.layer.masksToBounds = true
@@ -66,14 +151,6 @@ private extension ProfileViewController {
   func isImageSourcesAvailable() -> Bool {
     return UIImagePickerController.isSourceTypeAvailable(.camera) ||
       UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
-  }
-
-  func showError() {
-    let alert =
-      UIAlertController(title: "Ошибка", message: "Нет доступных источников изображения", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-
-    present(alert, animated: true)
   }
 
   func initActionSheet() -> UIAlertController {
@@ -121,10 +198,12 @@ private extension ProfileViewController {
     setNavigationBarForTheme()
 
     view.backgroundColor = settings.chatBackgroundColor
-    profileNameLabel.textColor = settings.labelColor
-    profilePositionLabel.textColor = settings.labelColor
-    profileSaveButton.titleLabel?.tintColor = settings.labelColor
-    profileSaveButton.backgroundColor = settings.incomingColor
+    profileNameTextField.textColor = settings.labelColor
+    profilePositionTextView.textColor = settings.labelColor
+    GCDSaveButton.titleLabel?.tintColor = settings.labelColor
+    GCDSaveButton.backgroundColor = settings.incomingColor
+    operationSaveButton.titleLabel?.tintColor = settings.labelColor
+    operationSaveButton.backgroundColor = settings.incomingColor
     profileImageEditButton.titleLabel?.tintColor = settings.labelColor
   }
 }
