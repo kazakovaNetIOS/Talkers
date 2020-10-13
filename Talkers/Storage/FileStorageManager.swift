@@ -9,9 +9,9 @@
 import UIKit
 
 struct UserProfile {
-  let name: String
-  let position: String
-  let avatar: UIImage
+  let name: String?
+  let position: String?
+  let avatar: UIImage?
 }
 
 class FileStorageManager {
@@ -23,6 +23,7 @@ class FileStorageManager {
     DispatchQueue.global(qos: .userInitiated).async {
       sleep(2)
       block(true)
+      print("GCD")
     }
   }
 
@@ -30,6 +31,7 @@ class FileStorageManager {
     DispatchQueue.global(qos: .userInitiated).async {
       sleep(5)
       block(false)
+      print("Operation")
     }
   }
 }

@@ -9,6 +9,9 @@
 import UIKit
 
 class ProfileViewController: BaseViewController {
+  enum SavingMethod {
+    case gcd, operation
+  }
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profilePositionTextView: UITextView!
   @IBOutlet weak var profileInitialsLabel: UILabel!
@@ -17,6 +20,8 @@ class ProfileViewController: BaseViewController {
   @IBOutlet weak var profileImageEditButton: UIButton!
   @IBOutlet weak var profileNameTextField: UITextField!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+  var userProfile: UserProfile?
 
   // MARK: - Lifecycle
 
@@ -56,27 +61,11 @@ class ProfileViewController: BaseViewController {
   }
 
   @IBAction func profileGSDSaveAction(_ sender: Any) {
-    updateUIOnSave()
-
-    let userProfile = UserProfile(name: "name", position: "position", avatar: UIImage())
-    FileStorageManager.shared.saveToFileWithGCD(profile: userProfile) { [weak self] isError in
-      DispatchQueue.main.async {
-        self?.updateUIOnEndSavingProcess(isError: isError)
-        print("GSD")
-      }
-    }
+    savingWillStarted(withMethod: .gcd)
   }
 
   @IBAction func profileOperationSaveAction(_ sender: Any) {
-    updateUIOnSave()
-
-    let userProfile = UserProfile(name: "name", position: "position", avatar: UIImage())
-    FileStorageManager.shared.saveToFileWithOperation(profile: userProfile) {[weak self] isError in
-      DispatchQueue.main.async {
-        self?.updateUIOnEndSavingProcess(isError: isError)
-        print("Operation")
-      }
-    }
+    savingWillStarted(withMethod: .operation)
   }
 
   @IBAction func profileCloseAction(_ sender: Any) {
@@ -84,48 +73,72 @@ class ProfileViewController: BaseViewController {
   }
 
   @IBAction func profileEditAction(_ sender: Any) {
-    switchEditingMode(isEditing: true)
+    editingModeDidChange(to: true)
   }
 }
 
 // MARK: - Private
 
 private extension ProfileViewController {
-  func updateUIOnEndSavingProcess(isError: Bool) {
-    hideProgress()
+  func saveUserProfile(withMethod method: SavingMethod) {
+    guard let profile = self.userProfile else { return }
 
-    if isError {
+    switch method {
+    case .operation:
+      FileStorageManager.shared.saveToFileWithOperation(profile: profile) {[weak self] error in
+        DispatchQueue.main.async {
+          self?.savingDidFinish(for: method, withError: error)
+        }
+      }
+    case .gcd:
+      FileStorageManager.shared.saveToFileWithGCD(profile: profile) {[weak self] error in
+        DispatchQueue.main.async {
+          self?.savingDidFinish(for: method, withError: error)
+        }
+      }
+    }
+  }
+
+  func loadUserProfile() {
+    self.userProfile = UserProfile(
+      name: "Natalia Kazakova",
+      position: "UX/UI designer, web-designer Moscow, Russia",
+      avatar: UIImage())
+  }
+
+  func savingWillStarted(withMethod method: SavingMethod) {
+    editingModeDidChange(to: false)
+    progressWillShow(on: true)
+    saveUserProfile(withMethod: method)
+  }
+
+  func savingDidFinish(for method: SavingMethod, withError: Bool) {
+    progressWillShow(on: false)
+
+    if withError {
       let alertSettings = AlertMessageSettings(
         title: "Ошибка",
         message: "Не удалось сохранить данные",
         defaultActionTitle: "Повторить",
-        defaultActionHandler: {
-          print("Повторить")
+        defaultActionHandler: { [weak self] in
+          self?.savingWillStarted(withMethod: method)
         },
-      cancelActionTitle: "Ок")
+        cancelActionTitle: "Ок")
       showAlert(with: alertSettings)
     } else {
       showAlert(with: AlertMessageSettings(title: "Данные сохранены", message: "", defaultActionTitle: "Ок"))
     }
   }
 
-  func updateUIOnSave() {
-    switchEditingMode(isEditing: false)
-    showProgress()
+  func progressWillShow(on show: Bool) {
+    show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    activityIndicator.isHidden = !show
   }
 
-  func showProgress() {
-    activityIndicator.startAnimating()
-    activityIndicator.isHidden = false
-  }
-
-  func hideProgress() {
-    activityIndicator.stopAnimating()
-  }
-
-  func switchEditingMode(isEditing: Bool) {
+  func editingModeDidChange(to isEditing: Bool) {
     profileNameFieldStateChange(isEditing: isEditing)
     profilePositionFieldStateChange(isEditing: isEditing)
+    saveButtonsStateChange(isEditing: isEditing)
   }
 
   func profileNameFieldStateChange(isEditing: Bool) {
@@ -141,6 +154,11 @@ private extension ProfileViewController {
     profilePositionTextView.layer.borderWidth = isEditing ? 0.25 : 0.0
     profilePositionTextView.layer.borderColor = isEditing ? UIColor.lightGray.cgColor : .none
     profilePositionTextView.layer.cornerRadius = 5.0
+  }
+
+  func saveButtonsStateChange(isEditing: Bool) {
+    operationSaveButton.isEnabled = isEditing
+    GCDSaveButton.isEnabled = isEditing
   }
 
   func shapeIntoCircle(for view: UIView) {
@@ -252,6 +270,10 @@ extension UIAlertController {
 extension ProfileViewController {
   static func storyboardInstance() -> UINavigationController? {
     let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-    return storyboard.instantiateInitialViewController() as? UINavigationController
+    let navigationVC = storyboard.instantiateInitialViewController() as? UINavigationController
+    let profileVC = navigationVC?.topViewController as? ProfileViewController
+    profileVC?.loadUserProfile()
+
+    return navigationVC
   }
 }
