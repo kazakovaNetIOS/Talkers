@@ -25,6 +25,7 @@
 		56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */; };
 		56481C492537A59200B52E20 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C482537A59200B52E20 /* FileStorage.swift */; };
 		56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4B2537AA1200B52E20 /* LoadUserProfileOperation.swift */; };
+		567E07D52537BC91007133D1 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567E07D42537BC91007133D1 /* UserProfileManager.swift */; };
 		567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */; };
 		567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3CF5252261B40078A709 /* ConversationsListViewController.swift */; };
 		567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CFD252262D70078A709 /* ConversationViewController.storyboard */; };
@@ -67,6 +68,7 @@
 		56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserProfileOperation.swift; sourceTree = "<group>"; };
 		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		56481C4B2537AA1200B52E20 /* LoadUserProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileOperation.swift; sourceTree = "<group>"; };
+		567E07D42537BC91007133D1 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
 		567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsListViewController.storyboard; sourceTree = "<group>"; };
 		567F3CF5252261B40078A709 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		567F3CFD252262D70078A709 /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				5614C71A253337B20038464F /* GCDDataManager.swift */,
 				56481C3C2537375A00B52E20 /* OperationDataManager.swift */,
+				567E07D42537BC91007133D1 /* UserProfileManager.swift */,
 			);
 			path = "Data managers";
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
+				567E07D52537BC91007133D1 /* UserProfileManager.swift in Sources */,
 				56481C3D2537375A00B52E20 /* OperationDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

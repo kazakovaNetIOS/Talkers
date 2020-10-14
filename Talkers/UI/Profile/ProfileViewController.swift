@@ -9,9 +9,6 @@
 import UIKit
 
 class ProfileViewController: BaseViewController {
-  enum BackgroundMethod {
-    case gcd, operation
-  }
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profilePositionTextView: UITextView!
   @IBOutlet weak var profileInitialsLabel: UILabel!
@@ -24,6 +21,7 @@ class ProfileViewController: BaseViewController {
   @IBOutlet weak var closeButton: UIBarButtonItem!
 
   var userProfile: UserProfile?
+  var dataManager = DataManager()
 
   // MARK: - Lifecycle
 
@@ -39,7 +37,7 @@ class ProfileViewController: BaseViewController {
     operationSaveButton.layer.cornerRadius = 14
     operationSaveButton.layer.masksToBounds = true
 
-    loadingWillStarted(withMethod: .operation)
+    loadingWillStarted()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -60,13 +58,6 @@ class ProfileViewController: BaseViewController {
       name: UITextField.textDidChangeNotification,
       object: nil
     )
-
-//    NotificationCenter.default.addObserver(
-//      self,
-//      selector: #selector(textFieldDidChangeWithNotification(_:)),
-//      name: UIImageView.image,
-//      object: nil
-//    )
   }
 
   @objc private func textDidChangeWithNotification(_ notification: Notification) {
@@ -90,11 +81,13 @@ class ProfileViewController: BaseViewController {
   }
 
   @IBAction func profileGSDSaveAction(_ sender: Any) {
-    savingWillStarted(withMethod: .gcd)
+    dataManager.managerType = .gcd
+    savingWillStarted()
   }
 
   @IBAction func profileOperationSaveAction(_ sender: Any) {
-    savingWillStarted(withMethod: .operation)
+    dataManager.managerType = .operation
+    savingWillStarted()
   }
 
   @IBAction func profileCloseAction(_ sender: Any) {
@@ -109,35 +102,28 @@ class ProfileViewController: BaseViewController {
 // MARK: - Private
 
 private extension ProfileViewController {
-  func loadingWillStarted(withMethod method: BackgroundMethod) {
+  func loadingWillStarted() {
     editingModeDidChange(to: false)
     isButtonsEnabled(false)
     isServiceButtonsEnabled(false)
     progressWillShow(on: true)
-    loadUserProfile(withMethod: method)
+    loadUserProfile()
   }
 
-  func loadUserProfile(withMethod method: BackgroundMethod) {
-    switch method {
-    case .gcd:
-      GCDDataManager.shared.loadUserProfile { [weak self] userProfile in
-        self?.loadingDidFinish(for: method, with: userProfile)
-      }
-    case .operation:
-      OperationDataManager.shared.loadFromFile { [weak self] userProfile in
-        self?.loadingDidFinish(for: method, with: userProfile)
-      }
+  func loadUserProfile() {
+    dataManager.load { [weak self] userProfile in
+      self?.loadingDidFinish(with: userProfile)
     }
   }
 
-  func loadingDidFinish(for method: BackgroundMethod, with userProfile: UserProfile?) {
+  func loadingDidFinish(with userProfile: UserProfile?) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
 
     if let userProfile = userProfile {
       bindUserProfileData(for: userProfile)
     } else {
-      loadingWillStarted(withMethod: method)
+      loadingWillStarted()
     }
   }
 
@@ -154,26 +140,19 @@ private extension ProfileViewController {
     profilePositionTextView.text = userProfile.position ?? "Your position"
   }
 
-  func savingWillStarted(withMethod method: BackgroundMethod) {
+  func savingWillStarted() {
     editingModeDidChange(to: false)
     isButtonsEnabled(false)
     isServiceButtonsEnabled(false)
     progressWillShow(on: true)
-    saveUserProfile(withMethod: method)
+    saveUserProfile()
   }
 
-  func saveUserProfile(withMethod method: BackgroundMethod) {
+  func saveUserProfile() {
     let profile = getProfileData()
 
-    switch method {
-    case .operation:
-      OperationDataManager.shared.saveToFile(profile: profile) {[weak self] error in
-        self?.savingDidFinish(for: method, withError: error)
-      }
-    case .gcd:
-      GCDDataManager.shared.saveUserProfile(profile: profile) {[weak self] error in
-        self?.savingDidFinish(for: method, withError: error)
-      }
+    dataManager.save(profile: profile) {[weak self] error in
+      self?.savingDidFinish(withError: error)
     }
   }
 
@@ -184,7 +163,7 @@ private extension ProfileViewController {
       avatar: profileImage.image)
   }
 
-  func savingDidFinish(for method: BackgroundMethod, withError: Bool) {
+  func savingDidFinish(withError: Bool) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
     isButtonsEnabled(false)
@@ -195,13 +174,13 @@ private extension ProfileViewController {
         message: "Не удалось сохранить данные",
         defaultActionTitle: "Повторить",
         defaultActionHandler: { [weak self] in
-          self?.savingWillStarted(withMethod: method)
+          self?.savingWillStarted()
         },
         cancelActionTitle: "Ок")
       showAlert(with: alertSettings)
     } else {
       showAlert(with: AlertMessageSettings(title: "Данные сохранены", message: "", defaultActionTitle: "Ок"))
-      loadingWillStarted(withMethod: method)
+      loadingWillStarted()
     }
   }
 

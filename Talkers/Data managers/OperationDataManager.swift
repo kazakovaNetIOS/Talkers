@@ -8,12 +8,14 @@
 
 import Foundation
 
+
 class OperationDataManager {
-  static let shared = OperationDataManager()
+}
 
-  private init() {}
+// MARK: - UserProfileManager
 
-  func saveToFile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
+extension OperationDataManager: UserProfileManager {
+  func saveUserProfile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
     let operation = SaveUserProfileOperation(userProfile: profile)
     operation.completionBlock = {
       OperationQueue.main.addOperation {
@@ -23,7 +25,7 @@ class OperationDataManager {
     OperationQueue().addOperation(operation)
   }
 
-  func loadFromFile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
+  func loadUserProfile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
     let operation = LoadUserProfileOperation()
     operation.completionBlock = {
       OperationQueue.main.addOperation {
