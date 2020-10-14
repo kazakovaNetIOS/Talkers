@@ -91,39 +91,40 @@ private extension ProfileViewController {
   }
 
   func loadUserProfile(withMethod method: BackgroundMethod) {
-    // todo
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      self?.userProfile = GCDDataManager.shared.loadFromFile()
-
-      DispatchQueue.main.async {
-        self?.loadingDidFinish(for: method, withError: false)
+    switch method {
+    case .gcd:
+      GCDDataManager.shared.loadFromFile { [weak self] userProfile in
+        self?.loadingDidFinish(for: method, with: userProfile)
+      }
+    case .operation:
+      OperationDataManager.shared.loadFromFile { [weak self] userProfile in
+        self?.loadingDidFinish(for: method, with: userProfile)
       }
     }
   }
 
-  func loadingDidFinish(for method: BackgroundMethod, withError: Bool) {
+  func loadingDidFinish(for method: BackgroundMethod, with userProfile: UserProfile?) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
 
-    if withError {
-      let alertSettings = AlertMessageSettings(
-        title: "Ошибка",
-        message: "Не удалось загрузить данные",
-        defaultActionTitle: "Повторить",
-        defaultActionHandler: { [weak self] in
-          self?.loadingWillStarted(withMethod: method)
-        },
-        cancelActionTitle: "Ок")
-      showAlert(with: alertSettings)
+    if let userProfile = userProfile {
+      bindUserProfileData(for: userProfile)
     } else {
-      userProfileDidLoaded()
+      loadingWillStarted(withMethod: method)
     }
   }
 
-  func userProfileDidLoaded() {
-    profileInitialsLabel.text = userProfile?.initials
-    profileNameTextField.text = userProfile?.name
-    profilePositionTextView.text = userProfile?.position
+  func bindUserProfileData(for userProfile: UserProfile) {
+    if let avatar = userProfile.avatar {
+      profileInitialsLabel.isHidden = true
+      profileImage.image = avatar
+    } else {
+      profileInitialsLabel.isHidden = false
+      profileInitialsLabel.text = userProfile.initials
+    }
+
+    profileNameTextField.text = userProfile.name ?? "Your name"
+    profilePositionTextView.text = userProfile.position ?? "Your position"
   }
 
   func savingWillStarted(withMethod method: BackgroundMethod) {
@@ -133,22 +134,25 @@ private extension ProfileViewController {
   }
 
   func saveUserProfile(withMethod method: BackgroundMethod) {
-    guard let profile = self.userProfile else { return }
+    let profile = getProfileData()
 
     switch method {
     case .operation:
       OperationDataManager.shared.saveToFile(profile: profile) {[weak self] error in
-        DispatchQueue.main.async {
-          self?.savingDidFinish(for: method, withError: error)
-        }
+        self?.savingDidFinish(for: method, withError: error)
       }
     case .gcd:
       GCDDataManager.shared.saveToFile(profile: profile) {[weak self] error in
-        DispatchQueue.main.async { // TODO
-          self?.savingDidFinish(for: method, withError: error)
-        }
+        self?.savingDidFinish(for: method, withError: error)
       }
     }
+  }
+
+  func getProfileData() -> UserProfile {
+    return UserProfile(
+      name: profileNameTextField.text,
+      position: profilePositionTextView.text,
+      avatar: profileImage.image)
   }
 
   func savingDidFinish(for method: BackgroundMethod, withError: Bool) {

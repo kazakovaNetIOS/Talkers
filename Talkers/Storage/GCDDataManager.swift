@@ -11,21 +11,65 @@ import Foundation
 class GCDDataManager {
   static let shared = GCDDataManager()
 
+  private var savingCompletionBlock: ((Bool) -> Void) = { isError in
+    Logger.printInLog("Execution completed \(isError ? "with" : "no") errors")
+  }
+  private var loadingCompletionBlock: ((UserProfile?) -> Void) = { userProfile in
+    Logger.printInLog("Profile \(userProfile == nil ? "not" : "succesfully") loaded")
+  }
   private init() {}
 
-  func saveToFile(profile: UserProfile, completion block: @escaping (_ isError: Bool) -> Void) {
-    DispatchQueue.global(qos: .userInitiated).async {
-      sleep(2)
-      block(true)
-      print("GCD")
+  func saveToFile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
+    guard let path = UserProfile.ArchiveURL else {
+      processSavingResult(isError: true)
+      return
+    }
+
+    savingCompletionBlock = savingDidFinishedWithError
+
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      do {
+        let data = try NSKeyedArchiver.archivedData(withRootObject: profile, requiringSecureCoding: false)
+        try data.write(to: path)
+      } catch {
+        self?.processSavingResult(isError: true)
+      }
+
+      self?.processSavingResult(isError: false)
     }
   }
 
-  func loadFromFile() -> UserProfile {
-    // todo
-    sleep(5)
-    return UserProfile(
-      name: "Natalya Kazakova",
-      position: "UX/UI designer, web-designer Moscow, IOS-developer Russia")
+  func loadFromFile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
+    guard let path = UserProfile.ArchiveURL else {
+      return
+    }
+
+    loadingCompletionBlock = loadingDidFinished
+
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      do {
+        let data = try Data(contentsOf: path)
+        let profile = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserProfile
+        self?.processLoadingResult(userProfile: profile)
+      } catch {
+        return
+      }
+    }
+  }
+}
+
+// MARK: - Private
+
+private extension GCDDataManager {
+  func processSavingResult(isError: Bool) {
+    DispatchQueue.main.async { [weak self] in
+      self?.savingCompletionBlock(isError)
+    }
+  }
+
+  func processLoadingResult(userProfile: UserProfile?) {
+    DispatchQueue.main.async { [weak self] in
+      self?.loadingCompletionBlock(userProfile)
+    }
   }
 }
