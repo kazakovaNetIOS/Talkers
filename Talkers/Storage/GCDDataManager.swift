@@ -19,40 +19,28 @@ class GCDDataManager {
   }
   private init() {}
 
-  func saveToFile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
-    guard let path = UserProfile.ArchiveURL else {
-      processSavingResult(isError: true)
-      return
-    }
-
+  func saveUserProfile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
     savingCompletionBlock = savingDidFinishedWithError
 
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       do {
-        let data = try NSKeyedArchiver.archivedData(withRootObject: profile, requiringSecureCoding: false)
-        try data.write(to: path)
+        try FileStorage.shared.saveToFile(userProfile: profile)
+        self?.processSavingResult(isError: false)
       } catch {
         self?.processSavingResult(isError: true)
       }
-
-      self?.processSavingResult(isError: false)
     }
   }
 
-  func loadFromFile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
-    guard let path = UserProfile.ArchiveURL else {
-      return
-    }
-
+  func loadUserProfile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
     loadingCompletionBlock = loadingDidFinished
 
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       do {
-        let data = try Data(contentsOf: path)
-        let profile = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserProfile
+        let profile = try FileStorage.shared.loadFromFile()
         self?.processLoadingResult(userProfile: profile)
       } catch {
-        return
+        self?.processLoadingResult(userProfile: nil)
       }
     }
   }

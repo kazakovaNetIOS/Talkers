@@ -39,7 +39,7 @@ class ProfileViewController: BaseViewController {
     operationSaveButton.layer.cornerRadius = 14
     operationSaveButton.layer.masksToBounds = true
 
-    loadingWillStarted(withMethod: .gcd)
+    loadingWillStarted(withMethod: .operation)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +93,7 @@ private extension ProfileViewController {
   func loadUserProfile(withMethod method: BackgroundMethod) {
     switch method {
     case .gcd:
-      GCDDataManager.shared.loadFromFile { [weak self] userProfile in
+      GCDDataManager.shared.loadUserProfile { [weak self] userProfile in
         self?.loadingDidFinish(for: method, with: userProfile)
       }
     case .operation:
@@ -142,7 +142,7 @@ private extension ProfileViewController {
         self?.savingDidFinish(for: method, withError: error)
       }
     case .gcd:
-      GCDDataManager.shared.saveToFile(profile: profile) {[weak self] error in
+      GCDDataManager.shared.saveUserProfile(profile: profile) {[weak self] error in
         self?.savingDidFinish(for: method, withError: error)
       }
     }

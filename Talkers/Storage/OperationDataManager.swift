@@ -14,12 +14,22 @@ class OperationDataManager {
   private init() {}
 
   func saveToFile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
-    DispatchQueue.global(qos: .userInitiated).async {
-      savingDidFinishedWithError(false)
+    let operation = SaveUserProfileOperation(userProfile: profile)
+    operation.completionBlock = {
+      OperationQueue.main.addOperation {
+        savingDidFinishedWithError(operation.isError)
+      }
     }
+    OperationQueue().addOperation(operation)
   }
 
   func loadFromFile(completion loadingDidFinished: @escaping (_ userProfile: UserProfile?) -> Void) {
-    loadingDidFinished(UserProfile(name: "Ivan Ivanov", position: "IOS-developer", avatar: nil))
+    let operation = LoadUserProfileOperation()
+    operation.completionBlock = {
+      OperationQueue.main.addOperation {
+        loadingDidFinished(operation.userProfile)
+      }
+    }
+    OperationQueue().addOperation(operation)
   }
 }
