@@ -140,7 +140,9 @@
                     <connections>
                         <outlet property="GCDSaveButton" destination="YiE-fG-fb3" id="P2T-Xl-QmC"/>
                         <outlet property="activityIndicator" destination="rvL-wI-w0R" id="cg7-MA-Vdc"/>
+                        <outlet property="closeButton" destination="ga7-Jv-Z9f" id="hl3-s6-lVp"/>
                         <outlet property="operationSaveButton" destination="VTS-DO-vIO" id="lvj-Ld-Rlx"/>
+                        <outlet property="profileEditButton" destination="wRK-0R-vKI" id="lM0-fP-eL8"/>
                         <outlet property="profileImage" destination="lco-je-ML4" id="TLf-kK-9DB"/>
                         <outlet property="profileImageEditButton" destination="ylj-Gk-iwW" id="DQP-Bo-G1Q"/>
                         <outlet property="profileInitialsLabel" destination="R5t-cL-ete" id="xJt-NM-TSI"/>
