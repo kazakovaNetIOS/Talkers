@@ -120,6 +120,7 @@
 			children = (
 				567F3D0D252372EA0078A709 /* App */,
 				567F3D08252266230078A709 /* Assets */,
+				569FE3872537B3A8002820CB /* Data managers */,
 				56107B29252E6D0D0049BFA7 /* Extensions */,
 				567F3D0E252373220078A709 /* Helpers */,
 				56481C3F25373BF500B52E20 /* Model */,
@@ -162,8 +163,6 @@
 		5614C719253337920038464F /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				5614C71A253337B20038464F /* GCDDataManager.swift */,
-				56481C3C2537375A00B52E20 /* OperationDataManager.swift */,
 				56481C482537A59200B52E20 /* FileStorage.swift */,
 			);
 			path = Storage;
@@ -294,6 +293,15 @@
 				568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		569FE3872537B3A8002820CB /* Data managers */ = {
+			isa = PBXGroup;
+			children = (
+				5614C71A253337B20038464F /* GCDDataManager.swift */,
+				56481C3C2537375A00B52E20 /* OperationDataManager.swift */,
+			);
+			path = "Data managers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

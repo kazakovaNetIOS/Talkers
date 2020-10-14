@@ -46,6 +46,31 @@ class ProfileViewController: BaseViewController {
     super.viewWillAppear(true)
 
     changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(textDidChangeWithNotification(_:)),
+      name: UITextView.textDidChangeNotification,
+      object: nil
+    )
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(textDidChangeWithNotification(_:)),
+      name: UITextField.textDidChangeNotification,
+      object: nil
+    )
+
+//    NotificationCenter.default.addObserver(
+//      self,
+//      selector: #selector(textFieldDidChangeWithNotification(_:)),
+//      name: UIImageView.image,
+//      object: nil
+//    )
+  }
+
+  @objc private func textDidChangeWithNotification(_ notification: Notification) {
+    isButtonsEnabled(true)
   }
 
   // MARK: - IBActions
@@ -86,6 +111,8 @@ class ProfileViewController: BaseViewController {
 private extension ProfileViewController {
   func loadingWillStarted(withMethod method: BackgroundMethod) {
     editingModeDidChange(to: false)
+    isButtonsEnabled(false)
+    isServiceButtonsEnabled(false)
     progressWillShow(on: true)
     loadUserProfile(withMethod: method)
   }
@@ -129,6 +156,8 @@ private extension ProfileViewController {
 
   func savingWillStarted(withMethod method: BackgroundMethod) {
     editingModeDidChange(to: false)
+    isButtonsEnabled(false)
+    isServiceButtonsEnabled(false)
     progressWillShow(on: true)
     saveUserProfile(withMethod: method)
   }
@@ -158,6 +187,7 @@ private extension ProfileViewController {
   func savingDidFinish(for method: BackgroundMethod, withError: Bool) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
+    isButtonsEnabled(false)
 
     if withError {
       let alertSettings = AlertMessageSettings(
@@ -171,6 +201,7 @@ private extension ProfileViewController {
       showAlert(with: alertSettings)
     } else {
       showAlert(with: AlertMessageSettings(title: "Данные сохранены", message: "", defaultActionTitle: "Ок"))
+      loadingWillStarted(withMethod: method)
     }
   }
 
@@ -182,7 +213,6 @@ private extension ProfileViewController {
   func editingModeDidChange(to isEditing: Bool) {
     profileNameFieldStateChange(isEditing: isEditing)
     profilePositionFieldStateChange(isEditing: isEditing)
-    isButtonsEnabled(isEditing)
   }
 
   func profileNameFieldStateChange(isEditing: Bool) {
@@ -203,7 +233,6 @@ private extension ProfileViewController {
   func isButtonsEnabled(_ isEnable: Bool) {
     operationSaveButton.isEnabled = isEnable
     GCDSaveButton.isEnabled = isEnable
-    isServiceButtonsEnabled(isEnable)
   }
 
   func isServiceButtonsEnabled(_ isEditing: Bool) {
@@ -298,6 +327,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     profileImage.image = info[.originalImage] as? UIImage
     profileImage.contentMode = .scaleAspectFill
     profileImage.clipsToBounds = true
+
+    isButtonsEnabled(true)
 
     dismiss(animated: true)
   }

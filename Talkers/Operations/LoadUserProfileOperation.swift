@@ -14,7 +14,6 @@ class LoadUserProfileOperation: AsyncOperation {
   override func execute() {
     do {
       userProfile = try FileStorage.shared.loadFromFile()
-      sleep(3)
     } catch {
       userProfile = nil
     }

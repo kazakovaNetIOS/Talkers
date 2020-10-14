@@ -108,11 +108,13 @@ private extension ThemeManager {
   }
 
   func saveToUserDefaults(themeSettings newValue: ThemeSettings) {
-    UserDefaults.standard.setValue(newValue.incomingColor.toDictionary(), forKey: Keys.incomingColor)
-    UserDefaults.standard.setValue(newValue.outgoingColor.toDictionary(), forKey: Keys.outgoingColor)
-    UserDefaults.standard.setValue(newValue.chatBackgroundColor.toDictionary(), forKey: Keys.chatBackgroundColor)
-    UserDefaults.standard.setValue(newValue.labelColor.toDictionary(), forKey: Keys.labelColor)
-    UserDefaults.standard.setValue(newValue.labelText, forKey: Keys.labelText)
-    UserDefaults.standard.setValue(newValue.theme.rawValue, forKey: Keys.theme)
+    DispatchQueue.global(qos: .userInitiated).async {
+      UserDefaults.standard.setValue(newValue.incomingColor.toDictionary(), forKey: Keys.incomingColor)
+      UserDefaults.standard.setValue(newValue.outgoingColor.toDictionary(), forKey: Keys.outgoingColor)
+      UserDefaults.standard.setValue(newValue.chatBackgroundColor.toDictionary(), forKey: Keys.chatBackgroundColor)
+      UserDefaults.standard.setValue(newValue.labelColor.toDictionary(), forKey: Keys.labelColor)
+      UserDefaults.standard.setValue(newValue.labelText, forKey: Keys.labelText)
+      UserDefaults.standard.setValue(newValue.theme.rawValue, forKey: Keys.theme)
+    }
   }
 }
