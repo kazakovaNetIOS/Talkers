@@ -9,16 +9,13 @@
 import Foundation
 
 class GCDDataManager {
-  static let shared = GCDDataManager()
+  private var savingCompletionBlock: ((Bool) -> Void) = { _ in }
+  private var loadingCompletionBlock: ((UserProfile?) -> Void) = { _ in }
+}
 
-  private var savingCompletionBlock: ((Bool) -> Void) = { isError in
-    Logger.printInLog("Execution completed \(isError ? "with" : "no") errors")
-  }
-  private var loadingCompletionBlock: ((UserProfile?) -> Void) = { userProfile in
-    Logger.printInLog("Profile \(userProfile == nil ? "not" : "succesfully") loaded")
-  }
-  private init() {}
+// MARK: - UserProfileManager
 
+extension GCDDataManager: UserProfileManager {
   func saveUserProfile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
     savingCompletionBlock = savingDidFinishedWithError
 
