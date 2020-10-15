@@ -128,7 +128,7 @@
 				56481C3F25373BF500B52E20 /* Model */,
 				56481C432537A3DD00B52E20 /* Operations */,
 				5614C719253337920038464F /* Storage */,
-				567F3CFA252262240078A709 /* UI */,
+				567F3CFA252262240078A709 /* Screens */,
 			);
 			path = Talkers;
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 			path = ConversationsList;
 			sourceTree = "<group>";
 		};
-		567F3CFA252262240078A709 /* UI */ = {
+		567F3CFA252262240078A709 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				567F3CFC252262C30078A709 /* Conversation */,
@@ -209,7 +209,7 @@
 				567F3D32252508470078A709 /* ConfigurableView.swift */,
 				5682E5E625335B24009CE1BE /* BaseViewController.swift */,
 			);
-			path = UI;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		567F3CFC252262C30078A709 /* Conversation */ = {
@@ -586,7 +586,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.kazakova-net.Talkers";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -604,7 +604,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.kazakova-net.Talkers";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
