@@ -16,7 +16,9 @@ class GCDDataManager {
 // MARK: - UserProfileManager
 
 extension GCDDataManager: UserProfileManager {
-  func saveUserProfile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
+  func saveUserProfile(
+    profile: UserProfile,
+    completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
     savingCompletionBlock = savingDidFinishedWithError
 
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in

@@ -106,11 +106,12 @@ private extension ThemesViewController {
   }
 }
 
-
 // MARK: - Instantiation from storybord
 
 extension ThemesViewController {
-  static func storyboardInstance(delegate: ThemesPickerDelegate, onThemeSelectedListener: @escaping (_ settings: ThemeSettings) -> Void) -> ThemesViewController? {
+  static func storyboardInstance(
+    delegate: ThemesPickerDelegate,
+    onThemeSelectedListener: @escaping (_ settings: ThemeSettings) -> Void) -> ThemesViewController? {
     let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
     let viewController = navigationController?.topViewController as? ThemesViewController

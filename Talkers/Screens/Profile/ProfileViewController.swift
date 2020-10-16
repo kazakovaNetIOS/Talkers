@@ -300,7 +300,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     present(imagePicker, animated: true)
   }
 
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+  func imagePickerController(
+    _ picker: UIImagePickerController,
+    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     profileInitialsLabel.isHidden = true
 
     profileImage.image = info[.originalImage] as? UIImage

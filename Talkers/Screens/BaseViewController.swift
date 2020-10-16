@@ -17,7 +17,13 @@ class BaseViewController: UIViewController {
     let cancelActionTitle: String?
     let canceltActionHandler: (() -> Void)?
 
-    init (title: String?, message: String?, defaultActionTitle: String?, defaultActionHandler: (() -> Void)? = nil, cancelActionTitle: String? = nil, canceltActionHandler: (() -> Void)? = nil) {
+    init (
+      title: String?,
+      message: String?,
+      defaultActionTitle: String?,
+      defaultActionHandler: (() -> Void)? = nil,
+      cancelActionTitle: String? = nil,
+      canceltActionHandler: (() -> Void)? = nil) {
       self.title = title
       self.message = message
       self.defaultActionTitle = defaultActionTitle

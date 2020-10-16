@@ -8,14 +8,15 @@
 
 import Foundation
 
-
 class OperationDataManager {
 }
 
 // MARK: - UserProfileManager
 
 extension OperationDataManager: UserProfileManager {
-  func saveUserProfile(profile: UserProfile, completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
+  func saveUserProfile(
+    profile: UserProfile,
+    completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
     let operation = SaveUserProfileOperation(userProfile: profile)
     operation.completionBlock = {
       OperationQueue.main.addOperation {
