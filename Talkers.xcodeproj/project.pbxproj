@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36C854EAF996DC7DAF061664 /* Pods_Talkers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */; };
 		560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D463E250AD21300E5A610 /* AppDelegate.swift */; };
 		560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4642250AD21300E5A610 /* ProfileViewController.swift */; };
 		560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* ProfileViewController.storyboard */; };
@@ -48,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15051AC01A5EBDBF5498083C /* Pods-Talkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.release.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.release.xcconfig"; sourceTree = "<group>"; };
+		5591FED140C25ADA8BC81E46 /* Pods-Talkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.debug.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.debug.xcconfig"; sourceTree = "<group>"; };
 		560D463B250AD21300E5A610 /* Talkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		560D463E250AD21300E5A610 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		560D4642250AD21300E5A610 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		568AE50B251B3315001277F1 /* Roboto-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.otf"; sourceTree = "<group>"; };
 		569FE3832537ADC9002820CB /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		56BD29EC2510C441003633A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,17 +99,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36C854EAF996DC7DAF061664 /* Pods_Talkers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		338968455562CD1386CEF658 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5591FED140C25ADA8BC81E46 /* Pods-Talkers.debug.xcconfig */,
+				15051AC01A5EBDBF5498083C /* Pods-Talkers.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		560D4632250AD21300E5A610 = {
 			isa = PBXGroup;
 			children = (
 				560D463D250AD21300E5A610 /* Talkers */,
 				560D463C250AD21300E5A610 /* Products */,
+				338968455562CD1386CEF658 /* Pods */,
+				C38B9CD45539FCBB5869DC62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -307,6 +323,14 @@
 			path = "Data managers";
 			sourceTree = "<group>";
 		};
+		C38B9CD45539FCBB5869DC62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,10 +338,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 560D464F250AD21A00E5A610 /* Build configuration list for PBXNativeTarget "Talkers" */;
 			buildPhases = (
+				6CE609386CA1136A23AAC69D /* [CP] Check Pods Manifest.lock */,
 				56107B2E253262730049BFA7 /* ShellScript */,
 				560D4637250AD21300E5A610 /* Sources */,
 				560D4638250AD21300E5A610 /* Frameworks */,
 				560D4639250AD21300E5A610 /* Resources */,
+				5FB7BD1F1ACBF93DAE46B9F6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,7 +427,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		5FB7BD1F1ACBF93DAE46B9F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Talkers/Pods-Talkers-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Talkers/Pods-Talkers-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Talkers/Pods-Talkers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CE609386CA1136A23AAC69D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Talkers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -577,6 +642,7 @@
 		};
 		560D4650250AD21A00E5A610 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5591FED140C25ADA8BC81E46 /* Pods-Talkers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -595,6 +661,7 @@
 		};
 		560D4651250AD21A00E5A610 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15051AC01A5EBDBF5498083C /* Pods-Talkers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
