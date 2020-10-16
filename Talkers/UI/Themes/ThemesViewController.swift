@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol ThemesPickerDelegate {
-    func themeDidSelect(with settings: ThemeSettings)
+protocol ThemesPickerDelegate: class {
+  func themeDidSelect(_ themesViewController: ThemesViewController, with settings: ThemeSettings)
 }
 
 class ThemesViewController: UIViewController {
     
-    var delegate: ThemesPickerDelegate?
+    weak var delegate: ThemesPickerDelegate?
     var themeSelected: ((_ settings: ThemeSettings) -> Void)?
 
     @IBOutlet weak var classicThemeButton: ThemeButton!
@@ -80,7 +80,7 @@ private extension ThemesViewController {
     func processThemeSelected(with settings: ThemeSettings) {
         guard let delegate = self.delegate, let themeSelected = self.themeSelected else { return }
         
-        delegate.themeDidSelect(with: settings)
+      delegate.themeDidSelect(self, with: settings)
         
         // retain cycle мог бы возникнуть, если бы в это замыкание например, передавалась ссылка на ThemesViewController,
         // а внутри кода замыкания в capture list эта ссылка не была бы помечена как weak.
