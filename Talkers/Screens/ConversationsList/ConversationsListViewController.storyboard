@@ -37,11 +37,18 @@
                                 <action selector="settingsIconTapped:" destination="J5H-0z-0ei" id="Biw-se-7bM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="profile" id="7h9-CN-kl5">
-                            <connections>
-                                <action selector="profileIconTapped:" destination="J5H-0z-0ei" id="kHb-ZE-Jh1"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="profile" id="7h9-CN-kl5">
+                                <connections>
+                                    <action selector="profileIconTapped:" destination="J5H-0z-0ei" id="kHb-ZE-Jh1"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="5QB-JJ-k4e">
+                                <connections>
+                                    <action selector="addChannelIconTapped:" destination="J5H-0z-0ei" id="qev-mO-DLM"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="conversationsListTableView" destination="IGV-L3-QxH" id="udI-tt-iqa"/>
@@ -72,7 +79,7 @@
     </scenes>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
-        <image name="profile" width="33" height="33"/>
+        <image name="profile" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

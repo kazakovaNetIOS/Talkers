@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
-class ConversationsListViewController: UIViewController {
+class ConversationsListViewController: BaseViewController {
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
+  private var dataManager: ConversationsListDataManager?
 
   @IBOutlet weak var conversationsListTableView: UITableView!
 
@@ -18,6 +20,11 @@ class ConversationsListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    dataManager = ConversationsListDataManager { [weak self] in
+      self?.conversationsListTableView.reloadData()
+//      print(self?.dataManager?.getConversation(by: IndexPath(row: (self?.dataManager?.getConversationsCount() ?? 1)-1, section: 0) ))
+    }
+    
     configureTableView()
   }
 
@@ -34,7 +41,7 @@ class ConversationsListViewController: UIViewController {
     setNavigationBarForTheme()
     conversationsListTableView.reloadData()
 
-    self.navigationItem.title = "Tinkoff Chat"
+    self.navigationItem.title = "Channels"
   }
 
   // MARK: - IBAction
@@ -51,39 +58,44 @@ class ConversationsListViewController: UIViewController {
       navigationController?.pushViewController(themesViewController, animated: true)
     }
   }
+  
+  @IBAction func addChannelIconTapped(_ sender: Any) {
+    let settings = BaseViewController.AlertMessageSettingsWithTextField(
+      title: "Новый канал",
+      message: nil,
+      defaultActionTitle: "Создать",
+      defaultActionHandler: { [weak self] alert in
+        guard let channelName = alert.textFields?.first?.text else { return }
+        self?.createNewChannel(with: channelName)
+      },
+      cancelActionTitle: "Отмена",
+      canceltActionHandler: { alert in
+        alert.dismiss(animated: true)
+      },
+      textFieldPlaceholder: "Имя канала")
+
+    showAlertWithTextField(with: settings)
+  }
 }
 
 // MARK: - UITableViewDataSource
 
 extension ConversationsListViewController: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return DummyConversationListDataSource.getSectionCount()
-  }
-
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DummyConversationListDataSource.getConversationsCount(for: section)
-  }
-
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    switch section {
-    case 0:
-      return "Online"
-    case 1:
-      return "History"
-    default:
-      return ""
-    }
+    return dataManager?.getConversationsCount() ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let message = DummyConversationListDataSource.getConversation(by: indexPath)
+    guard let channel = dataManager?.getConversation(by: indexPath) else {
+      return UITableViewCell()
+    }
 
     guard let cell = tableView.dequeueReusableCell(
     withIdentifier: cellIdentifier, for: indexPath) as? ConversationsListTableViewCell else {
       return UITableViewCell()
     }
 
-    cell.configure(with: message)
+    cell.configure(with: channel)
 
     return cell
   }
@@ -94,7 +106,7 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let conversationViewController = ConversationViewController.storyboardInstance() {
-      conversationViewController.messageModel = DummyConversationListDataSource.getConversation(by: indexPath)
+//      conversationViewController.messageModel = ConversationsListDataManager.shared.getConversation(by: indexPath)
 
       navigationController?.pushViewController(conversationViewController, animated: true)
     }
@@ -112,8 +124,12 @@ extension ConversationsListViewController {
 
 // MARK: - Private
 
-extension ConversationsListViewController {
-  private func configureTableView() {
+private extension ConversationsListViewController {
+  func createNewChannel(with name: String) {
+    print(name)
+  }
+
+  func configureTableView() {
     conversationsListTableView.delegate = self
     conversationsListTableView.dataSource = self
     conversationsListTableView.tableFooterView =

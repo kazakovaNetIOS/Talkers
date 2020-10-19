@@ -173,7 +173,7 @@ private extension ProfileViewController {
         title: "Ошибка",
         message: "Не удалось сохранить данные",
         defaultActionTitle: "Повторить",
-        defaultActionHandler: { [weak self] in
+        defaultActionHandler: { [weak self] _ in
           self?.savingWillStarted()
         },
         cancelActionTitle: "Ок")

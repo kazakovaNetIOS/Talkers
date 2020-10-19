@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIColor {
-  // swiftlint:disable:next large_tuple
   var rgba: (red: Float, green: Float, blue: Float, alpha: Float) {
     var red: CGFloat = 0
     var green: CGFloat = 0

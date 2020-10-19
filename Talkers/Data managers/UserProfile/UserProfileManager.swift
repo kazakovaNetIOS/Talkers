@@ -23,9 +23,9 @@ class DataManager {
     didSet {
       switch managerType {
       case .gcd:
-        dataManager = GCDDataManager()
+        dataManager = UserProfileGCDDataManager()
       case .operation:
-        dataManager = OperationDataManager()
+        dataManager = UserProfileOperationDataManager()
       }
     }
   }
@@ -33,9 +33,9 @@ class DataManager {
   init() {
     switch managerType {
     case .gcd:
-      dataManager = GCDDataManager()
+      dataManager = UserProfileGCDDataManager()
     case .operation:
-      dataManager = OperationDataManager()
+      dataManager = UserProfileOperationDataManager()
     }
   }
 

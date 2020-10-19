@@ -8,12 +8,12 @@
 
 import Foundation
 
-class OperationDataManager {
+class UserProfileOperationDataManager {
 }
 
 // MARK: - UserProfileManager
 
-extension OperationDataManager: UserProfileManager {
+extension UserProfileOperationDataManager: UserProfileManager {
   func saveUserProfile(
     profile: UserProfile,
     completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {

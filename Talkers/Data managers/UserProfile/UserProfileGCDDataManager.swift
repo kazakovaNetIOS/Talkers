@@ -8,14 +8,14 @@
 
 import Foundation
 
-class GCDDataManager {
+class UserProfileGCDDataManager {
   private var savingCompletionBlock: ((Bool) -> Void) = { _ in }
   private var loadingCompletionBlock: ((UserProfile?) -> Void) = { _ in }
 }
 
 // MARK: - UserProfileManager
 
-extension GCDDataManager: UserProfileManager {
+extension UserProfileGCDDataManager: UserProfileManager {
   func saveUserProfile(
     profile: UserProfile,
     completion savingDidFinishedWithError: @escaping (_ isError: Bool) -> Void) {
@@ -47,7 +47,7 @@ extension GCDDataManager: UserProfileManager {
 
 // MARK: - Private
 
-private extension GCDDataManager {
+private extension UserProfileGCDDataManager {
   func processSavingResult(isError: Bool) {
     DispatchQueue.main.async { [weak self] in
       self?.savingCompletionBlock(isError)

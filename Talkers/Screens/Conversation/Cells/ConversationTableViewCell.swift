@@ -9,6 +9,7 @@
 import UIKit
 
 typealias MessageModel = ConversationTableViewCell.MessageCellModel
+typealias Message = ConversationTableViewCell.Message
 
 class ConversationTableViewCell: UITableViewCell {
   enum MessageType {
@@ -19,6 +20,13 @@ class ConversationTableViewCell: UITableViewCell {
     let text: String
     let type: MessageType
   }
+
+  struct Message {
+    let content: String
+    let created: Date
+    let senderId: String
+    let senderName: String
+  } 
 
   @IBOutlet weak var messageLabel: UILabel!
   @IBOutlet weak var containerView: UIView!

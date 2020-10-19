@@ -9,7 +9,7 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-  var messageModel: ConversationModel?
+  var messageModel: MessageModel?
   private let incomingMessageCellIdentifier = "IncomingConversationTableViewCell"
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
 
@@ -18,7 +18,7 @@ class ConversationViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.navigationItem.title = messageModel?.name
+//    self.navigationItem.title = messageModel?.name
 
     configureTableView()
   }

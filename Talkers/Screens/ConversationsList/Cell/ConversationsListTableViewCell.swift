@@ -8,22 +8,22 @@
 
 import UIKit
 
-typealias ConversationModel = ConversationsListTableViewCell.ConversationCellModel
+typealias Channel = ConversationsListTableViewCell.Channel
 
 class ConversationsListTableViewCell: UITableViewCell {
-  struct ConversationCellModel {
+
+  struct Channel {
+    let identifier: String
     let name: String
-    let message: String
-    let date: Date
-    let isOnline: Bool
-    let hasUnreadMessage: Bool
+    let lastMessage: String?
+    let lastActivity: Date?
 
     var isEmptyMessage: Bool {
-      return self.message.isEmpty
+      return self.lastMessage?.count == 0
     }
-  }
+  } 
 
-  var model: ConversationCellModel?
+  var model: Channel?
 
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var lastMessageLabel: UILabel!
@@ -33,15 +33,14 @@ class ConversationsListTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension ConversationsListTableViewCell: ConfigurableView {
-  typealias ConfigurationModel = ConversationCellModel
+  typealias ConfigurationModel = Channel
 
-  func configure(with model: ConversationCellModel) {
+  func configure(with model: ConfigurationModel) {
     changeColorsForTheme(with: ThemeManager.shared.themeSettings)
 
     setName(with: model.name)
     setMessage(with: model)
     setDate(with: model)
-    setIsOnline(with: model.isOnline)
   }
 }
 
@@ -52,11 +51,11 @@ extension ConversationsListTableViewCell {
     nameLabel?.text = name
   }
 
-  private func setMessage(with model: ConversationCellModel) {
+  private func setMessage(with model: ConfigurationModel) {
     if model.isEmptyMessage {
       setEmptyMessage()
     } else {
-      setRegularMessage(with: model)
+      lastMessageLabel?.text = model.lastMessage
     }
   }
 
@@ -65,37 +64,18 @@ extension ConversationsListTableViewCell {
     lastMessageLabel?.font = UIFont.italicSystemFont(ofSize: 13.0)
   }
 
-  private func setRegularMessage(with model: ConversationCellModel) {
-    lastMessageLabel?.text = model.message
-    lastMessageLabel?.font = model.hasUnreadMessage ?
-      UIFont(name: "SF Pro Text Semibold", size: 13.0) :
-      UIFont(name: "SF Pro Text Regular", size: 13.0)
-  }
-
-  private func setDate(with model: ConversationCellModel) {
-    if model.isEmptyMessage {
+  private func setDate(with model: ConfigurationModel) {
+    guard (model.lastMessage != nil),
+          let lastActivity = model.lastActivity else {
       dateLabel?.text = ""
       return
     }
 
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "ru_RU")
-    let dateTemplate = isConversationDateInPast(model.date) ? "dd MMM" : "HH:mm"
+    let dateTemplate = isConversationDateInPast(lastActivity) ? "dd MMM" : "HH:mm"
     dateFormatter.setLocalizedDateFormatFromTemplate(dateTemplate)
-    dateLabel?.text = dateFormatter.string(from: model.date)
-  }
-
-  private func setIsOnline(with isOnline: Bool) {
-    switch ThemeManager.shared.themeSettings.theme {
-    case .classic:
-      contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : ThemeManager.shared.themeSettings.chatBackgroundColor
-    case .day:
-      contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.6043051751, green: 0.6833598076, blue: 1, alpha: 0.2960273973) : ThemeManager.shared.themeSettings.chatBackgroundColor
-    case .night:
-      lastMessageLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
-      nameLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
-      dateLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
-    }
+    dateLabel?.text = dateFormatter.string(from: lastActivity)
   }
 
   private func isConversationDateInPast(_ date: Date) -> Bool {
