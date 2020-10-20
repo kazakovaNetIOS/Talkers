@@ -12,7 +12,7 @@ typealias Channel = ConversationsListTableViewCell.Channel
 
 class ConversationsListTableViewCell: UITableViewCell {
 
-  struct Channel {
+  struct Channel: Equatable {
     let identifier: String
     let name: String
     let lastMessage: String?

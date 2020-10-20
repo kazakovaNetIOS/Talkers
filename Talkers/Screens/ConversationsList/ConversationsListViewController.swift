@@ -22,7 +22,6 @@ class ConversationsListViewController: BaseViewController {
 
     dataManager = ConversationsListDataManager { [weak self] in
       self?.conversationsListTableView.reloadData()
-//      print(self?.dataManager?.getConversation(by: IndexPath(row: (self?.dataManager?.getConversationsCount() ?? 1)-1, section: 0) ))
     }
     
     configureTableView()
@@ -66,7 +65,7 @@ class ConversationsListViewController: BaseViewController {
       defaultActionTitle: "Создать",
       defaultActionHandler: { [weak self] alert in
         guard let channelName = alert.textFields?.first?.text else { return }
-        self?.createNewChannel(with: channelName)
+        self?.createNewChannel(withName: channelName)
       },
       cancelActionTitle: "Отмена",
       canceltActionHandler: { alert in
@@ -125,8 +124,8 @@ extension ConversationsListViewController {
 // MARK: - Private
 
 private extension ConversationsListViewController {
-  func createNewChannel(with name: String) {
-    print(name)
+  func createNewChannel(withName channelName: String) {
+    dataManager?.addChannel(withName: channelName)
   }
 
   func configureTableView() {

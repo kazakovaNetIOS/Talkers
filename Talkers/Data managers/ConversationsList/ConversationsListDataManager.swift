@@ -17,8 +17,14 @@ class ConversationsListDataManager {
 
   init(channelDidLoad: @escaping () -> Void) {
     reference.addSnapshotListener { [weak self] snapshot, error in
-      snapshot?.documents.map { document in
-//        print(document.data())
+      if let error = error {
+        print(error.localizedDescription)
+        return
+      }
+
+      guard let documents = snapshot?.documents else { return }
+
+      for document in documents {
         guard let name = document.data()["name"] as? String else { return }
 
         let identifier = document.documentID
@@ -32,8 +38,10 @@ class ConversationsListDataManager {
           lastMessage: lastMessage,
           lastActivity: lastActivity)
 
-        self?.channels.append(channel)
-        channelDidLoad()
+        if self?.channels.firstIndex(of: channel) == nil {
+          self?.channels.append(channel)
+          channelDidLoad()
+        }
       }
     }
   }
@@ -44,5 +52,9 @@ class ConversationsListDataManager {
 
   func getConversationsCount() -> Int {
     return channels.count
+  }
+
+  func addChannel(withName channelName: String) {
+    reference.addDocument(data: ["name": channelName])
   }
 }
