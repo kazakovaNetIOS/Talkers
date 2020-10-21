@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias ChannelKeys = Channel.Keys
+
 struct Channel: Equatable {
   let identifier: String
   let name: String
@@ -16,5 +18,15 @@ struct Channel: Equatable {
 
   var isEmptyMessage: Bool {
     return self.lastMessage?.count == 0
+  }
+
+  public enum Keys {
+    static let name = "name"
+    static let lastMessage = "lastMessage"
+    static let lastActivity = "lastActivity"
+  }
+
+  static func == (lhs: Channel, rhs: Channel) -> Bool {
+    return lhs.identifier == rhs.identifier
   }
 } 

@@ -11,7 +11,7 @@ import Firebase
 
 class ConversationsListViewController: BaseViewController {
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
-  private var dataManager: ConversationsListDataManager?
+  private var dataManager = ConversationsListDataManager()
 
   @IBOutlet weak var conversationsListTableView: UITableView!
 
@@ -20,11 +20,11 @@ class ConversationsListViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    dataManager = ConversationsListDataManager { [weak self] in
+    configureTableView()
+
+    dataManager.startLoading { [weak self] in
       self?.conversationsListTableView.reloadData()
     }
-    
-    configureTableView()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -81,13 +81,11 @@ class ConversationsListViewController: BaseViewController {
 
 extension ConversationsListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dataManager?.getConversationsCount() ?? 0
+    return dataManager.getConversationsCount()
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let channel = dataManager?.getConversation(by: indexPath) else {
-      return UITableViewCell()
-    }
+    let channel = dataManager.getConversation(by: indexPath)
 
     guard let cell = tableView.dequeueReusableCell(
     withIdentifier: cellIdentifier, for: indexPath) as? ConversationsListTableViewCell else {
@@ -105,7 +103,7 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let conversationViewController = ConversationViewController.storyboardInstance() {
-      conversationViewController.channel = dataManager?.getConversation(by: indexPath)
+      conversationViewController.channel = dataManager.getConversation(by: indexPath)
 
       navigationController?.pushViewController(conversationViewController, animated: true)
     }
@@ -125,7 +123,7 @@ extension ConversationsListViewController {
 
 private extension ConversationsListViewController {
   func createNewChannel(withName channelName: String) {
-    dataManager?.addChannel(withName: channelName)
+    dataManager.addChannel(withName: channelName)
   }
 
   func configureTableView() {

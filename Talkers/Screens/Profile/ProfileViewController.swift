@@ -123,7 +123,7 @@ private extension ProfileViewController {
     if let userProfile = userProfile {
       bindUserProfileData(for: userProfile)
     } else {
-      loadingWillStarted()
+      bindUserProfileData(for: UserProfile(name: "", position: "", avatar: nil))
     }
   }
 

@@ -14,7 +14,7 @@ class ConversationViewController: UIViewController {
       guard let channel = channel else { return }
 
       dataManager = ConversationsDataManager(channelId: channel.identifier) { [weak self] in
-        self?.conversationTableView.reloadData()
+        self?.conversationTableView?.reloadData()
       }
     }
   }
@@ -24,13 +24,29 @@ class ConversationViewController: UIViewController {
   private var dataManager: ConversationsDataManager?
 
   @IBOutlet weak var conversationTableView: UITableView!
-
+  @IBOutlet weak var messageTextField: UITextField!
+  @IBOutlet weak var rootView: UIView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.navigationItem.title = channel?.name
 
     configureTableView()
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShowOrHide),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShowOrHide),
+      name: UIResponder.keyboardWillHideNotification,
+      object: nil
+    )
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +54,31 @@ class ConversationViewController: UIViewController {
 
     setNavigationBarForTheme()
     conversationTableView.reloadData()
+  }
+
+  @IBAction func messageSendButtonTapped(_ sender: Any) {
+    dataManager?.addMessage(with: Message(
+                              content: messageTextField.text ?? "",
+                              created: Date(),
+                              senderId: ConversationsDataManager.mySenderId,
+                              // TODO захардкожено имя, так как не реализована возможность вытащить его быстро из профиля
+                              senderName: "Natalia Kazakova"))
+  }
+
+  @objc private func keyboardWillShowOrHide(_ notification: Notification) {
+    let keyBoard = notification.userInfo
+
+    if let keyboardFrame = keyBoard?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+      let keyboardHeight = keyboardFrame.cgRectValue.height
+
+      UIView.animate(withDuration: 1.0, animations: { [weak self] in
+        guard let self = self else { return }
+        // TODO не смогла до конца разобраться как изменить констрейнт
+        self.rootView.removeConstraint(self.rootView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor))
+        self.rootView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: keyboardHeight).isActive = true
+
+      })
+    }
   }
 }
 

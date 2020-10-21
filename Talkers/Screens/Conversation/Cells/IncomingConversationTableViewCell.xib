@@ -26,17 +26,26 @@
                         <rect key="frame" x="17" y="10" width="401.5" height="124"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It’s morning in Tokyo " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oto-2J-ALz">
-                                <rect key="frame" x="8" y="8" width="385.5" height="108"/>
+                                <rect key="frame" x="8" y="34" width="385.5" height="82"/>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Jonh Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUS-9l-NVP">
+                                <rect key="frame" x="8" y="8" width="385.5" height="18"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Oto-2J-ALz" firstAttribute="top" secondItem="aCj-ew-Xfn" secondAttribute="top" constant="8" id="9Cr-zY-CHx"/>
+                            <constraint firstItem="JUS-9l-NVP" firstAttribute="leading" secondItem="aCj-ew-Xfn" secondAttribute="leading" constant="8" id="3LW-1k-l4R"/>
+                            <constraint firstItem="JUS-9l-NVP" firstAttribute="top" secondItem="aCj-ew-Xfn" secondAttribute="top" constant="8" id="9DF-Nl-BiN"/>
+                            <constraint firstAttribute="trailing" secondItem="JUS-9l-NVP" secondAttribute="trailing" constant="8" id="AB9-dO-CK0"/>
                             <constraint firstAttribute="bottom" secondItem="Oto-2J-ALz" secondAttribute="bottom" constant="8" id="DFi-NX-lA7"/>
                             <constraint firstAttribute="trailing" secondItem="Oto-2J-ALz" secondAttribute="trailing" constant="8" id="Qo4-E1-Jpa"/>
+                            <constraint firstItem="Oto-2J-ALz" firstAttribute="top" secondItem="JUS-9l-NVP" secondAttribute="bottom" constant="8" id="ks0-Vy-wO6"/>
                             <constraint firstItem="Oto-2J-ALz" firstAttribute="leading" secondItem="aCj-ew-Xfn" secondAttribute="leading" constant="8" id="uqk-EW-hGU"/>
                         </constraints>
                     </view>
@@ -52,6 +61,7 @@
             <connections>
                 <outlet property="containerView" destination="aCj-ew-Xfn" id="PrE-QJ-JCU"/>
                 <outlet property="messageLabel" destination="Oto-2J-ALz" id="tLI-3S-z6c"/>
+                <outlet property="nameLabel" destination="JUS-9l-NVP" id="Mb7-cO-mZw"/>
             </connections>
             <point key="canvasLocation" x="74.637681159420296" y="-2.6785714285714284"/>
         </tableViewCell>

@@ -15,32 +15,45 @@ class ConversationsListDataManager {
 
   private var channels = [Channel]()
 
-  init(channelDidLoad: @escaping () -> Void) {
-    reference.addSnapshotListener { [weak self] snapshot, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
+  func startLoading(channelDidLoad: @escaping () -> Void) {
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self?.reference.addSnapshotListener {snapshot, error in
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
 
-      guard let documents = snapshot?.documents else { return }
+        guard let documents = snapshot?.documents else { return }
 
-      for document in documents {
-        guard let name = document.data()["name"] as? String else { return }
+        for document in documents {
+          guard let name = document.data()[ChannelKeys.name] as? String else {
+            continue
+          }
 
-        let identifier = document.documentID
-        let lastMessage = document.data()["lastMessage"] as? String
-        let timeStamp = document.data()["lastActivity"] as? Timestamp
-        let lastActivity = timeStamp?.dateValue()
+          let identifier = document.documentID
+          let lastMessage = document.data()[ChannelKeys.lastMessage] as? String
+          let timeStamp = document.data()[ChannelKeys.lastActivity] as? Timestamp
+          let lastActivity = timeStamp?.dateValue()
 
-        let channel = Channel(
-          identifier: identifier,
-          name: name,
-          lastMessage: lastMessage,
-          lastActivity: lastActivity)
+          let channel = Channel(
+            identifier: identifier,
+            name: name,
+            lastMessage: lastMessage,
+            lastActivity: lastActivity)
 
-        if self?.channels.firstIndex(of: channel) == nil {
-          self?.channels.append(channel)
-          channelDidLoad()
+          guard let index = self?.channels.firstIndex(of: channel) else {
+            self?.channels.append(channel)
+            DispatchQueue.main.async {
+              channelDidLoad()
+            }
+
+            continue
+          }
+
+          self?.channels.insert(channel, at: index)
+          DispatchQueue.main.async {
+            channelDidLoad()
+          }
         }
       }
     }
@@ -55,6 +68,8 @@ class ConversationsListDataManager {
   }
 
   func addChannel(withName channelName: String) {
-    reference.addDocument(data: ["name": channelName])
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self?.reference.addDocument(data: [ChannelKeys.name: channelName])
+    }
   }
 }

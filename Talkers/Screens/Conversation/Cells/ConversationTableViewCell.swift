@@ -15,6 +15,7 @@ class ConversationTableViewCell: UITableViewCell {
 
   @IBOutlet weak var messageLabel: UILabel!
   @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var nameLabel: UILabel!
 }
 
 // MARK: - ConfigurableView
@@ -25,6 +26,10 @@ extension ConversationTableViewCell: ConfigurableView {
   func configure(with model: ConfigurationModel) {
     messageLabel.text = model.content
     messageLabel.textColor = ThemeManager.shared.themeSettings.labelColor
+
+    if !model.isMyMessage {
+      nameLabel.text = model.senderName
+    }
 
     containerView.layer.cornerRadius = 8.0
     containerView.clipsToBounds = true

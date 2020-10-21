@@ -35,4 +35,8 @@ struct Message: Equatable {
     static let senderId = "senderId"
     static let senderName = "senderName"
   }
+
+  static func == (lhs: Message, rhs: Message) -> Bool {
+    return lhs.senderId == rhs.senderId && lhs.created == rhs.created
+  }
 }

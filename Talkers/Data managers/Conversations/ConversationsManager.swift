@@ -26,29 +26,33 @@ class ConversationsDataManager {
 
   init(channelId: String, messagesDidLoad: @escaping () -> Void) {
     reference = reference.document(channelId).collection("messages")
-    reference.addSnapshotListener { [weak self] snapshot, error in
-      if let error = error {
-        print(error.localizedDescription)
-        return
-      }
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self?.reference.addSnapshotListener { [weak self] snapshot, error in
+        if let error = error {
+          print(error.localizedDescription)
+          return
+        }
 
-      guard let documents = snapshot?.documents else { return }
+        guard let documents = snapshot?.documents else { return }
 
-      for document in documents {
-        guard let content = document.data()[MessageKeys.content] as? String else { return }
-        guard let timestamp = document.data()[MessageKeys.created] as? Timestamp else { return }
-        guard let senderId = document.data()[MessageKeys.senderId] as? String else { return }
-        guard let senderName = document.data()[MessageKeys.senderName] as? String else { return }
+        for document in documents {
+          guard let content = document.data()[MessageKeys.content] as? String else { return }
+          guard let timestamp = document.data()[MessageKeys.created] as? Timestamp else { return }
+          guard let senderId = document.data()[MessageKeys.senderId] as? String else { return }
+          guard let senderName = document.data()[MessageKeys.senderName] as? String else { return }
 
-        let message = Message(
-          content: content,
-          created: timestamp.dateValue(),
-          senderId: senderId,
-          senderName: senderName)
+          let message = Message(
+            content: content,
+            created: timestamp.dateValue(),
+            senderId: senderId,
+            senderName: senderName)
 
-        if self?.messages.firstIndex(of: message) == nil {
-          self?.messages.append(message)
-          messagesDidLoad()
+          if self?.messages.firstIndex(of: message) == nil {
+            self?.messages.append(message)
+            DispatchQueue.main.async {
+              messagesDidLoad()
+            }
+          }
         }
       }
     }
@@ -62,7 +66,9 @@ class ConversationsDataManager {
     return messages.count
   }
 
-  func addMessage(withName message: Message) {
-    reference.addDocument(data: message.dictionary)
+  func addMessage(with message: Message) {
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      self?.reference.addDocument(data: message.dictionary)
+    }
   }
 }
