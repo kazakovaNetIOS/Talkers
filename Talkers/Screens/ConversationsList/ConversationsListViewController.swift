@@ -105,7 +105,7 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let conversationViewController = ConversationViewController.storyboardInstance() {
-//      conversationViewController.messageModel = ConversationsListDataManager.shared.getConversation(by: indexPath)
+      conversationViewController.channel = dataManager?.getConversation(by: indexPath)
 
       navigationController?.pushViewController(conversationViewController, animated: true)
     }

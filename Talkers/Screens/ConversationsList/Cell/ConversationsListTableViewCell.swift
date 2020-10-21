@@ -8,20 +8,7 @@
 
 import UIKit
 
-typealias Channel = ConversationsListTableViewCell.Channel
-
 class ConversationsListTableViewCell: UITableViewCell {
-
-  struct Channel: Equatable {
-    let identifier: String
-    let name: String
-    let lastMessage: String?
-    let lastActivity: Date?
-
-    var isEmptyMessage: Bool {
-      return self.lastMessage?.count == 0
-    }
-  } 
 
   var model: Channel?
 

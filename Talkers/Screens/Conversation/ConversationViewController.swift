@@ -9,16 +9,26 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-  var messageModel: MessageModel?
+  var channel: Channel? {
+    didSet {
+      guard let channel = channel else { return }
+
+      dataManager = ConversationsDataManager(channelId: channel.identifier) { [weak self] in
+        self?.conversationTableView.reloadData()
+      }
+    }
+  }
+
   private let incomingMessageCellIdentifier = "IncomingConversationTableViewCell"
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
+  private var dataManager: ConversationsDataManager?
 
   @IBOutlet weak var conversationTableView: UITableView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-//    self.navigationItem.title = messageModel?.name
+    self.navigationItem.title = channel?.name
 
     configureTableView()
   }
@@ -35,22 +45,25 @@ class ConversationViewController: UIViewController {
 
 extension ConversationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DummyConversationDataSource.getMessagesCount()
+    return dataManager?.getConversationsCount() ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let message = DummyConversationDataSource.getMessage(by: indexPath)
+    guard let message = dataManager?.getConversation(by: indexPath) else {
+      return UITableViewCell()
+    }
+
     var cell: ConversationTableViewCell?
 
-    if message.type == .incoming {
+//    if message.type == .incoming {
       cell = tableView.dequeueReusableCell(
         withIdentifier: incomingMessageCellIdentifier,
         for: indexPath) as? ConversationTableViewCell
-    } else if message.type == .outgoing {
-      cell = tableView.dequeueReusableCell(
-        withIdentifier: outgoingMessageCellIdentifier,
-        for: indexPath) as? ConversationTableViewCell
-    }
+//    } else if message.type == .outgoing {
+//      cell = tableView.dequeueReusableCell(
+//        withIdentifier: outgoingMessageCellIdentifier,
+//        for: indexPath) as? ConversationTableViewCell
+//    }
 
     guard let messageCell = cell else { return UITableViewCell() }
 

@@ -8,25 +8,10 @@
 
 import UIKit
 
-typealias MessageModel = ConversationTableViewCell.MessageCellModel
-typealias Message = ConversationTableViewCell.Message
-
 class ConversationTableViewCell: UITableViewCell {
   enum MessageType {
     case incoming, outgoing
   }
-
-  struct MessageCellModel {
-    let text: String
-    let type: MessageType
-  }
-
-  struct Message {
-    let content: String
-    let created: Date
-    let senderId: String
-    let senderName: String
-  } 
 
   @IBOutlet weak var messageLabel: UILabel!
   @IBOutlet weak var containerView: UIView!
@@ -35,21 +20,21 @@ class ConversationTableViewCell: UITableViewCell {
 // MARK: - ConfigurableView
 
 extension ConversationTableViewCell: ConfigurableView {
-  typealias ConfigurationModel = MessageCellModel
+  typealias ConfigurationModel = Message
 
-  func configure(with model: MessageCellModel) {
-    messageLabel.text = model.text
+  func configure(with model: ConfigurationModel) {
+    messageLabel.text = model.content
     messageLabel.textColor = ThemeManager.shared.themeSettings.labelColor
 
     containerView.layer.cornerRadius = 8.0
     containerView.clipsToBounds = true
 
-    switch model.type {
-    case .incoming:
+//    switch model.type {
+//    case .incoming:
       containerView.backgroundColor = ThemeManager.shared.themeSettings.incomingColor
-    case .outgoing:
-      containerView.backgroundColor = ThemeManager.shared.themeSettings.outgoingColor
-    }
+//    case .outgoing:
+//      containerView.backgroundColor = ThemeManager.shared.themeSettings.outgoingColor
+//    }
 
     contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
   }
