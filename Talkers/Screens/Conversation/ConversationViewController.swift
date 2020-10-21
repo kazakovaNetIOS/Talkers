@@ -55,15 +55,15 @@ extension ConversationViewController: UITableViewDataSource {
 
     var cell: ConversationTableViewCell?
 
-//    if message.type == .incoming {
+    if message.isMyMessage {
+      cell = tableView.dequeueReusableCell(
+        withIdentifier: outgoingMessageCellIdentifier,
+        for: indexPath) as? ConversationTableViewCell
+    } else {
       cell = tableView.dequeueReusableCell(
         withIdentifier: incomingMessageCellIdentifier,
         for: indexPath) as? ConversationTableViewCell
-//    } else if message.type == .outgoing {
-//      cell = tableView.dequeueReusableCell(
-//        withIdentifier: outgoingMessageCellIdentifier,
-//        for: indexPath) as? ConversationTableViewCell
-//    }
+    }
 
     guard let messageCell = cell else { return UITableViewCell() }
 

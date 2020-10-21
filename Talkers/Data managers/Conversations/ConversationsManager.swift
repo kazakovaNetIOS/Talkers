@@ -14,6 +14,15 @@ class ConversationsDataManager {
   lazy var reference = db.collection("channels")
 
   private var messages = [Message]()
+  public static var mySenderId: String {
+    if let storedSenderId = UserDefaults.standard.string(forKey: MessageKeys.senderId) {
+      return storedSenderId
+    } else {
+      let id = UUID().uuidString
+      UserDefaults.standard.setValue(id, forKey: MessageKeys.senderId)
+      return id
+    }
+  }
 
   init(channelId: String, messagesDidLoad: @escaping () -> Void) {
     reference = reference.document(channelId).collection("messages")
@@ -26,10 +35,10 @@ class ConversationsDataManager {
       guard let documents = snapshot?.documents else { return }
 
       for document in documents {
-        guard let content = document.data()["content"] as? String else { return }
-        guard let timestamp = document.data()["created"] as? Timestamp else { return }
-        guard let senderId = document.data()["senderId"] as? String else { return }
-        guard let senderName = document.data()["senderName"] as? String else { return }
+        guard let content = document.data()[MessageKeys.content] as? String else { return }
+        guard let timestamp = document.data()[MessageKeys.created] as? Timestamp else { return }
+        guard let senderId = document.data()[MessageKeys.senderId] as? String else { return }
+        guard let senderName = document.data()[MessageKeys.senderName] as? String else { return }
 
         let message = Message(
           content: content,
@@ -54,6 +63,6 @@ class ConversationsDataManager {
   }
 
   func addMessage(withName message: Message) {
-    reference.addDocument(data: message.asDictionary())
+    reference.addDocument(data: message.dictionary)
   }
 }

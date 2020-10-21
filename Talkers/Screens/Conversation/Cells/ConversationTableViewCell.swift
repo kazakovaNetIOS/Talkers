@@ -29,12 +29,8 @@ extension ConversationTableViewCell: ConfigurableView {
     containerView.layer.cornerRadius = 8.0
     containerView.clipsToBounds = true
 
-//    switch model.type {
-//    case .incoming:
-      containerView.backgroundColor = ThemeManager.shared.themeSettings.incomingColor
-//    case .outgoing:
-//      containerView.backgroundColor = ThemeManager.shared.themeSettings.outgoingColor
-//    }
+    containerView.backgroundColor = model.isMyMessage ?
+      ThemeManager.shared.themeSettings.outgoingColor : ThemeManager.shared.themeSettings.incomingColor
 
     contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
   }
