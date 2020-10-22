@@ -63,6 +63,7 @@ class ConversationViewController: UIViewController {
                               senderId: ConversationsDataManager.mySenderId,
                               // TODO захардкожено имя, так как не реализована возможность вытащить его быстро из профиля
                               senderName: "Natalia Kazakova"))
+    messageTextField.text = ""
   }
 
   @objc private func keyboardWillShowOrHide(_ notification: Notification) {
