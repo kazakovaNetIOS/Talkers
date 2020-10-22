@@ -39,6 +39,8 @@ extension ConversationsListTableViewCell: ConfigurableView {
     typealias ConfigurationModel = ConversationCellModel
     
     func configure(with model: ConversationCellModel) {
+        changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+        
         setName(with: model.name)
         setMessage(with: model)
         setDate(with: model)
@@ -87,7 +89,16 @@ extension ConversationsListTableViewCell {
     }
     
     private func setIsOnline(with isOnline: Bool) {
-        contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 0.07) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        switch ThemeManager.shared.themeSettings.theme {
+            case .classic:
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 1, green: 0.9843137255, blue: 0, alpha: 0.07) : ThemeManager.shared.themeSettings.chatBackgroundColor
+            case .day:
+                contentView.backgroundColor = isOnline ? #colorLiteral(red: 0.6043051751, green: 0.6833598076, blue: 1, alpha: 0.2960273973) : ThemeManager.shared.themeSettings.chatBackgroundColor
+            case .night:
+                lastMessageLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
+                nameLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
+                dateLabel?.textColor = isOnline ? #colorLiteral(red: 0.9256232071, green: 1, blue: 0.506579234, alpha: 0.4) : ThemeManager.shared.themeSettings.labelColor
+        }
     }
     
     private func isConversationDateInPast(_ date: Date) -> Bool {
@@ -95,5 +106,12 @@ extension ConversationsListTableViewCell {
         calender.timeZone = TimeZone.current
         let result = calender.compare(date, to: Date(), toGranularity: .day)
         return result == .orderedAscending
+    }
+    
+    func changeColorsForTheme(with settings: ThemeSettings) {
+        contentView.backgroundColor = settings.chatBackgroundColor
+        lastMessageLabel?.textColor = settings.labelColor
+        nameLabel?.textColor = settings.labelColor
+        dateLabel?.textColor = settings.labelColor
     }
 }

@@ -32,8 +32,18 @@ extension ConversationTableViewCell: ConfigurableView {
     
     func configure(with model: MessageCellModel) {
         messageLabel.text = model.text
+        messageLabel.textColor = ThemeManager.shared.themeSettings.labelColor
         
         containerView.layer.cornerRadius = 8.0
         containerView.clipsToBounds = true
+        
+        switch model.type {
+            case .incoming:
+                containerView.backgroundColor = ThemeManager.shared.themeSettings.incomingColor
+            case .outgoing:
+                containerView.backgroundColor = ThemeManager.shared.themeSettings.outgoingColor
+        }
+        
+        contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
     }
 }

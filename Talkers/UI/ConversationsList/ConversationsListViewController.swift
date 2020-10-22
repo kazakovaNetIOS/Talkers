@@ -32,6 +32,9 @@ class ConversationsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+        conversationsListTableView.reloadData()
+            
         self.navigationItem.title = "Tinkoff Chat"
     }
     
@@ -40,6 +43,14 @@ class ConversationsListViewController: UIViewController {
     @IBAction func profileIconTapped(_ sender: Any) {
         if let profileViewController = ProfileViewController.storyboardInstance() {
             present(profileViewController, animated: true)
+        }
+    }
+    
+    @IBAction func settingsIconTapped(_ sender: Any) {
+        if let themesViewController = ThemesViewController.storyboardInstance(
+            delegate: ThemeManager.shared,
+            onThemeSelectedListener: ThemeManager.shared.onThemeSelectedListener) {
+            navigationController?.pushViewController(themesViewController, animated: true)
         }
     }
 }
@@ -117,5 +128,11 @@ extension ConversationsListViewController {
                                                 nibName: cellIdentifier,
                                                 bundle: nil),
                                             forCellReuseIdentifier: cellIdentifier)
+    }
+
+    func changeColorsForTheme(with settings: ThemeSettings) {
+      setNavigationBarForTheme()
+
+      conversationsListTableView.backgroundColor = settings.chatBackgroundColor
     }
 }

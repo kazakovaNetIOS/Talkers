@@ -9,12 +9,13 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profilePositionLabel: UILabel!
     @IBOutlet weak var profileInitialsLabel: UILabel!
     @IBOutlet weak var profileSaveButton: UIButton!
+    @IBOutlet weak var profileImageEditButton: UIButton!
     
     // MARK: - Lifecycle
     
@@ -26,6 +27,12 @@ class ProfileViewController: UIViewController {
         
         profileSaveButton.layer.cornerRadius = 14
         profileSaveButton.layer.masksToBounds = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        changeColorsForTheme(with: ThemeManager.shared.themeSettings)
     }
     
     // MARK: - IBActions
@@ -47,30 +54,32 @@ class ProfileViewController: UIViewController {
     @IBAction func profileCloseAction(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    
-    // MARK: - Private
-    
-    private func shapeIntoCircle(for view: UIView) {
+}
+
+// MARK: - Private
+
+private extension ProfileViewController {
+    func shapeIntoCircle(for view: UIView) {
         view.layer.cornerRadius = view.bounds.width / 2
         view.layer.masksToBounds = true
     }
     
-    private func isImageSourcesAvailable() -> Bool {
+    func isImageSourcesAvailable() -> Bool {
         return UIImagePickerController.isSourceTypeAvailable(.camera) ||
             UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
     }
     
-    private func showError() {
+    func showError() {
         let alert = UIAlertController(title: "Ошибка", message: "Нет доступных источников изображения", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         
         present(alert, animated: true)
     }
     
-    private func initActionSheet() -> UIAlertController {
+    func initActionSheet() -> UIAlertController {
         let actionSheet = UIAlertController(title: nil,
-                          message: nil,
-                          preferredStyle: .actionSheet)
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let camera = initCameraAction()
@@ -90,7 +99,7 @@ class ProfileViewController: UIViewController {
         return actionSheet
     }
     
-    private func initCameraAction() -> UIAlertAction{
+    func initCameraAction() -> UIAlertAction{
         let cameraAction = UIAlertAction(title: "Сделать фото", style: .default) { _ in
             self.chooseImagePicker(source: .camera)
         }
@@ -100,7 +109,7 @@ class ProfileViewController: UIViewController {
         return cameraAction
     }
     
-    private func initPhotoAction() -> UIAlertAction {
+    func initPhotoAction() -> UIAlertAction {
         let photoAction = UIAlertAction(title: "Установить из галереи", style: .default) { _ in
             self.chooseImagePicker(source: .photoLibrary)
         }
@@ -108,6 +117,17 @@ class ProfileViewController: UIViewController {
         photoAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
         
         return photoAction
+    }
+    
+    func changeColorsForTheme(with settings: ThemeSettings) {
+        setNavigationBarForTheme()
+        
+        view.backgroundColor = settings.chatBackgroundColor
+        profileNameLabel.textColor = settings.labelColor
+        profilePositionLabel.textColor = settings.labelColor
+        profileSaveButton.titleLabel?.tintColor = settings.labelColor
+        profileSaveButton.backgroundColor = settings.incomingColor
+        profileImageEditButton.titleLabel?.tintColor = settings.labelColor
     }
 }
 
@@ -157,8 +177,8 @@ extension UIAlertController {
 // MARK: - Instantiation from storybord
 
 extension ProfileViewController {
-    static func storyboardInstance() -> ProfileViewController? {
+    static func storyboardInstance() -> UINavigationController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-        return storyboard.instantiateInitialViewController() as? ProfileViewController
+        return storyboard.instantiateInitialViewController() as? UINavigationController
     }
 }
