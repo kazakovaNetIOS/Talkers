@@ -25,13 +25,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="664" height="158"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Ronald Robertson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFb-k2-Rwk">
-                        <rect key="frame" x="16.5" y="16.5" width="582.5" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Ronald Robertson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFb-k2-Rwk">
+                        <rect key="frame" x="16.5" y="16.5" width="577.5" height="18"/>
                         <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeK-dR-zPa">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeK-dR-zPa">
                         <rect key="frame" x="605" y="16.5" width="42.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="i8U-0Z-3nl"/>
@@ -52,9 +52,9 @@
                     <constraint firstItem="MwQ-hy-UbG" firstAttribute="top" secondItem="IeK-dR-zPa" secondAttribute="bottom" constant="4" id="4Jf-SO-1Gz"/>
                     <constraint firstItem="IeK-dR-zPa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16.5" id="DEX-Ls-ihn"/>
                     <constraint firstAttribute="bottom" secondItem="MwQ-hy-UbG" secondAttribute="bottom" constant="16.5" id="LiJ-R4-V0J"/>
+                    <constraint firstAttribute="trailing" secondItem="SFb-k2-Rwk" secondAttribute="trailing" constant="70" id="PF4-KC-A8J"/>
                     <constraint firstItem="SFb-k2-Rwk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16.5" id="RHm-qV-S6X"/>
                     <constraint firstItem="SFb-k2-Rwk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16.5" id="baJ-BT-4tz"/>
-                    <constraint firstItem="IeK-dR-zPa" firstAttribute="leading" secondItem="SFb-k2-Rwk" secondAttribute="trailing" constant="6" id="h5z-8q-a6V"/>
                     <constraint firstItem="MwQ-hy-UbG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16.5" id="rH2-x2-t30"/>
                     <constraint firstAttribute="trailing" secondItem="MwQ-hy-UbG" secondAttribute="trailing" constant="16.5" id="wDa-Oh-tme"/>
                 </constraints>

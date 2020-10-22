@@ -52,8 +52,7 @@ extension ConversationsListTableViewCell {
   }
 
   private func setDate(with model: ConfigurationModel) {
-    guard (model.lastMessage != nil),
-          let lastActivity = model.lastActivity else {
+    guard let lastActivity = model.lastActivity else {
       dateLabel?.text = ""
       return
     }

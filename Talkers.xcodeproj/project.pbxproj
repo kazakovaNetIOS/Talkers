@@ -49,6 +49,7 @@
 		56BD29ED2510C441003633A3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD29EC2510C441003633A3 /* Logger.swift */; };
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC6C25403C0B00EFB86E /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6B25403C0B00EFB86E /* Channel.swift */; };
+		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		56BD29EC2510C441003633A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC6B25403C0B00EFB86E /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 		56107B29252E6D0D0049BFA7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				56CECC8625421AF600EFB86E /* String+Extensions.swift */,
 				56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */,
 				56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */,
 			);
@@ -522,6 +525,7 @@
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
 				56107B15252D215A0049BFA7 /* ThemeManager.swift in Sources */,
+				56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */,
 				56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */,
 				567F3D192523EB440078A709 /* ConversationsListTableViewCell.swift in Sources */,
 				56BB5C7F253D7D3E0067265D /* ConversationsListDataManager.swift in Sources */,

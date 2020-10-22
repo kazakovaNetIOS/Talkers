@@ -15,45 +15,35 @@ class ConversationsListDataManager {
 
   private var channels = [Channel]()
 
-  func startLoading(channelDidLoad: @escaping () -> Void) {
+  func startLoading(completionHandler: @escaping () -> Void) {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      self?.reference.addSnapshotListener {snapshot, error in
-        if let error = error {
-          print(error.localizedDescription)
+      guard let self = self else { return }
+
+      self.reference.addSnapshotListener {snapshot, error in
+        guard let snapshot = snapshot else {
+          if let error = error {
+            print(error.localizedDescription)
+          }
           return
         }
 
-        guard let documents = snapshot?.documents else { return }
+        self.channels = snapshot.documents.compactMap { document -> Channel? in
+          let lastMessage = document["lastMessage"] as? String
+          let timestamp = document["lastActivity"] as? Timestamp
+          let lastActivity = timestamp?.dateValue()
+          guard let name = document["name"] as? String,
+                !name.isEmptyOrConsistWhitespaces else { return nil }
 
-        for document in documents {
-          guard let name = document.data()[ChannelKeys.name] as? String else {
-            continue
-          }
+          return Channel(identifier: document.documentID,
+                       name: name,
+                       lastMessage: lastMessage,
+                       lastActivity: lastActivity)
+        }
 
-          let identifier = document.documentID
-          let lastMessage = document.data()[ChannelKeys.lastMessage] as? String
-          let timeStamp = document.data()[ChannelKeys.lastActivity] as? Timestamp
-          let lastActivity = timeStamp?.dateValue()
+        self.channels = self.channels.sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
 
-          let channel = Channel(
-            identifier: identifier,
-            name: name,
-            lastMessage: lastMessage,
-            lastActivity: lastActivity)
-
-          guard let index = self?.channels.firstIndex(of: channel) else {
-            self?.channels.append(channel)
-            DispatchQueue.main.async {
-              channelDidLoad()
-            }
-
-            continue
-          }
-
-          self?.channels.insert(channel, at: index)
-          DispatchQueue.main.async {
-            channelDidLoad()
-          }
+        DispatchQueue.main.async {
+          completionHandler()
         }
       }
     }
