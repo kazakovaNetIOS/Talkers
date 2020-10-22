@@ -24,35 +24,35 @@ class ConversationsDataManager {
     }
   }
 
-  init(channelId: String, messagesDidLoad: @escaping () -> Void) {
+  init(channelId: String, completionHandler: @escaping () -> Void) {
     reference = reference.document(channelId).collection("messages")
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      self?.reference.addSnapshotListener { [weak self] snapshot, error in
-        if let error = error {
-          print(error.localizedDescription)
+      guard let self = self else { return }
+      self.reference.addSnapshotListener { snapshot, error in
+        guard let snapshot = snapshot else {
+          if let error = error {
+            print(error.localizedDescription)
+          }
           return
         }
 
-        guard let documents = snapshot?.documents else { return }
+        self.messages = snapshot.documents.compactMap { document -> Message? in
+          guard let content = document.data()[MessageKeys.content] as? String else { return nil }
+          guard let timestamp = document.data()[MessageKeys.created] as? Timestamp else { return nil }
+          guard let senderId = document.data()[MessageKeys.senderId] as? String else { return nil }
+          guard let senderName = document.data()[MessageKeys.senderName] as? String else { return nil }
 
-        for document in documents {
-          guard let content = document.data()[MessageKeys.content] as? String else { return }
-          guard let timestamp = document.data()[MessageKeys.created] as? Timestamp else { return }
-          guard let senderId = document.data()[MessageKeys.senderId] as? String else { return }
-          guard let senderName = document.data()[MessageKeys.senderName] as? String else { return }
-
-          let message = Message(
+          return Message(
             content: content,
             created: timestamp.dateValue(),
             senderId: senderId,
             senderName: senderName)
+        }
 
-          if self?.messages.firstIndex(of: message) == nil {
-            self?.messages.append(message)
-            DispatchQueue.main.async {
-              messagesDidLoad()
-            }
-          }
+        self.messages = self.messages.sorted { $0.created < $1.created }
+
+        DispatchQueue.main.async {
+          completionHandler()
         }
       }
     }

@@ -28,10 +28,10 @@ class ConversationsListDataManager {
         }
 
         self.channels = snapshot.documents.compactMap { document -> Channel? in
-          let lastMessage = document["lastMessage"] as? String
-          let timestamp = document["lastActivity"] as? Timestamp
+          let lastMessage = document[ChannelKeys.lastMessage] as? String
+          let timestamp = document[ChannelKeys.lastActivity] as? Timestamp
           let lastActivity = timestamp?.dateValue()
-          guard let name = document["name"] as? String,
+          guard let name = document[ChannelKeys.name] as? String,
                 !name.isEmptyOrConsistWhitespaces else { return nil }
 
           return Channel(identifier: document.documentID,

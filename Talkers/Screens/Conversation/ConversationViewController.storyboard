@@ -21,11 +21,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WTX-5z-wBe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="828"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="780"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVt-RL-7GV">
-                                        <rect key="frame" x="0.0" y="828" width="354" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your message here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVt-RL-7GV">
+                                        <rect key="frame" x="19" y="797" width="316" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="7Ll-ri-TCK"/>
                                         </constraints>
@@ -33,7 +33,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UeC-1T-VZb">
-                                        <rect key="frame" x="354" y="828" width="60" height="34"/>
+                                        <rect key="frame" x="335" y="797" width="60" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="8dA-Pj-8o9"/>
                                             <constraint firstAttribute="width" constant="60" id="HTd-bH-H6g"/>
@@ -49,14 +49,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" id="1as-f8-2Ty"/>
-                                    <constraint firstItem="KVt-RL-7GV" firstAttribute="top" secondItem="WTX-5z-wBe" secondAttribute="bottom" id="712-Qn-5Fm"/>
+                                    <constraint firstItem="KVt-RL-7GV" firstAttribute="top" secondItem="WTX-5z-wBe" secondAttribute="bottom" constant="17" id="712-Qn-5Fm"/>
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="top" secondItem="ivh-PP-8a2" secondAttribute="top" id="7eZ-dd-i1G"/>
                                     <constraint firstItem="UeC-1T-VZb" firstAttribute="leading" secondItem="KVt-RL-7GV" secondAttribute="trailing" id="L1W-fs-WCC"/>
-                                    <constraint firstAttribute="bottom" secondItem="KVt-RL-7GV" secondAttribute="bottom" id="aid-Zu-6Gs"/>
-                                    <constraint firstAttribute="bottom" secondItem="UeC-1T-VZb" secondAttribute="bottom" id="bN9-R1-F9K"/>
+                                    <constraint firstAttribute="bottom" secondItem="KVt-RL-7GV" secondAttribute="bottom" constant="31" id="aid-Zu-6Gs"/>
+                                    <constraint firstAttribute="bottom" secondItem="UeC-1T-VZb" secondAttribute="bottom" constant="31" id="bN9-R1-F9K"/>
                                     <constraint firstAttribute="trailing" secondItem="WTX-5z-wBe" secondAttribute="trailing" id="fdf-vD-5Km"/>
-                                    <constraint firstItem="KVt-RL-7GV" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" id="iCU-vk-XsT"/>
-                                    <constraint firstAttribute="trailing" secondItem="UeC-1T-VZb" secondAttribute="trailing" id="o3d-Jp-7ux"/>
+                                    <constraint firstItem="KVt-RL-7GV" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" constant="19" id="iCU-vk-XsT"/>
+                                    <constraint firstAttribute="trailing" secondItem="UeC-1T-VZb" secondAttribute="trailing" constant="19" id="o3d-Jp-7ux"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -73,7 +73,7 @@
                     <connections>
                         <outlet property="conversationTableView" destination="WTX-5z-wBe" id="ONW-ls-CTA"/>
                         <outlet property="messageTextField" destination="KVt-RL-7GV" id="ImD-TB-T2r"/>
-                        <outlet property="rootView" destination="ivh-PP-8a2" id="YHT-y9-goE"/>
+                        <outlet property="rootViewBottomConstraint" destination="sQx-Ts-Add" id="1hV-b7-DA6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZb-xb-hmR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

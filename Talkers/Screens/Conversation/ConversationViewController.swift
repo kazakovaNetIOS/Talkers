@@ -25,8 +25,8 @@ class ConversationViewController: UIViewController {
 
   @IBOutlet weak var conversationTableView: UITableView!
   @IBOutlet weak var messageTextField: UITextField!
-  @IBOutlet weak var rootView: UIView!
-  
+  @IBOutlet weak var rootViewBottomConstraint: NSLayoutConstraint!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -71,12 +71,9 @@ class ConversationViewController: UIViewController {
     if let keyboardFrame = keyBoard?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
       let keyboardHeight = keyboardFrame.cgRectValue.height
 
+      // TODO не смогла до конца разобраться как изменить констрейнт
       UIView.animate(withDuration: 1.0, animations: { [weak self] in
-        guard let self = self else { return }
-        // TODO не смогла до конца разобраться как изменить констрейнт
-        self.rootView.removeConstraint(self.rootView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor))
-        self.rootView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: keyboardHeight).isActive = true
-
+        self?.rootViewBottomConstraint.constant = keyboardHeight
       })
     }
   }
