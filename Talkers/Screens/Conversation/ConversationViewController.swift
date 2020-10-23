@@ -36,14 +36,14 @@ class ConversationViewController: UIViewController {
 
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(keyboardWillShowOrHide),
+      selector: #selector(keyboardWillShow),
       name: UIResponder.keyboardWillShowNotification,
       object: nil
     )
 
     NotificationCenter.default.addObserver(
       self,
-      selector: #selector(keyboardWillShowOrHide),
+      selector: #selector(keyboardWillHide),
       name: UIResponder.keyboardWillHideNotification,
       object: nil
     )
@@ -66,16 +66,24 @@ class ConversationViewController: UIViewController {
     messageTextField.text = ""
   }
 
-  @objc private func keyboardWillShowOrHide(_ notification: Notification) {
-    let keyBoard = notification.userInfo
+  @objc private func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+       keyboardSize.height > 0 {
 
-    if let keyboardFrame = keyBoard?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-      let keyboardHeight = keyboardFrame.cgRectValue.height
+      rootViewBottomConstraint.constant = keyboardSize.height + view.safeAreaInsets.bottom
 
-      // TODO не смогла до конца разобраться как изменить констрейнт
-      UIView.animate(withDuration: 1.0, animations: { [weak self] in
-        self?.rootViewBottomConstraint.constant = keyboardHeight
-      })
+      UIView.animate(withDuration: 1.0) {
+        self.view.layoutIfNeeded()
+      }
+    }
+  }
+
+  @objc private func keyboardWillHide(notification: NSNotification) {
+
+    rootViewBottomConstraint.constant = 0
+
+    UIView.animate(withDuration: 1.0) {
+      self.view.layoutIfNeeded()
     }
   }
 }
