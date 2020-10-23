@@ -8,18 +8,16 @@
 
 import Foundation
 
-class Logger {
-    
-    public static var isLoggingOn: Bool = false
-    
-    public static func printInLog(_ text: String) {
-        if !isLoggingOn {
-            return
-        }
-        
-        #if DEBUG
-        print(text)
-        #endif
-    }
-}
+enum Logger {
+  public static var isLoggingOn: Bool = false
 
+  public static func printInLog(_ text: String) {
+    if !isLoggingOn {
+      return
+    }
+
+    #if DEBUG
+    print(text)
+    #endif
+  }
+}

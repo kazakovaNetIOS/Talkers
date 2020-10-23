@@ -19,6 +19,13 @@
 		5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED95252A725D003A5955 /* ThemesViewController.storyboard */; };
 		5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED98252A76D2003A5955 /* ThemeButton.swift */; };
 		5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED9B252A772D003A5955 /* ThemeButton.xib */; };
+		5614C71B253337B20038464F /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5614C71A253337B20038464F /* GCDDataManager.swift */; };
+		56481C3D2537375A00B52E20 /* OperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C3C2537375A00B52E20 /* OperationDataManager.swift */; };
+		56481C4125373C1000B52E20 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4025373C1000B52E20 /* UserProfile.swift */; };
+		56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */; };
+		56481C492537A59200B52E20 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C482537A59200B52E20 /* FileStorage.swift */; };
+		56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4B2537AA1200B52E20 /* LoadUserProfileOperation.swift */; };
+		567E07D52537BC91007133D1 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567E07D42537BC91007133D1 /* UserProfileManager.swift */; };
 		567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */; };
 		567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3CF5252261B40078A709 /* ConversationsListViewController.swift */; };
 		567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 567F3CFD252262D70078A709 /* ConversationViewController.storyboard */; };
@@ -31,10 +38,12 @@
 		567F3D2B2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567F3D2A2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib */; };
 		567F3D2F2524D4C50078A709 /* DummyConversationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D2E2524D4C50078A709 /* DummyConversationDataSource.swift */; };
 		567F3D33252508470078A709 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F3D32252508470078A709 /* ConfigurableView.swift */; };
+		5682E5E725335B24009CE1BE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5682E5E625335B24009CE1BE /* BaseViewController.swift */; };
 		568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */; };
 		568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */; };
 		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
 		568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE50B251B3315001277F1 /* Roboto-Regular.otf */; };
+		569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569FE3832537ADC9002820CB /* AsyncOperation.swift */; };
 		56BD29ED2510C441003633A3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD29EC2510C441003633A3 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +62,13 @@
 		5612ED95252A725D003A5955 /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		5612ED98252A76D2003A5955 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		5612ED9B252A772D003A5955 /* ThemeButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeButton.xib; sourceTree = "<group>"; };
+		5614C71A253337B20038464F /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		56481C3C2537375A00B52E20 /* OperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager.swift; sourceTree = "<group>"; };
+		56481C4025373C1000B52E20 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserProfileOperation.swift; sourceTree = "<group>"; };
+		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		56481C4B2537AA1200B52E20 /* LoadUserProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileOperation.swift; sourceTree = "<group>"; };
+		567E07D42537BC91007133D1 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
 		567F3CF1252260B10078A709 /* ConversationsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationsListViewController.storyboard; sourceTree = "<group>"; };
 		567F3CF5252261B40078A709 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		567F3CFD252262D70078A709 /* ConversationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ConversationViewController.storyboard; sourceTree = "<group>"; };
@@ -65,10 +81,12 @@
 		567F3D2A2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutgoingConversationTableViewCell.xib; sourceTree = "<group>"; };
 		567F3D2E2524D4C50078A709 /* DummyConversationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyConversationDataSource.swift; sourceTree = "<group>"; };
 		567F3D32252508470078A709 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
+		5682E5E625335B24009CE1BE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		568AE4BE251B1DC8001277F1 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		568AE50B251B3315001277F1 /* Roboto-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.otf"; sourceTree = "<group>"; };
+		569FE3832537ADC9002820CB /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		56BD29EC2510C441003633A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,8 +122,12 @@
 			children = (
 				567F3D0D252372EA0078A709 /* App */,
 				567F3D08252266230078A709 /* Assets */,
+				569FE3872537B3A8002820CB /* Data managers */,
 				56107B29252E6D0D0049BFA7 /* Extensions */,
 				567F3D0E252373220078A709 /* Helpers */,
+				56481C3F25373BF500B52E20 /* Model */,
+				56481C432537A3DD00B52E20 /* Operations */,
+				5614C719253337920038464F /* Storage */,
 				567F3CFA252262240078A709 /* UI */,
 			);
 			path = Talkers;
@@ -140,6 +162,32 @@
 			path = ThemeButton;
 			sourceTree = "<group>";
 		};
+		5614C719253337920038464F /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				56481C482537A59200B52E20 /* FileStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		56481C3F25373BF500B52E20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				56481C4025373C1000B52E20 /* UserProfile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		56481C432537A3DD00B52E20 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				569FE3832537ADC9002820CB /* AsyncOperation.swift */,
+				56481C4B2537AA1200B52E20 /* LoadUserProfileOperation.swift */,
+				56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
 		567F3CF4252261600078A709 /* ConversationsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +207,7 @@
 				567F3D05252265B90078A709 /* Profile */,
 				5612ED91252A7205003A5955 /* Themes */,
 				567F3D32252508470078A709 /* ConfigurableView.swift */,
+				5682E5E625335B24009CE1BE /* BaseViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -248,6 +297,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		569FE3872537B3A8002820CB /* Data managers */ = {
+			isa = PBXGroup;
+			children = (
+				5614C71A253337B20038464F /* GCDDataManager.swift */,
+				56481C3C2537375A00B52E20 /* OperationDataManager.swift */,
+				567E07D42537BC91007133D1 /* UserProfileManager.swift */,
+			);
+			path = "Data managers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +314,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 560D464F250AD21A00E5A610 /* Build configuration list for PBXNativeTarget "Talkers" */;
 			buildPhases = (
+				56107B2E253262730049BFA7 /* ShellScript */,
 				560D4637250AD21300E5A610 /* Sources */,
 				560D4638250AD21300E5A610 /* Frameworks */,
 				560D4639250AD21300E5A610 /* Resources */,
@@ -325,26 +385,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		56107B2E253262730049BFA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		560D4637250AD21300E5A610 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				567F3D262524C7CF0078A709 /* ConversationTableViewCell.swift in Sources */,
+				5614C71B253337B20038464F /* GCDDataManager.swift in Sources */,
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
+				56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */,
 				567F3D2025246ED50078A709 /* DummyConversationListDataSource.swift in Sources */,
 				56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */,
+				56481C492537A59200B52E20 /* FileStorage.swift in Sources */,
 				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
 				567F3D2F2524D4C50078A709 /* DummyConversationDataSource.swift in Sources */,
+				5682E5E725335B24009CE1BE /* BaseViewController.swift in Sources */,
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
+				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
 				56107B15252D215A0049BFA7 /* ThemeManager.swift in Sources */,
+				56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */,
 				567F3D192523EB440078A709 /* ConversationsListTableViewCell.swift in Sources */,
 				567F3D01252262F40078A709 /* ConversationViewController.swift in Sources */,
 				5612ED93252A723E003A5955 /* ThemesViewController.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,
+				56481C4125373C1000B52E20 /* UserProfile.swift in Sources */,
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
+				567E07D52537BC91007133D1 /* UserProfileManager.swift in Sources */,
+				56481C3D2537375A00B52E20 /* OperationDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
