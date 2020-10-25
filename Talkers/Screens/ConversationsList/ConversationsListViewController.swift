@@ -37,7 +37,7 @@ class ConversationsListViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    setNavigationBarForTheme()
+    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
     conversationsListTableView.reloadData()
 
     self.navigationItem.title = "Channels"
@@ -133,5 +133,11 @@ private extension ConversationsListViewController {
       UIView(frame: CGRect(x: 0, y: 0, width: conversationsListTableView.frame.size.width, height: 1))
     conversationsListTableView.register(
       UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+  }
+
+  func changeColorsForTheme(with settings: ThemeSettings) {
+    setNavigationBarForTheme()
+
+    conversationsListTableView.backgroundColor = settings.chatBackgroundColor
   }
 }

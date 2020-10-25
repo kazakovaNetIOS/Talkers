@@ -61,17 +61,10 @@ final class ThemeManager {
 }
 
 extension ThemeManager: ThemesPickerDelegate {
-<<<<<<< HEAD
-  func themeDidSelect(_ themesViewController: ThemesViewController, with settings: ThemeSettings) {
-        // TODO Закомментировано по заданию
-//        applyTheme(with: settings)
-    }
-=======
   func themeDidSelect(with settings: ThemeSettings) {
     // TODO Закомментировано по заданию
     //        applyTheme(with: settings)
   }
->>>>>>> master
 }
 
 // MARK: - Private
@@ -84,22 +77,22 @@ private extension ThemeManager {
     func loadFromUserDefaults() -> ThemeSettings {
         var themeSettings = ThemeSettings()
         
-        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.incomingColor) as? Dictionary<String, CGFloat>,
+        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.incomingColor) as? [String: Int],
            let color = UIColor().fromDictionary(dictionary: storedColor) {
             themeSettings.incomingColor = color
         }
         
-        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.outgoingColor) as? Dictionary<String, CGFloat>,
+        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.outgoingColor) as? [String: Int],
            let color = UIColor().fromDictionary(dictionary: storedColor) {
             themeSettings.outgoingColor = color
         }
         
-        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.chatBackgroundColor) as? Dictionary<String, CGFloat>,
+        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.chatBackgroundColor) as? [String: Int],
            let color = UIColor().fromDictionary(dictionary: storedColor) {
             themeSettings.chatBackgroundColor = color
         }
         
-        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.labelColor) as? Dictionary<String, CGFloat>,
+        if let storedColor = UserDefaults.standard.dictionary(forKey: Keys.labelColor) as? [String: Int],
            let color = UIColor().fromDictionary(dictionary: storedColor) {
             themeSettings.labelColor = color
         }
@@ -108,8 +101,8 @@ private extension ThemeManager {
             themeSettings.labelText = storedLabelText
         }
         
-        if let storedTheme = Theme(rawValue:UserDefaults.standard.integer(forKey: Keys.theme)) {
-            themeSettings.theme =  storedTheme
+        if let storedTheme = Theme(rawValue: UserDefaults.standard.integer(forKey: Keys.theme)) {
+            themeSettings.theme = storedTheme
         }
         
         return themeSettings

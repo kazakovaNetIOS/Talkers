@@ -106,7 +106,6 @@ private extension ThemesViewController {
   }
 }
 
-
 // MARK: - Instantiation from storybord
 
 extension ThemesViewController {

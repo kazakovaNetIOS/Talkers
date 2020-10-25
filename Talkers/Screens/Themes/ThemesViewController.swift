@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ThemesPickerDelegate: class {
-  func themeDidSelect(with settings: ThemeSettings)
+  func themeDidSelect(_ themesViewController: ThemesViewController, with settings: ThemeSettings)
 }
 
 class ThemesViewController: UIViewController {
@@ -79,7 +79,7 @@ private extension ThemesViewController {
   func processThemeSelected(with settings: ThemeSettings) {
     guard let delegate = self.delegate, let themeSelected = self.themeSelected else { return }
 
-    delegate.themeDidSelect(with: settings)
+    delegate.themeDidSelect(self, with: settings)
 
     // retain cycle мог бы возникнуть, если бы в это замыкание например, передавалась ссылка на ThemesViewController,
     // а внутри кода замыкания в capture list эта ссылка не была бы помечена как weak.

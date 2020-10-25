@@ -52,7 +52,7 @@ class ConversationViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    setNavigationBarForTheme()
+    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
     conversationTableView.reloadData()
   }
 
@@ -143,5 +143,11 @@ extension ConversationViewController {
       UINib(nibName: outgoingMessageCellIdentifier, bundle: nil),
       forCellReuseIdentifier: outgoingMessageCellIdentifier)
     conversationTableView.separatorStyle = .none
+  }
+
+  func changeColorsForTheme(with settings: ThemeSettings) {
+    setNavigationBarForTheme()
+
+    conversationTableView.backgroundColor = settings.chatBackgroundColor
   }
 }
