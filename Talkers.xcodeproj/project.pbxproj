@@ -20,6 +20,8 @@
 		5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED95252A725D003A5955 /* ThemesViewController.storyboard */; };
 		5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED98252A76D2003A5955 /* ThemeButton.swift */; };
 		5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED9B252A772D003A5955 /* ThemeButton.xib */; };
+		561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A4254AA8D20016E750 /* CoreDataStack.swift */; };
+		561418A8254AC0690016E750 /* ChannelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A7254AC0690016E750 /* ChannelsRequest.swift */; };
 		5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */; };
 		562F259E253F68C7008280B5 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F259D253F68C7008280B5 /* ConversationsManager.swift */; };
 		56481C3D2537375A00B52E20 /* UserProfileOperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C3C2537375A00B52E20 /* UserProfileOperationDataManager.swift */; };
@@ -44,12 +46,14 @@
 		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
 		568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE50B251B3315001277F1 /* Roboto-Regular.otf */; };
 		569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569FE3832537ADC9002820CB /* AsyncOperation.swift */; };
+		56B78B8C254B40A800055F1E /* Chats.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */; };
 		56BB5C74253BA0E50067265D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56BB5C73253BA0E50067265D /* GoogleService-Info.plist */; };
 		56BB5C7F253D7D3E0067265D /* ConversationsListDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB5C7E253D7D3E0067265D /* ConversationsListDataManager.swift */; };
 		56BD29ED2510C441003633A3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BD29EC2510C441003633A3 /* Logger.swift */; };
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC6C25403C0B00EFB86E /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6B25403C0B00EFB86E /* Channel.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
+		56ED4E62254B26C1005A66B9 /* MessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED4E61254B26C1005A66B9 /* MessagesRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +73,8 @@
 		5612ED95252A725D003A5955 /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		5612ED98252A76D2003A5955 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		5612ED9B252A772D003A5955 /* ThemeButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeButton.xib; sourceTree = "<group>"; };
+		561418A4254AA8D20016E750 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		561418A7254AC0690016E750 /* ChannelsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsRequest.swift; sourceTree = "<group>"; };
 		5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileGCDDataManager.swift; sourceTree = "<group>"; };
 		562F259D253F68C7008280B5 /* ConversationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsManager.swift; sourceTree = "<group>"; };
 		56481C3C2537375A00B52E20 /* UserProfileOperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileOperationDataManager.swift; sourceTree = "<group>"; };
@@ -93,12 +99,14 @@
 		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		568AE50B251B3315001277F1 /* Roboto-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.otf"; sourceTree = "<group>"; };
 		569FE3832537ADC9002820CB /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		56B78B8B254B40A800055F1E /* Chats.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chats.xcdatamodel; sourceTree = "<group>"; };
 		56BB5C73253BA0E50067265D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56BB5C7E253D7D3E0067265D /* ConversationsListDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListDataManager.swift; sourceTree = "<group>"; };
 		56BD29EC2510C441003633A3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC6B25403C0B00EFB86E /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		56ED4E61254B26C1005A66B9 /* MessagesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesRequest.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -153,6 +161,7 @@
 				56481C432537A3DD00B52E20 /* Operations */,
 				567F3CFA252262240078A709 /* Screens */,
 				5614C719253337920038464F /* Storage */,
+				56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */,
 			);
 			path = Talkers;
 			sourceTree = "<group>";
@@ -198,9 +207,9 @@
 		56481C3F25373BF500B52E20 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				56481C4025373C1000B52E20 /* UserProfile.swift */,
-				56CECC6825403B8C00EFB86E /* Message.swift */,
 				56CECC6B25403C0B00EFB86E /* Channel.swift */,
+				56CECC6825403B8C00EFB86E /* Message.swift */,
+				56481C4025373C1000B52E20 /* UserProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +321,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		5688675025478FF200996801 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				561418A4254AA8D20016E750 /* CoreDataStack.swift */,
+				56ED4E60254B2685005A66B9 /* Requests */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		568AE4BA251B1C4E001277F1 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +344,7 @@
 		569FE3872537B3A8002820CB /* Data managers */ = {
 			isa = PBXGroup;
 			children = (
+				5688675025478FF200996801 /* CoreData */,
 				56BB5C7D253D7D1A0067265D /* Conversations */,
 				56BB5C7C253D7D030067265D /* ConversationsList */,
 				56BB5C7A253D7CF00067265D /* UserProfile */,
@@ -357,6 +376,15 @@
 				562F259D253F68C7008280B5 /* ConversationsManager.swift */,
 			);
 			path = Conversations;
+			sourceTree = "<group>";
+		};
+		56ED4E60254B2685005A66B9 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				561418A7254AC0690016E750 /* ChannelsRequest.swift */,
+				56ED4E61254B26C1005A66B9 /* MessagesRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		C38B9CD45539FCBB5869DC62 /* Frameworks */ = {
@@ -516,7 +544,9 @@
 				5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */,
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
 				56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */,
+				561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */,
 				56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */,
+				56ED4E62254B26C1005A66B9 /* MessagesRequest.swift in Sources */,
 				56481C492537A59200B52E20 /* FileStorage.swift in Sources */,
 				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
 				56CECC6C25403C0B00EFB86E /* Channel.swift in Sources */,
@@ -537,6 +567,8 @@
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
 				567E07D52537BC91007133D1 /* UserProfileManager.swift in Sources */,
+				561418A8254AC0690016E750 /* ChannelsRequest.swift in Sources */,
+				56B78B8C254B40A800055F1E /* Chats.xcdatamodeld in Sources */,
 				562F259E253F68C7008280B5 /* ConversationsManager.swift in Sources */,
 				56481C3D2537375A00B52E20 /* UserProfileOperationDataManager.swift in Sources */,
 			);
@@ -740,6 +772,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56B78B8B254B40A800055F1E /* Chats.xcdatamodel */,
+			);
+			currentVersion = 56B78B8B254B40A800055F1E /* Chats.xcdatamodel */;
+			path = Chats.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 560D4633250AD21300E5A610 /* Project object */;
 }

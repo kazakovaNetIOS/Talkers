@@ -54,6 +54,14 @@ class ConversationsDataManager {
         DispatchQueue.main.async {
           completionHandler()
         }
+
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+          return
+        }
+
+        let messageRequest = MessagesRequest(coreDataStack: appDelegate.coreDataStack)
+        messageRequest.makeRequest(messages: self.messages)
       }
     }
   }

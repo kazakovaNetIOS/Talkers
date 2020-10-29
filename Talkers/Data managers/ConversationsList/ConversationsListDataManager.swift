@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import CoreData
 
 class ConversationsListDataManager {
   lazy var db = Firestore.firestore()
@@ -45,6 +46,14 @@ class ConversationsListDataManager {
         DispatchQueue.main.async {
           completionHandler()
         }
+
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+          return
+        }
+
+        let chatRequest = ChannelsRequest(coreDataStack: appDelegate.coreDataStack)
+        chatRequest.makeRequest(channels: self.channels)
       }
     }
   }

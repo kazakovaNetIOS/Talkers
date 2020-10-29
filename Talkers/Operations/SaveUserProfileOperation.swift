@@ -16,11 +16,12 @@ class SaveUserProfileOperation: AsyncOperation {
     self.userProfile = userProfile
   }
 
-  override func execute() {
+  override func main() {
     do {
       try FileStorage.shared.saveToFile(userProfile: userProfile)
     } catch {
       isError = true
     }
+    finish()
   }
 }

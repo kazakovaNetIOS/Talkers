@@ -9,39 +9,38 @@
 import Foundation
 
 class AsyncOperation: Operation {
-  enum State: String {
-    case isReady
-    case isExecuting
-    case isFinished
+  private var _executing = false
+  private var _finished = false
+
+  override var isAsynchronous: Bool {
+    return true
   }
 
-  var state: State = .isReady {
-    willSet(newValue) {
-      willChangeValue(forKey: state.rawValue)
-      willChangeValue(forKey: newValue.rawValue)
-    }
-    didSet {
-      didChangeValue(forKey: oldValue.rawValue)
-      didChangeValue(forKey: state.rawValue)
-    }
+  override var isExecuting: Bool {
+    return _executing
   }
-
-  override var isAsynchronous: Bool { true }
-  override var isExecuting: Bool { state == .isExecuting }
   override var isFinished: Bool {
-    if isCancelled && state != .isExecuting { return true }
-    return state == .isFinished
+    return _finished
   }
-
-  func execute() { }
 
   override func start() {
-    guard !isCancelled else { return }
+    guard !isCancelled else {
+      finish()
+      return
+    }
+    willChangeValue(forKey: "isExecuting")
+    _executing = true
+    main()
+    didChangeValue(forKey: "isExecuting")
+  }
 
-    state = .isExecuting
+  override func main() {
+    fatalError("Should be overriden")
+  }
 
-    execute()
-
-    self.state = .isFinished
+  func finish() {
+    willChangeValue(forKey: "isFinished")
+    _finished = true
+    didChangeValue(forKey: "isFinished")
   }
 }

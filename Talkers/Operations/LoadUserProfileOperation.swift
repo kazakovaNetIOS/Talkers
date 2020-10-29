@@ -11,11 +11,12 @@ import Foundation
 class LoadUserProfileOperation: AsyncOperation {
   var userProfile: UserProfile?
 
-  override func execute() {
+  override func main() {
     do {
       userProfile = try FileStorage.shared.loadFromFile()
     } catch {
       userProfile = nil
     }
+    finish()
   }
 }

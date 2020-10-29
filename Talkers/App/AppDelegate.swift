@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
+  var coreDataStack = CoreDataStack()
 
   func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
     Logger.printInLog("Launch process has begun but that state restoration has not yet occurred: \(#function). Initializing the app")
@@ -21,6 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     Logger.printInLog("Application moved from initialize to launch: \(#function)")
     FirebaseApp.configure()
+
+    coreDataStack.didUpdateDatabase = { stack in
+      stack.printDatabaseStatistic()
+    }
+
+    coreDataStack.enableObservers()
+    
     return true
   }
 
