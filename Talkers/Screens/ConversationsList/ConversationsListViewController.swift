@@ -25,7 +25,7 @@ class ConversationsListViewController: BaseViewController {
     let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                             managedObjectContext: self.coreDataStack.managedContext,
                                                             sectionNameKeyPath: nil,
-                                                            cacheName: "talkersChannels")
+                                                            cacheName: nil)
     fetchResultsController.delegate = self
 
     return fetchResultsController

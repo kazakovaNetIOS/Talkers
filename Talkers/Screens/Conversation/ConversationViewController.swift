@@ -34,7 +34,7 @@ class ConversationViewController: UIViewController {
     let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                             managedObjectContext: self.coreDataStack.managedContext,
                                                             sectionNameKeyPath: nil,
-                                                            cacheName: "talkersMessages")
+                                                            cacheName: nil)
     fetchResultsController.delegate = self
 
     return fetchResultsController
