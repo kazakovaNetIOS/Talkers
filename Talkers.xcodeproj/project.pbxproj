@@ -22,7 +22,6 @@
 		5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED95252A725D003A5955 /* ThemesViewController.storyboard */; };
 		5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED98252A76D2003A5955 /* ThemeButton.swift */; };
 		5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED9B252A772D003A5955 /* ThemeButton.xib */; };
-		561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A4254AA8D20016E750 /* CoreDataStack.swift */; };
 		561418A8254AC0690016E750 /* ChannelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A7254AC0690016E750 /* ChannelsRequest.swift */; };
 		5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */; };
 		561B82F425549C2A00D9B21D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B82F325549C2A00D9B21D /* CoreDataManager.swift */; };
@@ -78,7 +77,6 @@
 		5612ED95252A725D003A5955 /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		5612ED98252A76D2003A5955 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		5612ED9B252A772D003A5955 /* ThemeButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeButton.xib; sourceTree = "<group>"; };
-		561418A4254AA8D20016E750 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		561418A7254AC0690016E750 /* ChannelsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsRequest.swift; sourceTree = "<group>"; };
 		5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileGCDDataManager.swift; sourceTree = "<group>"; };
 		561B82F325549C2A00D9B21D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 		5688675025478FF200996801 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				561418A4254AA8D20016E750 /* CoreDataStack.swift */,
 				561B82F325549C2A00D9B21D /* CoreDataManager.swift */,
 				56ED4E60254B2685005A66B9 /* Requests */,
 			);
@@ -554,7 +551,6 @@
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
 				56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */,
 				561B82F425549C2A00D9B21D /* CoreDataManager.swift in Sources */,
-				561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */,
 				56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */,
 				56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */,
 				56ED4E62254B26C1005A66B9 /* MessagesRequest.swift in Sources */,

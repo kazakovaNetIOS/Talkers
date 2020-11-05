@@ -10,15 +10,12 @@ import Foundation
 import CoreData
 
 struct ChannelsRequest {
-  let coreDataStack: CoreDataStack
-
-  init(coreDataStack: CoreDataStack) {
-    self.coreDataStack = coreDataStack
-  }
+  let coreDataStack = CoreDataStack(modelName: "Chats")
 
   func makeRequest(channels: [Channel]) {
-    coreDataStack.performSave { context in
-      channels.forEach { ChannelMO(with: $0, in: context) }
+    channels.forEach { channel in
+      _ = ChannelMO(with: channel, in: coreDataStack.managedContext)
+      coreDataStack.saveContext()
     }
   }
 }

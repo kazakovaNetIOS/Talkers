@@ -14,19 +14,16 @@ class ConversationsListViewController: BaseViewController {
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
 
   private var dataManager = ConversationsListDataManager()
+  private lazy var coreDataStack = CoreDataStack(modelName: "Chats")
 
   private lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-      fatalError()
-    }
-
     let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
 
     let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: true)
     fetchRequest.sortDescriptors = [sortDescriptor]
 
     let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: appDelegate.coreDataStack.mainContext,
+                                                            managedObjectContext: self.coreDataStack.managedContext,
                                                             sectionNameKeyPath: nil,
                                                             cacheName: "talkersChannels")
     fetchResultsController.delegate = self
@@ -50,9 +47,7 @@ class ConversationsListViewController: BaseViewController {
       print("\(fetchError), \(fetchError.localizedDescription)")
     }
 
-    dataManager.startLoading { [weak self] in
-      self?.conversationsListTableView.reloadData()
-    }
+    dataManager.startLoading()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -147,20 +142,9 @@ extension ConversationsListViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        fatalError()
-      }
-
-      let managedContext = appDelegate.coreDataStack.mainContext
-
       let deletedChannel = fetchedResultsController.object(at: indexPath)
-      managedContext.delete(deletedChannel)
-
-      do {
-        try managedContext.save()
-      } catch let error as NSError {
-        print("Error while deleting channel: \(error.userInfo)")
-      }
+      coreDataStack.managedContext.delete(deletedChannel)
+      coreDataStack.saveContext()
     }
   }
 }

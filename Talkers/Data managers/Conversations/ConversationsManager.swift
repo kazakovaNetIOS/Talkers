@@ -12,12 +12,6 @@ import Firebase
 class ConversationsDataManager {
   lazy var db = Firestore.firestore()
   lazy var reference = db.collection("channels")
-  lazy var coreDataStack: CoreDataStack = {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-      fatalError()
-    }
-    return appDelegate.coreDataStack
-  }()
 
   private var messages = [Message]()
   public static var mySenderId: String {
@@ -30,7 +24,7 @@ class ConversationsDataManager {
     }
   }
 
-  func startLoading(channelId: String, completionHandler: @escaping () -> Void) {
+  func startLoading(channelId: String) {
     reference = reference.document(channelId).collection("messages")
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
@@ -58,12 +52,8 @@ class ConversationsDataManager {
 
         self.messages = self.messages.sorted { $0.created < $1.created }
 
-        let messageRequest = MessagesRequest(coreDataStack: self.coreDataStack)
+        let messageRequest = MessagesRequest()
         messageRequest.makeRequest(messages: self.messages)
-
-        DispatchQueue.main.async {
-          completionHandler()
-        }
       }
     }
   }

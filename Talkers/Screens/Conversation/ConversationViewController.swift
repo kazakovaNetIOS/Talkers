@@ -16,10 +16,10 @@ class ConversationViewController: UIViewController {
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
   
   private var dataManager = ConversationsDataManager()
+  private lazy var coreDataStack = CoreDataStack(modelName: "Chats")
 
   private lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
-    guard let channel = channel,
-          let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+    guard let channel = channel else {
       fatalError()
     }
 
@@ -32,7 +32,7 @@ class ConversationViewController: UIViewController {
     fetchRequest.sortDescriptors = [sortDescriptor]
 
     let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: appDelegate.coreDataStack.mainContext,
+                                                            managedObjectContext: self.coreDataStack.managedContext,
                                                             sectionNameKeyPath: nil,
                                                             cacheName: "talkersMessages")
     fetchResultsController.delegate = self
@@ -75,9 +75,7 @@ class ConversationViewController: UIViewController {
       print("\(fetchError), \(fetchError.localizedDescription)")
     }
 
-    dataManager.startLoading(channelId: channel.identifier) { [weak self] in
-      self?.conversationTableView?.reloadData()
-    }
+    dataManager.startLoading(channelId: channel.identifier)
   }
 
   override func viewWillAppear(_ animated: Bool) {

@@ -13,20 +13,14 @@ import CoreData
 class ConversationsListDataManager {
   lazy var db = Firestore.firestore()
   lazy var reference = db.collection("channels")
-  lazy var coreDataStack: CoreDataStack = {
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-      fatalError()
-    }
-    return appDelegate.coreDataStack
-  }()
 
   private var channels = [Channel]()
 
-  func startLoading(completionHandler: @escaping () -> Void) {
+  func startLoading() {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
 
-      self.reference.addSnapshotListener {snapshot, error in
+      self.reference.addSnapshotListener { snapshot, error in
         guard let snapshot = snapshot else {
           if let error = error {
             print(error.localizedDescription)
@@ -49,12 +43,8 @@ class ConversationsListDataManager {
 
         self.channels = self.channels.sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
 
-        let chatRequest = ChannelsRequest(coreDataStack: self.coreDataStack)
+        let chatRequest = ChannelsRequest()
         chatRequest.makeRequest(channels: self.channels)
-
-        DispatchQueue.main.async {
-          completionHandler()
-        }
       }
     }
   }
