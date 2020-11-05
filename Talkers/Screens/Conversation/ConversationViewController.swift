@@ -7,30 +7,50 @@
 //
 
 import UIKit
+import CoreData
 
 class ConversationViewController: UIViewController {
-  var channel: Channel? {
-    didSet {
-      guard let channel = channel else { return }
-
-      dataManager = ConversationsDataManager(channelId: channel.identifier) { [weak self] in
-        self?.conversationTableView?.reloadData()
-      }
-    }
-  }
+  var channel: Channel?
 
   private let incomingMessageCellIdentifier = "IncomingConversationTableViewCell"
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
-  private var dataManager: ConversationsDataManager?
+  
+  private var dataManager = ConversationsDataManager()
+
+  private lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
+    guard let channel = channel,
+          let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      fatalError()
+    }
+
+    let fetchRequest: NSFetchRequest<MessageMO> = MessageMO.fetchRequest()
+
+    let predicate = NSPredicate(format: "\(#keyPath(MessageMO.channelId)) == %@", channel.identifier)
+    fetchRequest.predicate = predicate
+
+    let sortDescriptor = NSSortDescriptor(key: #keyPath(MessageMO.created), ascending: true)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+
+    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                            managedObjectContext: appDelegate.coreDataStack.mainContext,
+                                                            sectionNameKeyPath: nil,
+                                                            cacheName: "talkersMessages")
+    fetchResultsController.delegate = self
+
+    return fetchResultsController
+  }()
 
   @IBOutlet weak var conversationTableView: UITableView!
   @IBOutlet weak var messageTextField: UITextField!
   @IBOutlet weak var rootViewBottomConstraint: NSLayoutConstraint!
 
+  // MARK: - Lifecycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.navigationItem.title = channel?.name
+    guard let channel = channel else { return }
+    self.navigationItem.title = channel.name
 
     configureTableView()
 
@@ -47,6 +67,17 @@ class ConversationViewController: UIViewController {
       name: UIResponder.keyboardWillHideNotification,
       object: nil
     )
+
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+
+    dataManager.startLoading(channelId: channel.identifier) { [weak self] in
+      self?.conversationTableView?.reloadData()
+    }
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -56,35 +87,26 @@ class ConversationViewController: UIViewController {
     conversationTableView.reloadData()
   }
 
+  // MARK: - IBAction
+
   @IBAction func messageSendButtonTapped(_ sender: Any) {
-    dataManager?.addMessage(with: Message(
-                              content: messageTextField.text ?? "",
-                              created: Date(),
-                              senderId: ConversationsDataManager.mySenderId,
-                              // TODO захардкожено имя, так как не реализована возможность вытащить его быстро из профиля
-                              senderName: "Natalia Kazakova"))
+    guard let channel = self.channel,
+          let messageText = messageTextField.text else {
+      messageTextField.text = ""
+      return
+    }
+
+    let message = Message(
+      channelId: channel.identifier,
+      content: messageText,
+      created: Date(),
+      senderId: ConversationsDataManager.mySenderId,
+      // TODO захардкожено имя, так как не реализована возможность вытащить его быстро из профиля
+      senderName: "Natalia Kazakova")
+
+    dataManager.addMessage(with: message)
+
     messageTextField.text = ""
-  }
-
-  @objc private func keyboardWillShow(notification: NSNotification) {
-    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-       keyboardSize.height > 0 {
-
-      rootViewBottomConstraint.constant = keyboardSize.height + view.safeAreaInsets.bottom
-
-      UIView.animate(withDuration: 1.0) {
-        self.view.layoutIfNeeded()
-      }
-    }
-  }
-
-  @objc private func keyboardWillHide(notification: NSNotification) {
-
-    rootViewBottomConstraint.constant = 0
-
-    UIView.animate(withDuration: 1.0) {
-      self.view.layoutIfNeeded()
-    }
   }
 }
 
@@ -92,13 +114,15 @@ class ConversationViewController: UIViewController {
 
 extension ConversationViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dataManager?.getConversationsCount() ?? 0
+    guard let sections = fetchedResultsController.sections else { return 0 }
+
+    let sectionsInfo = sections[section]
+    return sectionsInfo.numberOfObjects
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let message = dataManager?.getConversation(by: indexPath) else {
-      return UITableViewCell()
-    }
+    let messageMO = fetchedResultsController.object(at: indexPath)
+    let message = Message(messageMO)
 
     var cell: ConversationTableViewCell?
 
@@ -120,20 +144,53 @@ extension ConversationViewController: UITableViewDataSource {
   }
 }
 
-// MARK: - Instantiation from storybord
+// MARK: - NSFetchedResultsControllerDelegate
 
-extension ConversationViewController {
-  static func storyboardInstance() -> ConversationViewController? {
-    let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-    let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-    return navigationController?.topViewController as? ConversationViewController
+extension ConversationViewController: NSFetchedResultsControllerDelegate {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    conversationTableView.beginUpdates()
+  }
+
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                  didChange anObject: Any,
+                  at indexPath: IndexPath?,
+                  for type: NSFetchedResultsChangeType,
+                  newIndexPath: IndexPath?) {
+    switch type {
+    case .insert:
+      guard let newIndexPath = newIndexPath else { return }
+      conversationTableView.insertRows(at: [newIndexPath], with: .automatic)
+      print("Добавлено новое сообщение")
+    case .delete:
+      guard let indexPath = indexPath else { return }
+      conversationTableView.deleteRows(at: [indexPath], with: .automatic)
+      print("Удалено сообщение")
+    case .update:
+      guard let indexPath = indexPath,
+            let cell = conversationTableView.cellForRow(at: indexPath) as? ConversationTableViewCell else { return }
+      let messageMO = fetchedResultsController.object(at: indexPath)
+      cell.configure(with: Message(messageMO))
+      print("Обновлено сообщение")
+    case .move:
+      guard let indexPath = indexPath,
+            let newIndexPath = newIndexPath else { return }
+      conversationTableView.deleteRows(at: [indexPath], with: .automatic)
+      conversationTableView.insertRows(at: [newIndexPath], with: .automatic)
+      print("Перемещено сообщение")
+    @unknown default:
+      print("Unexpected NSFetchedResultsChangeType")
+    }
+  }
+
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    conversationTableView.endUpdates()
   }
 }
 
 // MARK: - Private
 
-extension ConversationViewController {
-  private func configureTableView() {
+private extension ConversationViewController {
+  func configureTableView() {
     conversationTableView.dataSource = self
     conversationTableView.register(
       UINib(nibName: incomingMessageCellIdentifier, bundle: nil),
@@ -149,5 +206,35 @@ extension ConversationViewController {
     setNavigationBarForTheme()
 
     conversationTableView.backgroundColor = settings.chatBackgroundColor
+  }
+
+  @objc func keyboardWillShow(notification: NSNotification) {
+    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+       keyboardSize.height > 0 {
+
+      rootViewBottomConstraint.constant = keyboardSize.height + view.safeAreaInsets.bottom
+
+      UIView.animate(withDuration: 1.0) {
+        self.view.layoutIfNeeded()
+      }
+    }
+  }
+
+  @objc func keyboardWillHide(notification: NSNotification) {
+    rootViewBottomConstraint.constant = 0
+
+    UIView.animate(withDuration: 1.0) {
+      self.view.layoutIfNeeded()
+    }
+  }
+}
+
+// MARK: - Instantiation from storybord
+
+extension ConversationViewController {
+  static func storyboardInstance() -> ConversationViewController? {
+    let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+    let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+    return navigationController?.topViewController as? ConversationViewController
   }
 }

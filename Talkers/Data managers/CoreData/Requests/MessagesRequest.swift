@@ -18,9 +18,7 @@ struct MessagesRequest {
 
   func makeRequest(messages: [Message]) {
     coreDataStack.performSave { context in
-      for message in messages {
-        setValues(MessageMO(context: context), with: message)
-      }
+      messages.forEach { MessageMO(with: $0, in: context) }
     }
   }
 }
@@ -29,6 +27,7 @@ struct MessagesRequest {
 
 extension MessagesRequest {
   private func setValues(_ moMessage: MessageMO, with message: Message) {
+    moMessage.channelId = message.channelId
     moMessage.content = message.content
     moMessage.created = message.created
     moMessage.senderId = message.senderId

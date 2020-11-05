@@ -12,6 +12,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="MessageMO" representedClassName="MessageMO" syncable="YES" codeGenerationType="class">
+        <attribute name="channelId" attributeType="String"/>
         <attribute name="content" attributeType="String"/>
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="senderId" attributeType="String"/>
@@ -24,6 +25,6 @@
     </entity>
     <elements>
         <element name="ChannelMO" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="MessageMO" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="MessageMO" positionX="-54" positionY="-9" width="128" height="118"/>
     </elements>
 </model>

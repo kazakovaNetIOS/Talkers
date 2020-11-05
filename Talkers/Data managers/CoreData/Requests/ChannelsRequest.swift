@@ -18,20 +18,7 @@ struct ChannelsRequest {
 
   func makeRequest(channels: [Channel]) {
     coreDataStack.performSave { context in
-      for channel in channels {
-        setValues(ChannelMO(context: context), with: channel)
-      }
+      channels.forEach { ChannelMO(with: $0, in: context) }
     }
-  }
-}
-
-// MARK: - Set values by ChannelMO object
-
-extension ChannelsRequest {
-  private func setValues(_ moChannel: ChannelMO, with channel: Channel) {
-    moChannel.identifier = channel.identifier
-    moChannel.name = channel.name
-    moChannel.lastMessage = channel.lastMessage
-    moChannel.lastActivity = channel.lastActivity
   }
 }

@@ -12,6 +12,12 @@ import Firebase
 class ConversationsDataManager {
   lazy var db = Firestore.firestore()
   lazy var reference = db.collection("channels")
+  lazy var coreDataStack: CoreDataStack = {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      fatalError()
+    }
+    return appDelegate.coreDataStack
+  }()
 
   private var messages = [Message]()
   public static var mySenderId: String {
@@ -24,7 +30,7 @@ class ConversationsDataManager {
     }
   }
 
-  init(channelId: String, completionHandler: @escaping () -> Void) {
+  func startLoading(channelId: String, completionHandler: @escaping () -> Void) {
     reference = reference.document(channelId).collection("messages")
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
@@ -43,6 +49,7 @@ class ConversationsDataManager {
           guard let senderName = document.data()[MessageKeys.senderName] as? String else { return nil }
 
           return Message(
+            channelId: channelId,
             content: content,
             created: timestamp.dateValue(),
             senderId: senderId,
@@ -51,17 +58,12 @@ class ConversationsDataManager {
 
         self.messages = self.messages.sorted { $0.created < $1.created }
 
+        let messageRequest = MessagesRequest(coreDataStack: self.coreDataStack)
+        messageRequest.makeRequest(messages: self.messages)
+
         DispatchQueue.main.async {
           completionHandler()
         }
-
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-
-        let messageRequest = MessagesRequest(coreDataStack: appDelegate.coreDataStack)
-        messageRequest.makeRequest(messages: self.messages)
       }
     }
   }

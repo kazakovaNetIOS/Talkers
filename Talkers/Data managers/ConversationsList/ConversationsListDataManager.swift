@@ -13,6 +13,12 @@ import CoreData
 class ConversationsListDataManager {
   lazy var db = Firestore.firestore()
   lazy var reference = db.collection("channels")
+  lazy var coreDataStack: CoreDataStack = {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      fatalError()
+    }
+    return appDelegate.coreDataStack
+  }()
 
   private var channels = [Channel]()
 
@@ -43,17 +49,12 @@ class ConversationsListDataManager {
 
         self.channels = self.channels.sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
 
+        let chatRequest = ChannelsRequest(coreDataStack: self.coreDataStack)
+        chatRequest.makeRequest(channels: self.channels)
+
         DispatchQueue.main.async {
           completionHandler()
         }
-
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-
-        let chatRequest = ChannelsRequest(coreDataStack: appDelegate.coreDataStack)
-        chatRequest.makeRequest(channels: self.channels)
       }
     }
   }
@@ -69,6 +70,7 @@ class ConversationsListDataManager {
   func addChannel(withName channelName: String) {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       self?.reference.addDocument(data: [ChannelKeys.name: channelName])
+      print("Добавлен новый канал")
     }
   }
 }
