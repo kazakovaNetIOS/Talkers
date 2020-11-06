@@ -10,11 +10,11 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-  private let modelName: String
+  public static let share = CoreDataStack()
 
-  init(modelName: String) {
-    self.modelName = modelName
-  }
+  private let modelName = "Chats"
+
+  private init() {}		
 
   lazy var managedContext: NSManagedObjectContext = {
     self.storeContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy

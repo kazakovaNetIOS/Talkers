@@ -16,7 +16,7 @@ class ConversationViewController: UIViewController {
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
   
   private var dataManager = ConversationsDataManager()
-  private lazy var coreDataStack = CoreDataStack(modelName: "Chats")
+  private lazy var coreDataStack = CoreDataStack.share
 
   private lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
     guard let channel = channel else {
@@ -67,6 +67,12 @@ class ConversationViewController: UIViewController {
       name: UIResponder.keyboardWillHideNotification,
       object: nil
     )
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
 
     do {
       try fetchedResultsController.performFetch()
@@ -75,14 +81,8 @@ class ConversationViewController: UIViewController {
       print("\(fetchError), \(fetchError.localizedDescription)")
     }
 
+    guard let channel = channel else { return }
     dataManager.startLoading(channelId: channel.identifier)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
-    conversationTableView.reloadData()
   }
 
   // MARK: - IBAction

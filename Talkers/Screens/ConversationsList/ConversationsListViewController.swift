@@ -14,12 +14,12 @@ class ConversationsListViewController: BaseViewController {
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
 
   private var dataManager = ConversationsListDataManager()
-  private lazy var coreDataStack = CoreDataStack(modelName: "Chats")
+  private lazy var coreDataStack = CoreDataStack.share
 
   private lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
     let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
 
-    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: true)
+    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: false)
     fetchRequest.sortDescriptors = [sortDescriptor]
 
     let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -39,15 +39,6 @@ class ConversationsListViewController: BaseViewController {
     super.viewDidLoad()
 
     configureTableView()
-
-    do {
-      try fetchedResultsController.performFetch()
-    } catch {
-      let fetchError = error as NSError
-      print("\(fetchError), \(fetchError.localizedDescription)")
-    }
-
-    dataManager.startLoading()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +52,15 @@ class ConversationsListViewController: BaseViewController {
     super.viewWillAppear(animated)
 
     changeColorsForTheme(with: ThemeManager.shared.themeSettings)
-    conversationsListTableView.reloadData()
+
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+
+    dataManager.startLoading()
 
     self.navigationItem.title = "Channels"
   }

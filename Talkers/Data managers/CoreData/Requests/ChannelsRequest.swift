@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 struct ChannelsRequest {
-  let coreDataStack = CoreDataStack(modelName: "Chats")
+  let coreDataStack = CoreDataStack.share
 
   func makeRequest(channels: [Channel]) {
     channels.forEach { channel in
