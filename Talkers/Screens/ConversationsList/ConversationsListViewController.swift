@@ -142,8 +142,7 @@ extension ConversationsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let deletedChannel = fetchedResultsController.object(at: indexPath)
-      coreDataStack.managedContext.delete(deletedChannel)
-      coreDataStack.saveContext()
+      dataManager.deleteChannel(channel: deletedChannel)
     }
   }
 }

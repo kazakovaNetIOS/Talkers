@@ -41,8 +41,6 @@ class ConversationsListDataManager {
                        lastActivity: lastActivity)
         }
 
-        self.channels = self.channels.sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
-
         let chatRequest = ChannelsRequest()
         chatRequest.makeRequest(channels: self.channels)
       }
@@ -61,6 +59,20 @@ class ConversationsListDataManager {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       self?.reference.addDocument(data: [ChannelKeys.name: channelName])
       print("Добавлен новый канал")
+    }
+  }
+
+  func deleteChannel(channel: ChannelMO) {
+    guard let id = channel.identifier else { return }
+    let channelReference = reference.document(id)
+    channelReference.delete { error in
+      if let error = error {
+        print("Error deleting channel, \(error)")
+        return
+      }
+
+      CoreDataStack.share.managedContext.delete(channel)
+      CoreDataStack.share.saveContext()
     }
   }
 }

@@ -12,9 +12,9 @@ import CoreData
 struct MessagesRequest {
   let coreDataStack = CoreDataStack.share
 
-  func makeRequest(messages: [Message]) {
+  func makeRequest(messages: [Message], in channelId: String) {
     messages.forEach { message in
-      _ = MessageMO(with: message, in: coreDataStack.managedContext)
+      _ = MessageMO(with: message, channelId: channelId, in: coreDataStack.managedContext)
       coreDataStack.saveContext()
     }
   }

@@ -43,17 +43,14 @@ class ConversationsDataManager {
           guard let senderName = document.data()[MessageKeys.senderName] as? String else { return nil }
 
           return Message(
-            channelId: channelId,
             content: content,
             created: timestamp.dateValue(),
             senderId: senderId,
             senderName: senderName)
         }
 
-        self.messages = self.messages.sorted { $0.created < $1.created }
-
         let messageRequest = MessagesRequest()
-        messageRequest.makeRequest(messages: self.messages)
+        messageRequest.makeRequest(messages: self.messages, in: channelId)
       }
     }
   }

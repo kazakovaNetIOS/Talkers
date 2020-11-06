@@ -25,7 +25,7 @@ class ConversationViewController: UIViewController {
 
     let fetchRequest: NSFetchRequest<MessageMO> = MessageMO.fetchRequest()
 
-    let predicate = NSPredicate(format: "\(#keyPath(MessageMO.channelId)) == %@", channel.identifier)
+    let predicate = NSPredicate(format: "\(#keyPath(MessageMO.channel.identifier)) == %@", channel.identifier)
     fetchRequest.predicate = predicate
 
     let sortDescriptor = NSSortDescriptor(key: #keyPath(MessageMO.created), ascending: true)
@@ -88,14 +88,12 @@ class ConversationViewController: UIViewController {
   // MARK: - IBAction
 
   @IBAction func messageSendButtonTapped(_ sender: Any) {
-    guard let channel = self.channel,
-          let messageText = messageTextField.text else {
+    guard let messageText = messageTextField.text else {
       messageTextField.text = ""
       return
     }
 
     let message = Message(
-      channelId: channel.identifier,
       content: messageText,
       created: Date(),
       senderId: ConversationsDataManager.mySenderId,

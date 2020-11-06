@@ -5,6 +5,7 @@
         <attribute name="lastActivity" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastMessage" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MessageMO" inverseName="channel" inverseEntity="MessageMO"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="identifier"/>
@@ -12,11 +13,11 @@
         </uniquenessConstraints>
     </entity>
     <entity name="MessageMO" representedClassName="MessageMO" syncable="YES" codeGenerationType="class">
-        <attribute name="channelId" attributeType="String"/>
         <attribute name="content" attributeType="String"/>
         <attribute name="created" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="senderId" attributeType="String"/>
         <attribute name="senderName" attributeType="String"/>
+        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelMO" inverseName="messages" inverseEntity="ChannelMO"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="created"/>
@@ -24,7 +25,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="ChannelMO" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="ChannelMO" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="MessageMO" positionX="-54" positionY="-9" width="128" height="118"/>
     </elements>
 </model>
