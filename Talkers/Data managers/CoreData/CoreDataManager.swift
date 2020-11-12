@@ -11,7 +11,7 @@ import CoreData
 
 class CoreDataManager {
   func getChannel(by id: String) -> ChannelMO? {
-    let context = CoreDataStack.share.managedContext
+    let context = CoreDataStack().managedContext
 
     let request: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
 

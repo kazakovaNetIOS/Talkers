@@ -14,35 +14,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
-  func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-    Logger.printInLog("Launch process has begun but that state restoration has not yet occurred: \(#function). Initializing the app")
-    return true
-  }
+  private let rootAssembly = RootAssembly()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // todo remove
     Logger.printInLog("Application moved from initialize to launch: \(#function)")
     FirebaseApp.configure()
+
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    let controller = rootAssembly.presentationAssembly.conversationsListViewController()
+    window?.rootViewController = controller
+    window?.makeKeyAndVisible()
     
     return true
-  }
-
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    Logger.printInLog("\(#function) called to finish up the transition to the foreground")
-  }
-
-  func applicationWillResignActive(_ application: UIApplication) {
-    Logger.printInLog("Application moved from launch to inactive: \(#function)")
-  }
-
-  func applicationDidEnterBackground(_ application: UIApplication) {
-    Logger.printInLog("Application moved from inactive to background: \(#function)")
-  }
-
-  func applicationWillEnterForeground(_ application: UIApplication) {
-    Logger.printInLog("Application moved from background to active after interruption: \(#function)")
-  }
-
-  func applicationWillTerminate(_ application: UIApplication) {
-    Logger.printInLog("\(#function) called when app is about to be purged from memory")
   }
 }

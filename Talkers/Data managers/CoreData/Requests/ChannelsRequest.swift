@@ -10,7 +10,11 @@ import Foundation
 import CoreData
 
 struct ChannelsRequest {
-  let coreDataStack = CoreDataStack.share
+  let coreDataStack: CoreDataStack
+
+  init(coreDataStack: CoreDataStack) {
+    self.coreDataStack = coreDataStack
+  }
 
   func makeRequest(channels: [Channel]) {
     channels.forEach { channel in

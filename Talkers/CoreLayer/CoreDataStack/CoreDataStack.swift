@@ -10,15 +10,11 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-  public static let share = CoreDataStack()
-
   private let modelName = "Chats"
-
-  private init() {}		
 
   lazy var managedContext: NSManagedObjectContext = {
     self.storeContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-    return self.storeContainer.viewContext
+    return self.storeContainer.newBackgroundContext()
   }()
 
   private lazy var storeContainer: NSPersistentContainer = {
@@ -39,5 +35,10 @@ class CoreDataStack {
     } catch let error as NSError {
       print("Unresolved error \(error), \(error.userInfo)")
     }
+  }
+
+  func delete(object: NSManagedObject) {
+    managedContext.delete(object)
+    saveContext()
   }
 }

@@ -11,25 +11,10 @@ import Firebase
 import CoreData
 
 class ConversationsListViewController: BaseViewController {
+  var presentationAssembly: PresentationAssemblyProtocol?
+  var model: ChannelsModelProtocol?
+
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
-
-  private var dataManager = ConversationsListDataManager()
-  private lazy var coreDataStack = CoreDataStack.share
-
-  private lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
-    let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
-
-    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: false)
-    fetchRequest.sortDescriptors = [sortDescriptor]
-
-    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: self.coreDataStack.managedContext,
-                                                            sectionNameKeyPath: nil,
-                                                            cacheName: nil)
-    fetchResultsController.delegate = self
-
-    return fetchResultsController
-  }()
 
   @IBOutlet weak var conversationsListTableView: UITableView!
 
@@ -41,6 +26,16 @@ class ConversationsListViewController: BaseViewController {
     configureTableView()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+
+    model?.fetchChannels()
+
+    self.navigationItem.title = "Channels"
+  }
+
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
 
@@ -48,32 +43,17 @@ class ConversationsListViewController: BaseViewController {
     self.navigationItem.title = " "
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
-
-    do {
-      try fetchedResultsController.performFetch()
-    } catch {
-      let fetchError = error as NSError
-      print("\(fetchError), \(fetchError.localizedDescription)")
-    }
-
-    dataManager.startLoading()
-
-    self.navigationItem.title = "Channels"
-  }
-
   // MARK: - IBAction
 
   @IBAction func profileIconTapped(_ sender: Any) {
+    // todo
     if let profileViewController = ProfileViewController.storyboardInstance() {
       present(profileViewController, animated: true)
     }
   }
 
   @IBAction func settingsIconTapped(_ sender: Any) {
+    // todo
     if let themesViewController = ThemesViewController.storyboardInstance(
       delegate: ThemeManager.shared, onThemeSelectedListener: ThemeManager.shared.onThemeSelectedListener) {
       navigationController?.pushViewController(themesViewController, animated: true)
@@ -99,50 +79,19 @@ class ConversationsListViewController: BaseViewController {
   }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - ChannelsModelDelegateProtocol
 
-extension ConversationsListViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let sections = fetchedResultsController.sections else { return 0 }
-
-    let sectionsInfo = sections[section]
-    return sectionsInfo.numberOfObjects
+extension ConversationsListViewController: ChannelsModelDelegateProtocol {
+  func show(error message: String) {
+    let settings = BaseViewController.AlertMessageSettings(title: "Ошибка",
+                                                           message: message,
+                                                           defaultActionTitle: "Ok")
+    showAlert(with: settings)
   }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let channelMO = fetchedResultsController.object(at: indexPath)
-
-    guard let cell = tableView.dequeueReusableCell(
-    withIdentifier: cellIdentifier, for: indexPath) as? ConversationsListTableViewCell else {
-      return UITableViewCell()
-    }
-
-    cell.configure(with: Channel(channelMO))
-
-    return cell
-  }
-}
-
-// MARK: - UITableViewDelegate
-
-extension ConversationsListViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let conversationViewController = ConversationViewController.storyboardInstance() {
-      let channelMO = fetchedResultsController.object(at: indexPath)
-      conversationViewController.channel = Channel(channelMO)
-
+  func didChannelSelected(with channel: ChannelMO) {
+    if let conversationViewController = presentationAssembly?.conversationViewController(with: channel) {
       navigationController?.pushViewController(conversationViewController, animated: true)
-    }
-  }
-
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      let deletedChannel = fetchedResultsController.object(at: indexPath)
-      dataManager.deleteChannel(channel: deletedChannel)
     }
   }
 }
@@ -151,6 +100,7 @@ extension ConversationsListViewController: UITableViewDelegate {
 
 extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    // todo start loader
     conversationsListTableView.beginUpdates()
   }
 
@@ -171,9 +121,10 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
     case .update:
       guard let indexPath = indexPath,
             let cell = conversationsListTableView.cellForRow(at: indexPath) as? ConversationsListTableViewCell else { return }
-      let channelMO = fetchedResultsController.object(at: indexPath)
-      cell.configure(with: Channel(channelMO))
-      print("Обновлен канал")
+      if let channelMO = model?.getChannel(at: indexPath) {
+        cell.configure(with: Channel(channelMO))
+        print("Обновлен канал")
+      }
     case .move:
       guard let indexPath = indexPath,
             let newIndexPath = newIndexPath else { return }
@@ -186,6 +137,7 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   }
 
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    // todo stop loader
     conversationsListTableView.endUpdates()
   }
 }
@@ -194,12 +146,13 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
 
 private extension ConversationsListViewController {
   func createNewChannel(withName channelName: String) {
-    dataManager.addChannel(withName: channelName)
+    // todo
+    model?.addChannel(withName: channelName)
   }
 
   func configureTableView() {
-    conversationsListTableView.delegate = self
-    conversationsListTableView.dataSource = self
+    conversationsListTableView.delegate = model?.tableViewDelegate
+    conversationsListTableView.dataSource = model?.tableViewDataSource
     conversationsListTableView.tableFooterView =
       UIView(frame: CGRect(x: 0, y: 0, width: conversationsListTableView.frame.size.width, height: 1))
     conversationsListTableView.register(
@@ -208,7 +161,6 @@ private extension ConversationsListViewController {
 
   func changeColorsForTheme(with settings: ThemeSettings) {
     setNavigationBarForTheme()
-
     conversationsListTableView.backgroundColor = settings.chatBackgroundColor
   }
 }
@@ -216,8 +168,8 @@ private extension ConversationsListViewController {
 // MARK: - Instantiation from storybord
 
 extension ConversationsListViewController {
-  static func storyboardInstance() -> ConversationsListViewController? {
+  static func storyboardInstance() -> UINavigationController? {
     let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-    return storyboard.instantiateInitialViewController() as? ConversationsListViewController
+    return storyboard.instantiateInitialViewController() as? UINavigationController
   }
 }

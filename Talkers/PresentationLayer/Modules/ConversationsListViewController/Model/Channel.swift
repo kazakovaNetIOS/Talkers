@@ -2,7 +2,7 @@
 //  Channel.swift
 //  Talkers
 //
-//  Created by Natalia Kazakova on 21.10.2020.
+//  Created by Natalia Kazakova on 12.11.2020.
 //  Copyright © 2020 Natalia Kazakova. All rights reserved.
 //
 
@@ -29,7 +29,7 @@ struct Channel: Equatable {
   static func == (lhs: Channel, rhs: Channel) -> Bool {
     return lhs.identifier == rhs.identifier
   }
-} 
+}
 
 // MARK: - Init from ChannelMO
 

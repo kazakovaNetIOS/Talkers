@@ -16,7 +16,7 @@ class ConversationViewController: UIViewController {
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
   
   private var dataManager = ConversationsDataManager()
-  private lazy var coreDataStack = CoreDataStack.share
+  private lazy var coreDataStack = CoreDataStack()
 
   private lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
     guard let channel = channel else {
