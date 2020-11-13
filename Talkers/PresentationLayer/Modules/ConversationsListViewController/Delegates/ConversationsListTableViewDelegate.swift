@@ -9,10 +9,10 @@
 import UIKit
 
 class ConversationsListTableViewDelegate: NSObject {
-  private let model: ChannelsModel
+  private let model: ConversationsListModel
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
 
-  init(model: ChannelsModel) {
+  init(model: ConversationsListModel) {
     self.model = model
   }
 }

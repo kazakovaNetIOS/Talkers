@@ -10,6 +10,14 @@ import Foundation
 
 protocol ServiceAssemblyProtocol {
   var channelsService: ChannelsServiceProtocol { get }
+  var channelsFirebaseService: ChannelsFirebaseServiceProtocol { get }
+  var channelsCoreDataService: ChannelsCoreDataServiceProtocol { get }
+
+  var messagesService: MessagesServiceProtocol { get }
+  var messagesFirebaseService: MessagesFirebaseServiceProtocol { get }
+  var messagesCoreDataService: MessagesCoreDataServiceProtocol { get }
+
+  var userProfileService: UserProfileServiceProtocol { get }
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -19,6 +27,15 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     self.coreAssembly = coreAssembly
   }
 
-  lazy var channelsService: ChannelsServiceProtocol = ChannelsService(firebaseService: ChannelsFirebaseService(firebaseStorage: coreAssembly.channelsFirebaseStorage),
-                                                                      coreDataService: ChannelsCoreDataService(coreDataStorage: coreAssembly.channelsCoreDataStorage))
+  lazy var channelsFirebaseService: ChannelsFirebaseServiceProtocol = ChannelsFirebaseService(firebaseStorage: coreAssembly.firebaseStorage)
+  lazy var channelsCoreDataService: ChannelsCoreDataServiceProtocol = ChannelsCoreDataService(coreDataStorage: coreAssembly.coreDataStorage)
+  lazy var channelsService: ChannelsServiceProtocol = ChannelsService(firebaseService: channelsFirebaseService,
+                                                                      coreDataService: channelsCoreDataService)
+
+  lazy var messagesFirebaseService: MessagesFirebaseServiceProtocol = MessagesFirebaseService(firebaseStorage: coreAssembly.firebaseStorage)
+  lazy var messagesCoreDataService: MessagesCoreDataServiceProtocol = MessagesCoreDataService(coreDataStorage: coreAssembly.coreDataStorage)
+  lazy var messagesService: MessagesServiceProtocol = MessagesService(firebaseService: messagesFirebaseService,
+                                                                      coreDataService: messagesCoreDataService)
+
+  lazy var userProfileService: UserProfileServiceProtocol = UserProfileService(dataManager: UserProfileOperationDataManager())
 }

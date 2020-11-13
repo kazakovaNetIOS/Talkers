@@ -9,36 +9,11 @@
 import UIKit
 import CoreData
 
-class ConversationViewController: UIViewController {
-  var channel: Channel?
+class ConversationViewController: BaseViewController {
+  var model: ConversationModelProtocol?
 
   private let incomingMessageCellIdentifier = "IncomingConversationTableViewCell"
   private let outgoingMessageCellIdentifier = "OutgoingConversationTableViewCell"
-  
-  private var dataManager = ConversationsDataManager()
-  private lazy var coreDataStack = CoreDataStack()
-
-  private lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
-    guard let channel = channel else {
-      fatalError()
-    }
-
-    let fetchRequest: NSFetchRequest<MessageMO> = MessageMO.fetchRequest()
-
-    let predicate = NSPredicate(format: "\(#keyPath(MessageMO.channel.identifier)) == %@", channel.identifier)
-    fetchRequest.predicate = predicate
-
-    let sortDescriptor = NSSortDescriptor(key: #keyPath(MessageMO.created), ascending: true)
-    fetchRequest.sortDescriptors = [sortDescriptor]
-
-    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: self.coreDataStack.managedContext,
-                                                            sectionNameKeyPath: nil,
-                                                            cacheName: nil)
-    fetchResultsController.delegate = self
-
-    return fetchResultsController
-  }()
 
   @IBOutlet weak var conversationTableView: UITableView!
   @IBOutlet weak var messageTextField: UITextField!
@@ -48,9 +23,6 @@ class ConversationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    guard let channel = channel else { return }
-    self.navigationItem.title = channel.name
 
     configureTableView()
 
@@ -74,15 +46,9 @@ class ConversationViewController: UIViewController {
 
     changeColorsForTheme(with: ThemeManager.shared.themeSettings)
 
-    do {
-      try fetchedResultsController.performFetch()
-    } catch {
-      let fetchError = error as NSError
-      print("\(fetchError), \(fetchError.localizedDescription)")
-    }
+    model?.fetchMessages()
 
-    guard let channel = channel else { return }
-    dataManager.startLoading(channelId: channel.identifier)
+    self.navigationItem.title = model?.channel.name
   }
 
   // MARK: - IBAction
@@ -93,50 +59,20 @@ class ConversationViewController: UIViewController {
       return
     }
 
-    let message = Message(
-      content: messageText,
-      created: Date(),
-      senderId: ConversationsDataManager.mySenderId,
-      // TODO захардкожено имя, так как не реализована возможность вытащить его быстро из профиля
-      senderName: "Natalia Kazakova")
-
-    dataManager.addMessage(with: message)
+    model?.addMessage(with: messageText)
 
     messageTextField.text = ""
   }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - ConversationModelDelegateProtocol
 
-extension ConversationViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let sections = fetchedResultsController.sections else { return 0 }
-
-    let sectionsInfo = sections[section]
-    return sectionsInfo.numberOfObjects
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let messageMO = fetchedResultsController.object(at: indexPath)
-    let message = Message(messageMO)
-
-    var cell: ConversationTableViewCell?
-
-    if message.isMyMessage {
-      cell = tableView.dequeueReusableCell(
-        withIdentifier: outgoingMessageCellIdentifier,
-        for: indexPath) as? ConversationTableViewCell
-    } else {
-      cell = tableView.dequeueReusableCell(
-        withIdentifier: incomingMessageCellIdentifier,
-        for: indexPath) as? ConversationTableViewCell
-    }
-
-    guard let messageCell = cell else { return UITableViewCell() }
-
-    messageCell.configure(with: message)
-
-    return messageCell
+extension ConversationViewController: ConversationModelDelegateProtocol {
+  func show(error message: String) {
+    let settings = BaseViewController.AlertMessageSettings(title: "Ошибка",
+                                                           message: message,
+                                                           defaultActionTitle: "Ok")
+    showAlert(with: settings)
   }
 }
 
@@ -164,9 +100,10 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     case .update:
       guard let indexPath = indexPath,
             let cell = conversationTableView.cellForRow(at: indexPath) as? ConversationTableViewCell else { return }
-      let messageMO = fetchedResultsController.object(at: indexPath)
-      cell.configure(with: Message(messageMO))
-      print("Обновлено сообщение")
+      if let messageMO = model?.getMessage(at: indexPath) {
+        cell.configure(with: Message(messageMO))
+        print("Обновлено сообщение")
+      }
     case .move:
       guard let indexPath = indexPath,
             let newIndexPath = newIndexPath else { return }
@@ -180,6 +117,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
 
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     conversationTableView.endUpdates()
+    scrollToBottom()
   }
 }
 
@@ -187,7 +125,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
 
 private extension ConversationViewController {
   func configureTableView() {
-    conversationTableView.dataSource = self
+    conversationTableView.dataSource = model?.tableViewDataSource
     conversationTableView.register(
       UINib(nibName: incomingMessageCellIdentifier, bundle: nil),
       forCellReuseIdentifier: incomingMessageCellIdentifier)
@@ -222,6 +160,16 @@ private extension ConversationViewController {
     UIView.animate(withDuration: 1.0) {
       self.view.layoutIfNeeded()
     }
+  }
+
+  private func scrollToBottom() {
+    guard let count = model?.getMessagesCount(),
+          count > 0 else { return }
+    let row = count - 1
+    let indexPath = IndexPath(row: row, section: 0)
+    conversationTableView.scrollToRow(at: indexPath,
+                          at: .bottom,
+                          animated: true)
   }
 }
 

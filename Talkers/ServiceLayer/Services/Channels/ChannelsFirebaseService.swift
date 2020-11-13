@@ -26,14 +26,14 @@ protocol ChannelsFirebaseServiceDelegateProtocol: class {
 class ChannelsFirebaseService {
   weak var delegate: ChannelsFirebaseServiceDelegateProtocol?
   var channels: [Channel] = [Channel]()
-  private var firebaseStorage: ChannelsFirebaseStorageProtocol
+  private var firebaseStorage: FirebaseStorageProtocol
 
-  init(firebaseStorage: ChannelsFirebaseStorageProtocol) {
+  init(firebaseStorage: FirebaseStorageProtocol) {
     self.firebaseStorage = firebaseStorage
   }
 }
 
-// MARK: - ChannelsFirebaseService
+// MARK: - ChannelsFirebaseServiceProtocol
 
 extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
   func addChannel(withName channelName: String) {

@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-protocol ChannelsModelProtocol {
-  var delegate: ChannelsModelDelegateProtocol? { get set }
+protocol ConversationsListModelProtocol {
+  var delegate: ConversationsListModelDelegateProtocol? { get set }
   var tableViewDataSource: ConversationsListTableViewDataSource { get }
   var tableViewDelegate: ConversationsListTableViewDelegate { get }
 
@@ -24,13 +24,13 @@ protocol ChannelsModelProtocol {
   func selectChannel(at indexPath: IndexPath)
 }
 
-protocol ChannelsModelDelegateProtocol: class {
+protocol ConversationsListModelDelegateProtocol: class {
   func didChannelSelected(with channel: ChannelMO)
   func show(error message: String)
 }
 
-class ChannelsModel {
-  weak var delegate: ChannelsModelDelegateProtocol?
+class ConversationsListModel {
+  weak var delegate: ConversationsListModelDelegateProtocol?
   private var channelsService: ChannelsServiceProtocol
 
   lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
@@ -51,7 +51,7 @@ class ChannelsModel {
 
 // MARK: - ChannelsModelProtocol
 
-extension ChannelsModel: ChannelsModelProtocol {
+extension ConversationsListModel: ConversationsListModelProtocol {
   func fetchChannels() {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
@@ -104,7 +104,7 @@ extension ChannelsModel: ChannelsModelProtocol {
 
 // MARK: - ChannelsServiceDelegateProtocol
 
-extension ChannelsModel: ChannelsServiceDelegateProtocol {
+extension ConversationsListModel: ChannelsServiceDelegateProtocol {
   func processError(with message: String) {
     DispatchQueue.main.async { [weak self] in
       self?.delegate?.show(error: message)

@@ -10,11 +10,15 @@ import Foundation
 import CoreData
 
 struct MessagesRequest {
-  let coreDataStack = CoreDataStack()
+  let coreDataStack: CoreDataStack
 
-  func makeRequest(messages: [Message], in channelId: String) {
+  init(coreDataStack: CoreDataStack) {
+    self.coreDataStack = coreDataStack
+  }
+
+  func makeRequest(messages: [Message], in channel: ChannelMO) {
     messages.forEach { message in
-      _ = MessageMO(with: message, channelId: channelId, in: coreDataStack.managedContext)
+      _ = MessageMO(with: message, channel: channel, in: coreDataStack.managedContext)
       coreDataStack.saveContext()
     }
   }

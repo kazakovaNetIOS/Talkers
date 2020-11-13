@@ -49,8 +49,8 @@ class ConversationsDataManager {
             senderName: senderName)
         }
 
-        let messageRequest = MessagesRequest()
-        messageRequest.makeRequest(messages: self.messages, in: channelId)
+//        let messageRequest = MessagesRequest()
+//        messageRequest.makeRequest(messages: self.messages, in: channelId)
       }
     }
   }

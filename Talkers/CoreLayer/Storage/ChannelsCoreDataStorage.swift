@@ -8,14 +8,12 @@
 
 import Foundation
 
-protocol ChannelsCoreDataStorageProtocol {
+protocol CoreDataStorageProtocol {
   var frcRepository: FRCRepositoryProtocol { get }
   var coreDataStack: CoreDataStack { get }
 }
 
-class ChannelsCoreDataStorage {
-  weak var delegate: ChannelsStorageDelegateProtocol?
-  var channels = [Channel]()
+class CoreDataStorage: CoreDataStorageProtocol {
   lazy var frcRepository: FRCRepositoryProtocol = {
     return FRCChannelsRepository(context: self.coreDataStack.managedContext)
   }()
@@ -24,10 +22,4 @@ class ChannelsCoreDataStorage {
   init(coreDataStack: CoreDataStack) {
     self.coreDataStack = coreDataStack
   }
-}
-
-// MARK: - ChannelsStorageProtocol
-
-extension ChannelsCoreDataStorage: ChannelsCoreDataStorageProtocol {
-  
 }

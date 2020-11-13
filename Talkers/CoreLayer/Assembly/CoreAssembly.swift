@@ -9,11 +9,11 @@
 import Foundation
 
 protocol CoreAssemblyProtocol {
-  var channelsFirebaseStorage: ChannelsFirebaseStorageProtocol { get }
-  var channelsCoreDataStorage: ChannelsCoreDataStorageProtocol { get }
+  var firebaseStorage: FirebaseStorageProtocol { get }
+  var coreDataStorage: CoreDataStorageProtocol { get }
 }
 
 class CoreAssembly: CoreAssemblyProtocol {
-  lazy var channelsFirebaseStorage: ChannelsFirebaseStorageProtocol = ChannelsFirebaseStorage()
-  lazy var channelsCoreDataStorage: ChannelsCoreDataStorageProtocol = ChannelsCoreDataStorage(coreDataStack: CoreDataStack())
+  lazy var firebaseStorage: FirebaseStorageProtocol = FirebaseStorage()
+  lazy var coreDataStorage: CoreDataStorageProtocol = CoreDataStorage(coreDataStack: CoreDataStack())
 }

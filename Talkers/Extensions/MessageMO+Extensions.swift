@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 extension MessageMO {
-  convenience init(with message: Message, channelId: String, in context: NSManagedObjectContext) {
+  convenience init(with message: Message, channel: ChannelMO, in context: NSManagedObjectContext) {
     self.init(context: context)
 
-    self.channel = CoreDataManager().getChannel(by: channelId)
+    self.channel = channel
     self.content = message.content
     self.created = message.created
     self.senderId = message.senderId

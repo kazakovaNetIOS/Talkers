@@ -7,16 +7,16 @@
 //
 
 import UIKit
-import Firebase
 import CoreData
 
 class ConversationsListViewController: BaseViewController {
   var presentationAssembly: PresentationAssemblyProtocol?
-  var model: ChannelsModelProtocol?
+  var model: ConversationsListModelProtocol?
 
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
 
   @IBOutlet weak var conversationsListTableView: UITableView!
+  @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
   // MARK: - Lifecycle
 
@@ -81,7 +81,7 @@ class ConversationsListViewController: BaseViewController {
 
 // MARK: - ChannelsModelDelegateProtocol
 
-extension ConversationsListViewController: ChannelsModelDelegateProtocol {
+extension ConversationsListViewController: ConversationsListModelDelegateProtocol {
   func show(error message: String) {
     let settings = BaseViewController.AlertMessageSettings(title: "Ошибка",
                                                            message: message,
@@ -100,7 +100,7 @@ extension ConversationsListViewController: ChannelsModelDelegateProtocol {
 
 extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    // todo start loader
+    loadingIndicator.startAnimating()
     conversationsListTableView.beginUpdates()
   }
 
@@ -137,7 +137,7 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   }
 
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-    // todo stop loader
+    loadingIndicator.stopAnimating()
     conversationsListTableView.endUpdates()
   }
 }

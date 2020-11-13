@@ -9,18 +9,18 @@
 import Foundation
 import Firebase
 
-protocol ChannelsFirebaseStorageProtocol {
+protocol FirebaseStorageProtocol {
   var db: Firestore { get }
   var reference: CollectionReference { get }
   func getMessageCollectionReference(in channelId: String) -> CollectionReference
 }
 
-class ChannelsFirebaseStorage {
+class FirebaseStorage {
   lazy var db = Firestore.firestore()
   lazy var reference = db.collection("channels")
 }
 
-extension ChannelsFirebaseStorage: ChannelsFirebaseStorageProtocol {
+extension FirebaseStorage: FirebaseStorageProtocol {
   func getMessageCollectionReference(in channelId: String) -> CollectionReference {
     return reference.document(channelId).collection("messages")
   }

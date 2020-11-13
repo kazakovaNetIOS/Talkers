@@ -17,6 +17,7 @@ protocol PresentationAssemblyProtocol {
 
 class PresentationAssembly: PresentationAssemblyProtocol {
   private let serviceAssembly: ServiceAssemblyProtocol
+  private var conversationsListVC: ConversationsListViewController?
 
   init(serviceAssembly: ServiceAssemblyProtocol) {
     self.serviceAssembly = serviceAssembly
@@ -39,18 +40,22 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     model.setFRCDelegate(delegate: conversationsListVC)
     conversationsListVC.model = model
 
+    self.conversationsListVC = conversationsListVC
+
     return navVC
   }
 
   // MARK: - ConversationViewController
   func conversationViewController(with channel: ChannelMO) -> ConversationViewController {
-//    var model = channelsModel()
+    var model = conversationModel(with: channel)
 
     guard let conversationVC = ConversationViewController.storyboardInstance() else {
       fatalError("Can't initialize ConversationViewController from storyboard")
     }
 
-//    model.delegate = conversationsListVC
+    model.delegate = conversationVC
+    model.setFRCDelegate(delegate: conversationVC)
+    conversationVC.model = model
 
     return conversationVC
   }
@@ -59,7 +64,13 @@ class PresentationAssembly: PresentationAssemblyProtocol {
 // MARK: - Private
 
 private extension PresentationAssembly {
-  func channelsModel() -> ChannelsModelProtocol {
-    return ChannelsModel(channelsService: serviceAssembly.channelsService)
+  func channelsModel() -> ConversationsListModelProtocol {
+    return ConversationsListModel(channelsService: serviceAssembly.channelsService)
+  }
+
+  func conversationModel(with channel: ChannelMO) -> ConversationModelProtocol {
+    return ConversationModel(channelsService: serviceAssembly.messagesService,
+                             userProfileService: serviceAssembly.userProfileService,
+                             channel: channel)
   }
 }

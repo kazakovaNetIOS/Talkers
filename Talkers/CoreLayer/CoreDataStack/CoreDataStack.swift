@@ -13,8 +13,9 @@ class CoreDataStack {
   private let modelName = "Chats"
 
   lazy var managedContext: NSManagedObjectContext = {
-    self.storeContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-    return self.storeContainer.newBackgroundContext()
+    let context = self.storeContainer.viewContext
+    context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+    return context
   }()
 
   private lazy var storeContainer: NSPersistentContainer = {
