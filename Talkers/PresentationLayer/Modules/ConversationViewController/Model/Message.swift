@@ -16,6 +16,7 @@ struct Message: Equatable {
   let created: Date
   let senderId: String
   let senderName: String
+  let isMyMessage: Bool
 
   var dictionary: [String: Any] {
     return [
@@ -23,10 +24,6 @@ struct Message: Equatable {
       Keys.created: Timestamp(date: created),
       Keys.senderId: senderId,
       Keys.senderName: senderName]
-  }
-
-  var isMyMessage: Bool {
-    return self.senderId == ConversationsDataManager.mySenderId
   }
 
   public enum Keys {
@@ -45,10 +42,11 @@ struct Message: Equatable {
 // MARK: - Init from ChannelMO
 
 extension Message {
-  init(_ messageMO: MessageMO) {
+  init(_ messageMO: MessageMO, isMyMessage: Bool) {
     self.content = messageMO.content ?? ""
     self.created = messageMO.created ?? .distantPast
     self.senderId = messageMO.senderId ?? ""
     self.senderName = messageMO.senderName ?? ""
+    self.isMyMessage = isMyMessage
   }
 }

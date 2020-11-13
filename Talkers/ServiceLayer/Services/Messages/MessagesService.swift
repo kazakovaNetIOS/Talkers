@@ -12,7 +12,7 @@ import CoreData
 protocol MessagesServiceProtocol {
   var delegate: MessagesServiceDelegateProtocol? { get set }
   func addMessage(with message: Message, in channelId: String)
-  func fetchMessages(in channel: ChannelMO)
+  func fetchMessages(in channel: ChannelMO, mySenderId: String)
   func getFRC(with channelId: String) -> NSFetchedResultsController<MessageMO>
 }
 
@@ -44,8 +44,8 @@ extension MessagesService: MessagesServiceProtocol {
     firebaseService.addMessage(with: message, in: channelId)
   }
 
-  func fetchMessages(in channel: ChannelMO) {
-    firebaseService.fetchMessages(in: channel)
+  func fetchMessages(in channel: ChannelMO, mySenderId: String) {
+    firebaseService.fetchMessages(in: channel, mySenderId: mySenderId)
   }
 }
 

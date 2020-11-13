@@ -13,7 +13,7 @@ protocol MessagesFirebaseServiceProtocol {
   var delegate: MessagesFirebaseServiceDelegateProtocol? { get set }
   var messages: [Message] { get }
   func addMessage(with message: Message, in channelId: String)
-  func fetchMessages(in channel: ChannelMO)
+  func fetchMessages(in channel: ChannelMO, mySenderId: String)
 }
 
 protocol MessagesFirebaseServiceDelegateProtocol: class {
@@ -42,7 +42,7 @@ extension MessagesFirebaseService: MessagesFirebaseServiceProtocol {
     }
   }
 
-  func fetchMessages(in channel: ChannelMO) {
+  func fetchMessages(in channel: ChannelMO, mySenderId: String) {
     guard let channelId = channel.identifier else {
       self.delegate?.processFirebaseError(with: "Error while receiving messages")
       return
@@ -70,7 +70,8 @@ extension MessagesFirebaseService: MessagesFirebaseServiceProtocol {
             content: content,
             created: timestamp.dateValue(),
             senderId: senderId,
-            senderName: senderName)
+            senderName: senderName,
+            isMyMessage: senderId == mySenderId)
         }
 
         self.delegate?.firebaseDidFinishFetching(in: channel)

@@ -26,8 +26,7 @@ extension ConversationTableViewDataSource: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let messageMO = model.getMessage(at: indexPath)
-    let message = Message(messageMO)
+    let message = model.getMessage(at: indexPath)
 
     var cell: ConversationTableViewCell?
 

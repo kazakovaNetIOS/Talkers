@@ -16,7 +16,7 @@ protocol ConversationModelProtocol {
 
   func addMessage(with messageText: String)
   func fetchMessages()
-  func getMessage(at indexPath: IndexPath) -> MessageMO
+  func getMessage(at indexPath: IndexPath) -> Message
   func getNumbersOfObjects(for section: Int) -> Int
   func getMessagesCount() -> Int
   func setFRCDelegate(delegate: NSFetchedResultsControllerDelegate)
@@ -56,12 +56,13 @@ class ConversationModel {
 
 extension ConversationModel: ConversationModelProtocol {
   func addMessage(with messageText: String) {
-    let senderId = userProfileService.getSenderId()
+    let mySenderId = userProfileService.getSenderId()
     let userProfile = userProfileService.getUserProfile()
     let newMessage = Message(content: messageText,
                              created: Date(),
-                             senderId: senderId,
-                             senderName: userProfile.name ?? "")
+                             senderId: mySenderId,
+                             senderName: userProfile.name ?? "",
+                             isMyMessage: true)
 
     guard let channelId = channel.identifier else {
       fatalError("Can't initialize model for conversation")
@@ -85,13 +86,17 @@ extension ConversationModel: ConversationModelProtocol {
       }
 
       DispatchQueue.global(qos: .userInitiated).async {
-        self.messagessService.fetchMessages(in: self.channel)
+        self.messagessService.fetchMessages(in: self.channel,
+                                            mySenderId: self.userProfileService.getSenderId())
       }
     }
   }
 
-  func getMessage(at indexPath: IndexPath) -> MessageMO {
-    return fetchedResultsController.object(at: indexPath)
+  func getMessage(at indexPath: IndexPath) -> Message {
+    let messageMO = fetchedResultsController.object(at: indexPath)
+    let senderId = messageMO.senderId
+    let mySenderId = userProfileService.getSenderId()
+    return Message(messageMO, isMyMessage: senderId == mySenderId)
   }
 
   func getNumbersOfObjects(for section: Int) -> Int {

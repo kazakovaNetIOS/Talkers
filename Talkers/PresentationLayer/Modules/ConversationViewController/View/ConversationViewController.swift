@@ -100,8 +100,8 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     case .update:
       guard let indexPath = indexPath,
             let cell = conversationTableView.cellForRow(at: indexPath) as? ConversationTableViewCell else { return }
-      if let messageMO = model?.getMessage(at: indexPath) {
-        cell.configure(with: Message(messageMO))
+      if let message = model?.getMessage(at: indexPath) {
+        cell.configure(with: message)
         print("Обновлено сообщение")
       }
     case .move:
