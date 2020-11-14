@@ -23,12 +23,4 @@ extension ConversationsListTableViewDelegate: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     model.selectChannel(at: indexPath)
   }
-
-  func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete { model.deleteChannel(at: indexPath) }
-  }
 }

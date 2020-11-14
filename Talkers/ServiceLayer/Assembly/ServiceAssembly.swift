@@ -28,12 +28,13 @@ class ServiceAssembly: ServiceAssemblyProtocol {
   }
 
   lazy var channelsFirebaseService: ChannelsFirebaseServiceProtocol = ChannelsFirebaseService(firebaseStorage: coreAssembly.firebaseStorage)
-  lazy var channelsCoreDataService: ChannelsCoreDataServiceProtocol = ChannelsCoreDataService(coreDataStorage: coreAssembly.coreDataStorage)
+  lazy var channelsCoreDataService: ChannelsCoreDataServiceProtocol = ChannelsCoreDataService(coreDataStack: coreAssembly.coreDataStorage.coreDataStack)
   lazy var channelsService: ChannelsServiceProtocol = ChannelsService(firebaseService: channelsFirebaseService,
                                                                       coreDataService: channelsCoreDataService)
 
   lazy var messagesFirebaseService: MessagesFirebaseServiceProtocol = MessagesFirebaseService(firebaseStorage: coreAssembly.firebaseStorage)
-  lazy var messagesCoreDataService: MessagesCoreDataServiceProtocol = MessagesCoreDataService(coreDataStorage: coreAssembly.coreDataStorage)
+  lazy var messagesCoreDataService: MessagesCoreDataServiceProtocol = MessagesCoreDataService(coreDataStack: coreAssembly.coreDataStorage.coreDataStack,
+                                                                                              channelsCoreDataService: channelsCoreDataService)
   lazy var messagesService: MessagesServiceProtocol = MessagesService(firebaseService: messagesFirebaseService,
                                                                       coreDataService: messagesCoreDataService)
 

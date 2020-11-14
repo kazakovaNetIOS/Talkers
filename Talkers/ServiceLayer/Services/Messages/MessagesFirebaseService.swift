@@ -13,12 +13,12 @@ protocol MessagesFirebaseServiceProtocol {
   var delegate: MessagesFirebaseServiceDelegateProtocol? { get set }
   var messages: [Message] { get }
   func addMessage(with message: Message, in channelId: String)
-  func fetchMessages(in channel: ChannelMO, mySenderId: String)
+  func fetchMessages(in channelId: String, mySenderId: String)
 }
 
 protocol MessagesFirebaseServiceDelegateProtocol: class {
   func processFirebaseError(with message: String)
-  func firebaseDidFinishFetching(in channel: ChannelMO)
+  func firebaseDidFinishFetching(in channelId: String)
 }
 
 class MessagesFirebaseService {
@@ -35,19 +35,12 @@ class MessagesFirebaseService {
 
 extension MessagesFirebaseService: MessagesFirebaseServiceProtocol {
   func addMessage(with message: Message, in channelId: String) {
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      self?.firebaseStorage
-        .getMessageCollectionReference(in: channelId)
-        .addDocument(data: message.dictionary)
-    }
+    firebaseStorage
+      .getMessageCollectionReference(in: channelId)
+      .addDocument(data: message.dictionary)
   }
 
-  func fetchMessages(in channel: ChannelMO, mySenderId: String) {
-    guard let channelId = channel.identifier else {
-      self.delegate?.processFirebaseError(with: "Error while receiving messages")
-      return
-    }
-
+  func fetchMessages(in channelId: String, mySenderId: String) {
     self.firebaseStorage
       .getMessageCollectionReference(in: channelId)
       .addSnapshotListener {[weak self] snapshot, error in
@@ -74,7 +67,7 @@ extension MessagesFirebaseService: MessagesFirebaseServiceProtocol {
             isMyMessage: senderId == mySenderId)
         }
 
-        self.delegate?.firebaseDidFinishFetching(in: channel)
+        self.delegate?.firebaseDidFinishFetching(in: channelId)
       }
   }
 }

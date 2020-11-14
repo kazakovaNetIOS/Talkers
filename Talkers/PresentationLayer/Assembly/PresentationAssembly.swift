@@ -69,7 +69,7 @@ private extension PresentationAssembly {
   }
 
   func conversationModel(with channel: ChannelMO) -> ConversationModelProtocol {
-    return ConversationModel(channelsService: serviceAssembly.messagesService,
+    return ConversationModel(messagesService: serviceAssembly.messagesService,
                              userProfileService: serviceAssembly.userProfileService,
                              channel: channel)
   }

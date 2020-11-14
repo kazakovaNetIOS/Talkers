@@ -7,16 +7,13 @@
 //
 
 import Foundation
+import CoreData
 
 protocol CoreDataStorageProtocol {
-  var frcRepository: FRCRepositoryProtocol { get }
   var coreDataStack: CoreDataStack { get }
 }
 
 class CoreDataStorage: CoreDataStorageProtocol {
-  lazy var frcRepository: FRCRepositoryProtocol = {
-    return FRCChannelsRepository(context: self.coreDataStack.managedContext)
-  }()
   var coreDataStack: CoreDataStack
 
   init(coreDataStack: CoreDataStack) {

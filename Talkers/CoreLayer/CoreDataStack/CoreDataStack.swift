@@ -13,9 +13,7 @@ class CoreDataStack {
   private let modelName = "Chats"
 
   lazy var managedContext: NSManagedObjectContext = {
-    let context = self.storeContainer.viewContext
-    context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-    return context
+    return self.storeContainer.viewContext
   }()
 
   private lazy var storeContainer: NSPersistentContainer = {
@@ -25,21 +23,28 @@ class CoreDataStack {
         print("Unresolved error \(error), \(error.userInfo)")
       }
     }
+    container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()
 
-  func saveContext () {
-    guard managedContext.hasChanges else { return }
-
-    do {
-      try managedContext.save()
-    } catch let error as NSError {
-      print("Unresolved error \(error), \(error.userInfo)")
+  func performSave(_ block: @escaping (NSManagedObjectContext) -> Void) {
+    storeContainer.performBackgroundTask { (context) in
+      context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+      block(context)
+      if context.hasChanges {
+        do {
+          try self.performSave(in: context)
+        } catch {
+          assertionFailure(error.localizedDescription)
+        }
+      }
     }
   }
 
-  func delete(object: NSManagedObject) {
-    managedContext.delete(object)
-    saveContext()
+  private func performSave(in context: NSManagedObjectContext) throws {
+    try context.save()
+    if let parent = context.parent {
+      try performSave(in: parent)
+    }
   }
 }

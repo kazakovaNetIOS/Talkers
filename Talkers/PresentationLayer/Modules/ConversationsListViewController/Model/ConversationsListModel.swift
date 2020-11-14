@@ -34,7 +34,7 @@ class ConversationsListModel {
   private var channelsService: ChannelsServiceProtocol
 
   lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
-    return channelsService.getFRC()
+    return channelsService.fetchedResultsController
   }()
   lazy var tableViewDataSource: ConversationsListTableViewDataSource = {
     return ConversationsListTableViewDataSource(model: self)
@@ -53,23 +53,7 @@ class ConversationsListModel {
 
 extension ConversationsListModel: ConversationsListModelProtocol {
   func fetchChannels() {
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      guard let self = self else { return }
-
-      do {
-        try self.fetchedResultsController.performFetch()
-      } catch {
-        let fetchError = error as NSError
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.delegate?.show(error: "\(fetchError), \(fetchError.localizedDescription)")
-        }
-      }
-
-      DispatchQueue.global(qos: .userInitiated).async {
-        self.channelsService.fetchChannels()
-      }
-    }
+    self.channelsService.fetchChannels()
   }
 
   func addChannel(withName channelName: String) {
@@ -106,9 +90,7 @@ extension ConversationsListModel: ConversationsListModelProtocol {
 
 extension ConversationsListModel: ChannelsServiceDelegateProtocol {
   func processError(with message: String) {
-    DispatchQueue.main.async { [weak self] in
-      self?.delegate?.show(error: message)
-    }
+    delegate?.show(error: message)
   }
 
   func didFinishDeleting() {

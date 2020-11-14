@@ -10,56 +10,94 @@ import Foundation
 import CoreData
 
 protocol ChannelsCoreDataServiceProtocol {
+  var delegate: ChannelsCoreDataServiceDelegateProtocol? { get set }
+  var fetchedResultsController: NSFetchedResultsController<ChannelMO> { get }
   func deleteChannel(channel: ChannelMO)
-  func save(channels: [Channel])
-  func getFRC() -> NSFetchedResultsController<ChannelMO>
-  func getChannel(by id: String) -> ChannelMO?
+  func upsert(_ channels: [Channel])
+  func getChannel(by id: String, in context: NSManagedObjectContext) -> ChannelMO?
+  func fetchChannels()
+}
+
+protocol ChannelsCoreDataServiceDelegateProtocol: class {
+  func processCoreDataError(with message: String)
+  func coreDataDidFinishFetching()
 }
 
 class ChannelsCoreDataService {
-  private var coreDataStorage: CoreDataStorageProtocol
+  private var coreDataStack: CoreDataStack
+  weak var delegate: ChannelsCoreDataServiceDelegateProtocol?
+  lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
+    let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
 
-  init(coreDataStorage: CoreDataStorageProtocol) {
-    self.coreDataStorage = coreDataStorage
+    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+
+    return NSFetchedResultsController(fetchRequest: fetchRequest,
+                                      managedObjectContext: coreDataStack.managedContext,
+                                      sectionNameKeyPath: nil,
+                                      cacheName: nil)
+  }()
+
+  init(coreDataStack: CoreDataStack) {
+    self.coreDataStack = coreDataStack
   }
 }
 
 // MARK: - ChannelsCoreDataServiceProtocol
 
 extension ChannelsCoreDataService: ChannelsCoreDataServiceProtocol {
-  func getFRC() -> NSFetchedResultsController<ChannelMO> {
-    let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
-
-    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: false)
-    fetchRequest.sortDescriptors = [sortDescriptor]
-
-    return coreDataStorage.frcRepository.getFRC(fetchRequest: fetchRequest,
-                                sectionNameKeyPath: nil,
-                                cacheName: nil)
-  }
-
   func deleteChannel(channel: ChannelMO) {
-    coreDataStorage.coreDataStack.delete(object: channel)
+    coreDataStack.performSave {[weak self] (context) in
+      guard let self = self,
+            let channelId = channel.identifier else { return }
+
+      let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
+      let predicate = NSPredicate(format: "identifier = %@", channelId)
+      fetchRequest.predicate = predicate
+
+      do {
+        let channels = try context.fetch(fetchRequest)
+        guard let deletedChannel = channels.first else { return }
+        context.delete(deletedChannel)
+      } catch {
+        self.delegate?.processCoreDataError(with: error.localizedDescription)
+      }
+    }
   }
 
-  func save(channels: [Channel]) {
-    let channelsRequest = ChannelsRequest(coreDataStack: self.coreDataStorage.coreDataStack)
-    channelsRequest.makeRequest(channels: channels)
+  func upsert(_ channels: [Channel]) {
+    coreDataStack.performSave {[weak self] (context) in
+      guard let self = self else { return }
+
+      channels.forEach {
+        if let channel = self.getChannel(by: $0.identifier, in: context) {
+          channel.setValue($0.lastActivity, forKey: "lastActivity")
+          channel.setValue($0.lastMessage, forKey: "lastMessage")
+          channel.setValue($0.name, forKey: "name")
+        } else {
+          _ = ChannelMO(with: $0, in: context)
+        }
+      }
+    }
   }
 
-  func getChannel(by id: String) -> ChannelMO? {
-    let context = CoreDataStack().managedContext
-
+  func getChannel(by id: String, in context: NSManagedObjectContext) -> ChannelMO? {
     let request: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
-
     let predicate = NSPredicate(format: "identifier = %@", id)
     request.predicate = predicate
 
     let result = try? context.fetch(request)
-    if let channel = result?.first {
-      return channel
-    } else {
-      return nil
+    return result?.first
+  }
+
+  func fetchChannels() {
+    do {
+      try self.fetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      self.delegate?.processCoreDataError(with: "\(fetchError), \(fetchError.localizedDescription)")
     }
+
+    self.delegate?.coreDataDidFinishFetching()
   }
 }

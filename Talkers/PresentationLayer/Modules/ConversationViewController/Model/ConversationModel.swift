@@ -28,27 +28,28 @@ protocol ConversationModelDelegateProtocol: class {
 
 class ConversationModel {
   weak var delegate: ConversationModelDelegateProtocol?
-  private var messagessService: MessagesServiceProtocol
+  private var messagesService: MessagesServiceProtocol
   private var userProfileService: UserProfileServiceProtocol
   var channel: ChannelMO
 
   lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
-    guard let channelId = channel.identifier else {
+    guard let channelId = channel.identifier,
+          let frc = messagesService.getFRC(with: channelId) else {
       fatalError("Can't initialize model for conversation")
     }
-    return messagessService.getFRC(with: channelId)
+    return frc
   }()
   lazy var tableViewDataSource: ConversationTableViewDataSource = {
     return ConversationTableViewDataSource(model: self)
   }()
 
-  init(channelsService: MessagesServiceProtocol,
+  init(messagesService: MessagesServiceProtocol,
        userProfileService: UserProfileServiceProtocol,
        channel: ChannelMO) {
-    self.messagessService = channelsService
+    self.messagesService = messagesService
     self.userProfileService = userProfileService
     self.channel = channel
-    self.messagessService.delegate = self
+    self.messagesService.delegate = self
   }
 }
 
@@ -68,28 +69,12 @@ extension ConversationModel: ConversationModelProtocol {
       fatalError("Can't initialize model for conversation")
     }
 
-    messagessService.addMessage(with: newMessage, in: channelId)
+    messagesService.addMessage(with: newMessage, in: channelId)
   }
 
   func fetchMessages() {
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      guard let self = self else { return }
-
-      do {
-        try self.fetchedResultsController.performFetch()
-      } catch {
-        let fetchError = error as NSError
-        DispatchQueue.main.async { [weak self] in
-          guard let self = self else { return }
-          self.delegate?.show(error: "\(fetchError), \(fetchError.localizedDescription)")
-        }
-      }
-
-      DispatchQueue.global(qos: .userInitiated).async {
-        self.messagessService.fetchMessages(in: self.channel,
-                                            mySenderId: self.userProfileService.getSenderId())
-      }
-    }
+    guard let channelId = channel.identifier else { return }
+    messagesService.fetchMessages(in: channelId, mySenderId: userProfileService.getSenderId())
   }
 
   func getMessage(at indexPath: IndexPath) -> Message {

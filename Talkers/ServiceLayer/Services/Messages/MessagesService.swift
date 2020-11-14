@@ -12,8 +12,8 @@ import CoreData
 protocol MessagesServiceProtocol {
   var delegate: MessagesServiceDelegateProtocol? { get set }
   func addMessage(with message: Message, in channelId: String)
-  func fetchMessages(in channel: ChannelMO, mySenderId: String)
-  func getFRC(with channelId: String) -> NSFetchedResultsController<MessageMO>
+  func fetchMessages(in channelId: String, mySenderId: String)
+  func getFRC(with channelId: String) -> NSFetchedResultsController<MessageMO>?
 }
 
 protocol MessagesServiceDelegateProtocol: class {
@@ -24,19 +24,21 @@ class MessagesService {
   weak var delegate: MessagesServiceDelegateProtocol?
   private var firebaseService: MessagesFirebaseServiceProtocol
   private var coreDataService: MessagesCoreDataServiceProtocol
+  private var mySenderId: String?
 
   init(firebaseService: MessagesFirebaseServiceProtocol,
        coreDataService: MessagesCoreDataServiceProtocol) {
     self.firebaseService = firebaseService
     self.coreDataService = coreDataService
     self.firebaseService.delegate = self
+    self.coreDataService.delegate = self
   }
 }
 
 // MARK: - MessagesServiceProtocol
 
 extension MessagesService: MessagesServiceProtocol {
-  func getFRC(with channelId: String) -> NSFetchedResultsController<MessageMO> {
+  func getFRC(with channelId: String) -> NSFetchedResultsController<MessageMO>? {
     return coreDataService.getFRC(with: channelId)
   }
 
@@ -44,8 +46,9 @@ extension MessagesService: MessagesServiceProtocol {
     firebaseService.addMessage(with: message, in: channelId)
   }
 
-  func fetchMessages(in channel: ChannelMO, mySenderId: String) {
-    firebaseService.fetchMessages(in: channel, mySenderId: mySenderId)
+  func fetchMessages(in channelId: String, mySenderId: String) {
+    self.mySenderId = mySenderId
+    coreDataService.fetchMessages(in: channelId)
   }
 }
 
@@ -53,10 +56,23 @@ extension MessagesService: MessagesServiceProtocol {
 
 extension MessagesService: MessagesFirebaseServiceDelegateProtocol {
   func processFirebaseError(with message: String) {
-    delegate?.processError(with: message)
+    delegate?.processError(with: "Error in Firebase, \(message)")
   }
 
-  func firebaseDidFinishFetching(in channel: ChannelMO) {
-    coreDataService.save(messages: firebaseService.messages, in: channel)
+  func firebaseDidFinishFetching(in channelId: String) {
+    coreDataService.addMessages(firebaseService.messages, in: channelId)
+  }
+}
+
+// MARK: - MessagesCoreDataServiceDelegateProtocol
+
+extension MessagesService: MessagesCoreDataServiceDelegateProtocol {
+  func coreDataDidFinishFetching(in channelId: String) {
+    guard let mySenderId = self.mySenderId else { return }
+    firebaseService.fetchMessages(in: channelId, mySenderId: mySenderId)
+  }
+
+  func processCoreDataError(with message: String) {
+    self.delegate?.processError(with: "Error in CoreData, \(message)")
   }
 }

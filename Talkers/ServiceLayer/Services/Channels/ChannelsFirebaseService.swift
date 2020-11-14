@@ -37,9 +37,7 @@ class ChannelsFirebaseService {
 
 extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
   func addChannel(withName channelName: String) {
-    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-      self?.firebaseStorage.reference.addDocument(data: [ChannelKeys.name: channelName])
-    }
+    firebaseStorage.reference.addDocument(data: [ChannelKeys.name: channelName])
   }
 
   func deleteChannel(channel: ChannelMO) {
@@ -62,29 +60,36 @@ extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
   }
 
   func fetchChannels() {
-    self.firebaseStorage.reference.addSnapshotListener {[weak self] snapshot, error in
+    DispatchQueue.global(qos: .userInitiated).async {[weak self] in
       guard let self = self else { return }
-      
-      guard let snapshot = snapshot else {
-        if let error = error {
-          self.delegate?.processFirebaseError(with: error.localizedDescription)
+
+      self.firebaseStorage.reference.addSnapshotListener {[weak self] snapshot, error in
+        guard let self = self else { return }
+
+        guard let snapshot = snapshot else {
+          if let error = error {
+            self.delegate?.processFirebaseError(with: error.localizedDescription)
+          }
+          return
         }
-        return
-      }
 
-      self.channels = snapshot.documents.compactMap { document -> Channel? in
-        let lastMessage = document[ChannelKeys.lastMessage] as? String
-        let timestamp = document[ChannelKeys.lastActivity] as? Timestamp
-        let lastActivity = timestamp?.dateValue()
-        guard let name = document[ChannelKeys.name] as? String,
-              !name.isEmptyOrConsistWhitespaces else { return nil }
+        self.channels = snapshot.documents.compactMap { document -> Channel? in
+          let lastMessage = document[ChannelKeys.lastMessage] as? String
+          let timestamp = document[ChannelKeys.lastActivity] as? Timestamp
+          let lastActivity = timestamp?.dateValue()
+          guard let name = document[ChannelKeys.name] as? String,
+                !name.isEmptyOrConsistWhitespaces else { return nil }
 
-        return Channel(identifier: document.documentID,
-                       name: name,
-                       lastMessage: lastMessage,
-                       lastActivity: lastActivity)
+          return Channel(identifier: document.documentID,
+                         name: name,
+                         lastMessage: lastMessage,
+                         lastActivity: lastActivity)
+        }
+        
+        DispatchQueue.main.async {
+          self.delegate?.firebaseDidFinishFetching()
+        }
       }
-      self.delegate?.firebaseDidFinishFetching()
     }
   }
 }
