@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your message here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVt-RL-7GV">
-                                        <rect key="frame" x="19" y="797" width="316" height="34"/>
+                                        <rect key="frame" x="19" y="797" width="308" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="7Ll-ri-TCK"/>
                                         </constraints>
@@ -51,7 +51,7 @@
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" id="1as-f8-2Ty"/>
                                     <constraint firstItem="KVt-RL-7GV" firstAttribute="top" secondItem="WTX-5z-wBe" secondAttribute="bottom" constant="17" id="712-Qn-5Fm"/>
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="top" secondItem="ivh-PP-8a2" secondAttribute="top" id="7eZ-dd-i1G"/>
-                                    <constraint firstItem="UeC-1T-VZb" firstAttribute="leading" secondItem="KVt-RL-7GV" secondAttribute="trailing" id="L1W-fs-WCC"/>
+                                    <constraint firstItem="UeC-1T-VZb" firstAttribute="leading" secondItem="KVt-RL-7GV" secondAttribute="trailing" constant="8" id="L1W-fs-WCC"/>
                                     <constraint firstAttribute="bottom" secondItem="KVt-RL-7GV" secondAttribute="bottom" constant="31" id="aid-Zu-6Gs"/>
                                     <constraint firstAttribute="bottom" secondItem="UeC-1T-VZb" secondAttribute="bottom" constant="31" id="bN9-R1-F9K"/>
                                     <constraint firstAttribute="trailing" secondItem="WTX-5z-wBe" secondAttribute="trailing" id="fdf-vD-5Km"/>
@@ -73,7 +73,9 @@
                     <connections>
                         <outlet property="conversationTableView" destination="WTX-5z-wBe" id="ONW-ls-CTA"/>
                         <outlet property="messageTextField" destination="KVt-RL-7GV" id="ImD-TB-T2r"/>
+                        <outlet property="parentView" destination="ivh-PP-8a2" id="FLw-6e-uSv"/>
                         <outlet property="rootViewBottomConstraint" destination="sQx-Ts-Add" id="1hV-b7-DA6"/>
+                        <outlet property="sendButton" destination="UeC-1T-VZb" id="ddF-qL-pMd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZb-xb-hmR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -32,7 +32,7 @@ extension ConversationsListTableViewDataSource: UITableViewDataSource {
       return UITableViewCell()
     }
 
-    cell.configure(with: Channel(channelMO))
+    cell.configure(with: Channel(channelMO), themeSettings: model.currentThemeSettings)
 
     return cell
   }

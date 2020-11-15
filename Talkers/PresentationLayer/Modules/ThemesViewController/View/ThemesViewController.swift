@@ -8,13 +8,8 @@
 
 import UIKit
 
-protocol ThemesPickerDelegate: class {
-  func themeDidSelect(_ themesViewController: ThemesViewController, with settings: ThemeSettings)
-}
-
 class ThemesViewController: UIViewController {
-  weak var delegate: ThemesPickerDelegate?
-  var themeSelected: ((_ settings: ThemeSettings) -> Void)?
+  var model: ThemesModelProtocol?
 
   @IBOutlet weak var classicThemeButton: ThemeButton!
   @IBOutlet weak var dayThemeButton: ThemeButton!
@@ -23,7 +18,9 @@ class ThemesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    switch ThemeManager.shared.themeSettings.theme {
+    guard let themeSettings = model?.currentThemeSettings else { return }
+
+    switch themeSettings.theme {
     case .classic:
       classicThemeButton.isSelected(true)
     case .day:
@@ -36,7 +33,8 @@ class ThemesViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+    guard let themeSettings = model?.currentThemeSettings else { return }
+    changeColorsForTheme(with: themeSettings)
   }
 
   @IBAction func classicThemeButtonTapped(_ gesture: UITapGestureRecognizer) {
@@ -77,23 +75,13 @@ private extension ThemesViewController {
   }
 
   func processThemeSelected(with settings: ThemeSettings) {
-    guard let delegate = self.delegate, let themeSelected = self.themeSelected else { return }
-
-    delegate.themeDidSelect(self, with: settings)
-
-    // retain cycle мог бы возникнуть, если бы в это замыкание например, передавалась ссылка на ThemesViewController,
-    // а внутри кода замыкания в capture list эта ссылка не была бы помечена как weak.
-    // При таком сценарии получалась бы связка сильных ссылок: контроллер ссылается на замыкание,
-    // замыкание держит контроллер
-    // В моем коде в замыкание передается структура, которая является value-типом и не может образовать
-    // цикл сильных ссылок
-    themeSelected(settings)
+    model?.themeDidSelect(with: settings)
 
     changeColorsForTheme(with: settings)
   }
 
   func changeColorsForTheme(with settings: ThemeSettings) {
-    setNavigationBarForTheme()
+    setNavigationBarForTheme(themeSettings: settings)
 
     view.backgroundColor = settings.chatBackgroundColor
     setButtonsLabelColor(color: settings.labelColor)
@@ -109,16 +97,9 @@ private extension ThemesViewController {
 // MARK: - Instantiation from storybord
 
 extension ThemesViewController {
-  static func storyboardInstance(
-    delegate: ThemesPickerDelegate,
-    onThemeSelectedListener: @escaping (_ settings: ThemeSettings) -> Void) -> ThemesViewController? {
+  static func storyboardInstance() -> ThemesViewController? {
     let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-    let viewController = navigationController?.topViewController as? ThemesViewController
-
-    viewController?.delegate = delegate
-    viewController?.themeSelected = onThemeSelectedListener
-
-    return viewController
+    return navigationController?.topViewController as? ThemesViewController
   }
 }

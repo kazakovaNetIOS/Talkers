@@ -13,6 +13,8 @@ protocol PresentationAssemblyProtocol {
   func conversationsListViewController() -> UINavigationController
   // Создает экран со списком сообщений
   func conversationViewController(with channel: ChannelMO) -> ConversationViewController
+  // Создает экран упрвления темами
+  func themesViewController() -> ThemesViewController
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -59,18 +61,37 @@ class PresentationAssembly: PresentationAssemblyProtocol {
 
     return conversationVC
   }
+
+  // MARK: - ThemesViewController
+  func themesViewController() -> ThemesViewController {
+    let model = themesModel()
+
+    guard let themesVC = ThemesViewController.storyboardInstance() else {
+      fatalError("Can't initialize ThemesViewController from storyboard")
+    }
+    
+    themesVC.model = model
+
+    return themesVC
+  }
 }
 
 // MARK: - Private
 
 private extension PresentationAssembly {
   func channelsModel() -> ConversationsListModelProtocol {
-    return ConversationsListModel(channelsService: serviceAssembly.channelsService)
+    return ConversationsListModel(channelsService: serviceAssembly.channelsService,
+                                  themesService: serviceAssembly.themesService)
   }
 
   func conversationModel(with channel: ChannelMO) -> ConversationModelProtocol {
     return ConversationModel(messagesService: serviceAssembly.messagesService,
                              userProfileService: serviceAssembly.userProfileService,
+                             themesService: serviceAssembly.themesService,
                              channel: channel)
+  }
+
+  func themesModel() -> ThemesModelProtocol {
+    return ThemesModel(themesService: serviceAssembly.themesService)
   }
 }

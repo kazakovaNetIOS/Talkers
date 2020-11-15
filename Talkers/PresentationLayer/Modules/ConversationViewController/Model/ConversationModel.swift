@@ -13,6 +13,7 @@ protocol ConversationModelProtocol {
   var delegate: ConversationModelDelegateProtocol? { get set }
   var channel: ChannelMO { get }
   var tableViewDataSource: ConversationTableViewDataSource { get }
+  var currentThemeSettings: ThemeSettings { get }
 
   func addMessage(with messageText: String)
   func fetchMessages()
@@ -30,6 +31,7 @@ class ConversationModel {
   weak var delegate: ConversationModelDelegateProtocol?
   private var messagesService: MessagesServiceProtocol
   private var userProfileService: UserProfileServiceProtocol
+  private var themesService: ThemesServiceProtocol
   var channel: ChannelMO
 
   lazy var fetchedResultsController: NSFetchedResultsController<MessageMO> = {
@@ -42,12 +44,17 @@ class ConversationModel {
   lazy var tableViewDataSource: ConversationTableViewDataSource = {
     return ConversationTableViewDataSource(model: self)
   }()
+  var currentThemeSettings: ThemeSettings {
+    return themesService.currentThemeSettings
+  }
 
   init(messagesService: MessagesServiceProtocol,
        userProfileService: UserProfileServiceProtocol,
+       themesService: ThemesServiceProtocol,
        channel: ChannelMO) {
     self.messagesService = messagesService
     self.userProfileService = userProfileService
+    self.themesService = themesService
     self.channel = channel
     self.messagesService.delegate = self
   }

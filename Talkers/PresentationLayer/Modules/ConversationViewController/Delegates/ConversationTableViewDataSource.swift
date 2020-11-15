@@ -42,7 +42,7 @@ extension ConversationTableViewDataSource: UITableViewDataSource {
 
     guard let messageCell = cell else { return UITableViewCell() }
 
-    messageCell.configure(with: message)
+    messageCell.configure(with: message, themeSettings: model.currentThemeSettings)
 
     return messageCell
   }

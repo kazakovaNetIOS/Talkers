@@ -23,9 +23,9 @@ class ConversationTableViewCell: UITableViewCell {
 extension ConversationTableViewCell: ConfigurableView {
   typealias ConfigurationModel = Message
 
-  func configure(with model: ConfigurationModel) {
+  func configure(with model: ConfigurationModel, themeSettings: ThemeSettings) {
     messageLabel.text = model.content
-    messageLabel.textColor = ThemeManager.shared.themeSettings.labelColor
+    messageLabel.textColor = themeSettings.labelColor
 
     if !model.isMyMessage {
       nameLabel.text = model.senderName
@@ -35,8 +35,8 @@ extension ConversationTableViewCell: ConfigurableView {
     containerView.clipsToBounds = true
 
     containerView.backgroundColor = model.isMyMessage ?
-      ThemeManager.shared.themeSettings.outgoingColor : ThemeManager.shared.themeSettings.incomingColor
+      themeSettings.outgoingColor : themeSettings.incomingColor
 
-    contentView.backgroundColor = ThemeManager.shared.themeSettings.chatBackgroundColor
+    contentView.backgroundColor = themeSettings.chatBackgroundColor
   }
 }

@@ -22,8 +22,8 @@ class ConversationsListTableViewCell: UITableViewCell {
 extension ConversationsListTableViewCell: ConfigurableView {
   typealias ConfigurationModel = Channel
 
-  func configure(with model: ConfigurationModel) {
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+  func configure(with model: ConfigurationModel, themeSettings: ThemeSettings) {
+    changeColorsForTheme(with: themeSettings)
 
     setName(with: model.name)
     setMessage(with: model)

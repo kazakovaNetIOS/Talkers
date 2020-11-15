@@ -18,11 +18,16 @@ class ConversationViewController: BaseViewController {
   @IBOutlet weak var conversationTableView: UITableView!
   @IBOutlet weak var messageTextField: UITextField!
   @IBOutlet weak var rootViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var sendButton: UIButton!
+  @IBOutlet weak var parentView: UIView!
 
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    sendButton.layer.cornerRadius = 5.0
+    sendButton.clipsToBounds = true
 
     configureTableView()
 
@@ -44,7 +49,9 @@ class ConversationViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+    if let themeSettings = model?.currentThemeSettings {
+      changeColorsForTheme(with: themeSettings)
+    }
 
     model?.fetchMessages()
 
@@ -100,8 +107,9 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
     case .update:
       guard let indexPath = indexPath,
             let cell = conversationTableView.cellForRow(at: indexPath) as? ConversationTableViewCell else { return }
-      if let message = model?.getMessage(at: indexPath) {
-        cell.configure(with: message)
+      if let message = model?.getMessage(at: indexPath),
+         let themeSettings = model?.currentThemeSettings {
+        cell.configure(with: message, themeSettings: themeSettings)
         print("Обновлено сообщение")
       }
     case .move:
@@ -137,9 +145,24 @@ private extension ConversationViewController {
   }
 
   func changeColorsForTheme(with settings: ThemeSettings) {
-    setNavigationBarForTheme()
+    setNavigationBarForTheme(themeSettings: settings)
 
+    parentView.backgroundColor = settings.chatBackgroundColor
     conversationTableView.backgroundColor = settings.chatBackgroundColor
+    configureMessageTextField(settings)
+    sendButton.backgroundColor = settings.outgoingColor
+    sendButton.titleLabel?.textColor = settings.labelColor
+  }
+
+  func configureMessageTextField(_ settings: ThemeSettings) {
+    messageTextField.backgroundColor = settings.chatBackgroundColor
+    messageTextField.layer.borderColor = settings.labelColor.cgColor
+    messageTextField.layer.borderWidth = 1.0
+    messageTextField.layer.cornerRadius = 5.0
+    messageTextField.clipsToBounds = true
+    messageTextField.textColor = settings.labelColor
+    messageTextField.attributedPlaceholder = NSAttributedString(string: "Your message here...",
+                                                                attributes: [NSAttributedString.Key.foregroundColor: settings.labelColor])
   }
 
   @objc func keyboardWillShow(notification: NSNotification) {

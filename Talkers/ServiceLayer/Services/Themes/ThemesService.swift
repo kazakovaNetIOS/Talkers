@@ -8,30 +8,35 @@
 
 import UIKit
 
-typealias ThemeSettings = ThemeManager.ThemeSettings
+protocol ThemesServiceProtocol {
+  var currentThemeSettings: ThemeSettings { get }
+  func applyTheme(with settings: ThemeSettings)
+}
 
-final class ThemeManager {
-  struct ThemeSettings {
-    static let defaultIncomingColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
-    static let defaultOutgoingColor = #colorLiteral(red: 0.862745098, green: 0.968627451, blue: 0.7725490196, alpha: 1)
-    static let defaultChatBackgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    static let defaultLabelColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    static let defaultLabelText = "Classic"
-
-    var theme: Theme = .classic
-    var incomingColor: UIColor = defaultIncomingColor
-    var outgoingColor: UIColor = defaultOutgoingColor
-    var chatBackgroundColor: UIColor = defaultChatBackgroundColor
-    var labelColor: UIColor = defaultLabelColor
-    var labelText: String = defaultLabelText
-
-    init() { }
+final class ThemesService {
+  lazy var onThemeSelectedListener: (_ settings: ThemeSettings) -> Void = { [weak self] settings in
+    self?.applyTheme(with: settings)
   }
 
-  enum Theme: Int {
-    case classic, day, night
+  var currentThemeSettings: ThemeSettings {
+    get {
+      return loadFromUserDefaults()
+    }
+    set {
+      saveToUserDefaults(themeSettings: newValue)
+    }
   }
+}
 
+extension ThemesService: ThemesServiceProtocol {
+  func applyTheme(with settings: ThemeSettings) {
+    self.currentThemeSettings = settings
+  }
+}
+
+// MARK: - Private
+
+private extension ThemesService {
   private enum Keys {
     static let incomingColor = "incomingColor"
     static let outgoingColor = "outgoingColor"
@@ -40,39 +45,7 @@ final class ThemeManager {
     static let labelText = "labelText"
     static let theme = "theme"
   }
-
-  static let shared = ThemeManager()
-
-  lazy var onThemeSelectedListener: (_ settings: ThemeSettings) -> Void = { [weak self] settings in
-    self?.applyTheme(with: settings)
-  }
-
-  var themeSettings: ThemeSettings {
-    get {
-      return loadFromUserDefaults()
-    }
-    set {
-      saveToUserDefaults(themeSettings: newValue)
-    }
-  }
-
-  private init() { }
-}
-
-extension ThemeManager: ThemesPickerDelegate {
-  func themeDidSelect(_ themesViewController: ThemesViewController, with settings: ThemeSettings) {
-    // TODO Закомментировано по заданию
-    //        applyTheme(with: settings)
-  }
-}
-
-// MARK: - Private
-
-private extension ThemeManager {
-  func applyTheme(with settings: ThemeSettings) {
-    self.themeSettings = settings
-  }
-
+  
   func loadFromUserDefaults() -> ThemeSettings {
     var themeSettings = ThemeSettings()
 

@@ -29,7 +29,9 @@ class ConversationsListViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
 
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+    if let themeSettings = model?.currentThemeSettings {
+      changeColorsForTheme(with: themeSettings)
+    }
 
     model?.fetchChannels()
 
@@ -53,9 +55,7 @@ class ConversationsListViewController: BaseViewController {
   }
 
   @IBAction func settingsIconTapped(_ sender: Any) {
-    // todo
-    if let themesViewController = ThemesViewController.storyboardInstance(
-      delegate: ThemeManager.shared, onThemeSelectedListener: ThemeManager.shared.onThemeSelectedListener) {
+    if let themesViewController = presentationAssembly?.themesViewController() {
       navigationController?.pushViewController(themesViewController, animated: true)
     }
   }
@@ -121,8 +121,9 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
     case .update:
       guard let indexPath = indexPath,
             let cell = conversationsListTableView.cellForRow(at: indexPath) as? ConversationsListTableViewCell else { return }
-      if let channelMO = model?.getChannel(at: indexPath) {
-        cell.configure(with: Channel(channelMO))
+      if let channelMO = model?.getChannel(at: indexPath),
+         let themeSettings = model?.currentThemeSettings {
+        cell.configure(with: Channel(channelMO), themeSettings: themeSettings)
         print("Обновлен канал")
       }
     case .move:
@@ -160,7 +161,7 @@ private extension ConversationsListViewController {
   }
 
   func changeColorsForTheme(with settings: ThemeSettings) {
-    setNavigationBarForTheme()
+    setNavigationBarForTheme(themeSettings: settings)
     conversationsListTableView.backgroundColor = settings.chatBackgroundColor
   }
 }

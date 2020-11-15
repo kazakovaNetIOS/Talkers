@@ -15,7 +15,7 @@
 		560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* ProfileViewController.storyboard */; };
 		560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 560D4647250AD21A00E5A610 /* Assets.xcassets */; };
 		560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4649250AD21A00E5A610 /* LaunchScreen.storyboard */; };
-		56107B15252D215A0049BFA7 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56107B14252D215A0049BFA7 /* ThemeManager.swift */; };
+		56107B15252D215A0049BFA7 /* ThemesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56107B14252D215A0049BFA7 /* ThemesService.swift */; };
 		56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */; };
 		56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */; };
 		5612ED93252A723E003A5955 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED92252A723E003A5955 /* ThemesViewController.swift */; };
@@ -25,6 +25,8 @@
 		5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */; };
 		561B82F425549C2A00D9B21D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B82F325549C2A00D9B21D /* CoreDataStack.swift */; };
 		561E5B742559F62C00C0B13F /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561E5B732559F62C00C0B13F /* CoreDataStorage.swift */; };
+		563CF09F25610A1000E164C3 /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF09E25610A1000E164C3 /* ThemesModel.swift */; };
+		563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF0A2256119AC00E164C3 /* ThemeSettings.swift */; };
 		5645D2332559340A0085285C /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D2322559340A0085285C /* ConversationsListModel.swift */; };
 		5645D239255945F30085285C /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D238255945F30085285C /* ChannelsService.swift */; };
 		5645D240255947F50085285C /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D23F255947F50085285C /* FirebaseStorage.swift */; };
@@ -84,7 +86,7 @@
 		560D4647250AD21A00E5A610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		560D464A250AD21A00E5A610 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		560D464C250AD21A00E5A610 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56107B14252D215A0049BFA7 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		56107B14252D215A0049BFA7 /* ThemesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesService.swift; sourceTree = "<group>"; };
 		56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extentions.swift"; sourceTree = "<group>"; };
 		56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentions.swift"; sourceTree = "<group>"; };
 		5612ED92252A723E003A5955 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,8 @@
 		5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileGCDDataManager.swift; sourceTree = "<group>"; };
 		561B82F325549C2A00D9B21D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		561E5B732559F62C00C0B13F /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		563CF09E25610A1000E164C3 /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
+		563CF0A2256119AC00E164C3 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		5645D2322559340A0085285C /* ConversationsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		5645D238255945F30085285C /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		5645D23F255947F50085285C /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
@@ -209,7 +213,7 @@
 		5612ED91252A7205003A5955 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				56107B14252D215A0049BFA7 /* ThemeManager.swift */,
+				56107B14252D215A0049BFA7 /* ThemesService.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -226,10 +230,10 @@
 		5645D2302559333F0085285C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				56B96E55255E911E00ED3CF3 /* ThemesViewController */,
 				567ECB65255DE9D100DD292A /* ConversationViewController */,
 				5645D231255933690085285C /* ConversationsListViewController */,
 				56B96E52255E90AC00ED3CF3 /* ProfileViewController */,
+				56B96E55255E911E00ED3CF3 /* ThemesViewController */,
 				5682E5E625335B24009CE1BE /* BaseViewController.swift */,
 				567F3D32252508470078A709 /* ConfigurableView.swift */,
 			);
@@ -252,6 +256,7 @@
 				56B96E3C255E6A5E00ED3CF3 /* UserProfile */,
 				567ECB75255DEF1900DD292A /* Messages */,
 				567ECB73255DEF0D00DD292A /* Channels */,
+				5612ED91252A7205003A5955 /* Themes */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -450,7 +455,6 @@
 		569FE3872537B3A8002820CB /* Data managers */ = {
 			isa = PBXGroup;
 			children = (
-				5612ED91252A7205003A5955 /* Themes */,
 				56BB5C7A253D7CF00067265D /* UserProfile */,
 			);
 			path = "Data managers";
@@ -502,6 +506,8 @@
 		56B96E56255E912D00ED3CF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				563CF0A2256119AC00E164C3 /* ThemeSettings.swift */,
+				563CF09E25610A1000E164C3 /* ThemesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				567ECB7B255DEF4000DD292A /* MessagesFirebaseService.swift in Sources */,
 				56C06A2A255D9E6C00CE20C0 /* Channel.swift in Sources */,
 				567F3D262524C7CF0078A709 /* ConversationTableViewCell.swift in Sources */,
+				563CF09F25610A1000E164C3 /* ThemesModel.swift in Sources */,
 				5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */,
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
 				5645D240255947F50085285C /* FirebaseStorage.swift in Sources */,
@@ -737,7 +744,7 @@
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
 				5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */,
-				56107B15252D215A0049BFA7 /* ThemeManager.swift in Sources */,
+				56107B15252D215A0049BFA7 /* ThemesService.swift in Sources */,
 				56C06A1C255D3DBC00CE20C0 /* ChannelsCoreDataService.swift in Sources */,
 				56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */,
 				56B96E3A255E695B00ED3CF3 /* UserProfileService.swift in Sources */,
@@ -748,6 +755,7 @@
 				56C06A26255D626600CE20C0 /* ConversationsListTableViewDelegate.swift in Sources */,
 				56C06A20255D5F9C00CE20C0 /* ConversationsListTableViewDataSource.swift in Sources */,
 				56BD29ED2510C441003633A3 /* Logger.swift in Sources */,
+				563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */,
 				56481C4125373C1000B52E20 /* UserProfile.swift in Sources */,
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
 				561E5B742559F62C00C0B13F /* CoreDataStorage.swift in Sources */,

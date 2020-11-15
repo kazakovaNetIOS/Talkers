@@ -42,8 +42,8 @@ class ProfileViewController: BaseViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-
-    changeColorsForTheme(with: ThemeManager.shared.themeSettings)
+// todo
+//    changeColorsForTheme(with: ThemesService.shared.themeSettings)
 
     NotificationCenter.default.addObserver(
       self,
@@ -272,7 +272,7 @@ private extension ProfileViewController {
   }
 
   func changeColorsForTheme(with settings: ThemeSettings) {
-    setNavigationBarForTheme()
+    setNavigationBarForTheme(themeSettings: settings)
 
     view.backgroundColor = settings.chatBackgroundColor
     profileNameTextField.textColor = settings.labelColor

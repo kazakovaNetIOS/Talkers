@@ -13,6 +13,7 @@ protocol ConversationsListModelProtocol {
   var delegate: ConversationsListModelDelegateProtocol? { get set }
   var tableViewDataSource: ConversationsListTableViewDataSource { get }
   var tableViewDelegate: ConversationsListTableViewDelegate { get }
+  var currentThemeSettings: ThemeSettings { get }
 
   func addChannel(withName channelName: String)
   func deleteChannel(at indexPath: IndexPath)
@@ -32,6 +33,7 @@ protocol ConversationsListModelDelegateProtocol: class {
 class ConversationsListModel {
   weak var delegate: ConversationsListModelDelegateProtocol?
   private var channelsService: ChannelsServiceProtocol
+  private var themesService: ThemesServiceProtocol
 
   lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
     return channelsService.fetchedResultsController
@@ -42,9 +44,14 @@ class ConversationsListModel {
   lazy var tableViewDelegate: ConversationsListTableViewDelegate = {
     return ConversationsListTableViewDelegate(model: self)
   }()
+  var currentThemeSettings: ThemeSettings {
+    return themesService.currentThemeSettings
+  }
 
-  init(channelsService: ChannelsServiceProtocol) {
+  init(channelsService: ChannelsServiceProtocol,
+       themesService: ThemesServiceProtocol) {
     self.channelsService = channelsService
+    self.themesService = themesService
     self.channelsService.delegate = self
   }
 }

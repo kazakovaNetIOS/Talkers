@@ -18,6 +18,8 @@ protocol ServiceAssemblyProtocol {
   var messagesCoreDataService: MessagesCoreDataServiceProtocol { get }
 
   var userProfileService: UserProfileServiceProtocol { get }
+
+  var themesService: ThemesService { get }
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -39,4 +41,6 @@ class ServiceAssembly: ServiceAssemblyProtocol {
                                                                       coreDataService: messagesCoreDataService)
 
   lazy var userProfileService: UserProfileServiceProtocol = UserProfileService(dataManager: UserProfileOperationDataManager())
+
+  lazy var themesService: ThemesService = ThemesService()
 }
