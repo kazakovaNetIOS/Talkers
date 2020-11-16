@@ -10,28 +10,12 @@ import Foundation
 import CoreData
 
 struct MessagesRequest {
-  let coreDataStack: CoreDataStack
+  let coreDataStack = CoreDataStack.share
 
-  init(coreDataStack: CoreDataStack) {
-    self.coreDataStack = coreDataStack
-  }
-
-  func makeRequest(messages: [Message]) {
-    coreDataStack.performSave { context in
-      for message in messages {
-        setValues(MessageMO(context: context), with: message)
-      }
+  func makeRequest(messages: [Message], in channelId: String) {
+    messages.forEach { message in
+      _ = MessageMO(with: message, channelId: channelId, in: coreDataStack.managedContext)
+      coreDataStack.saveContext()
     }
-  }
-}
-
-// MARK: - Set values by ChannelMO object
-
-extension MessagesRequest {
-  private func setValues(_ moMessage: MessageMO, with message: Message) {
-    moMessage.content = message.content
-    moMessage.created = message.created
-    moMessage.senderId = message.senderId
-    moMessage.senderName = message.senderName
   }
 }

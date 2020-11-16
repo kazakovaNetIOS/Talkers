@@ -30,3 +30,14 @@ struct Channel: Equatable {
     return lhs.identifier == rhs.identifier
   }
 } 
+
+// MARK: - Init from ChannelMO
+
+extension Channel {
+  init(_ channelMO: ChannelMO) {
+    self.identifier = channelMO.identifier ?? UUID().uuidString
+    self.name = channelMO.name ?? ""
+    self.lastMessage = channelMO.lastMessage
+    self.lastActivity = channelMO.lastActivity
+  }
+}

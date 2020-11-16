@@ -10,28 +10,12 @@ import Foundation
 import CoreData
 
 struct ChannelsRequest {
-  let coreDataStack: CoreDataStack
-
-  init(coreDataStack: CoreDataStack) {
-    self.coreDataStack = coreDataStack
-  }
+  let coreDataStack = CoreDataStack.share
 
   func makeRequest(channels: [Channel]) {
-    coreDataStack.performSave { context in
-      for channel in channels {
-        setValues(ChannelMO(context: context), with: channel)
-      }
+    channels.forEach { channel in
+      _ = ChannelMO(with: channel, in: coreDataStack.managedContext)
+      coreDataStack.saveContext()
     }
-  }
-}
-
-// MARK: - Set values by ChannelMO object
-
-extension ChannelsRequest {
-  private func setValues(_ moChannel: ChannelMO, with channel: Channel) {
-    moChannel.identifier = channel.identifier
-    moChannel.name = channel.name
-    moChannel.lastMessage = channel.lastMessage
-    moChannel.lastActivity = channel.lastActivity
   }
 }

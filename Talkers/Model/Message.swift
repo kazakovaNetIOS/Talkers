@@ -37,6 +37,18 @@ struct Message: Equatable {
   }
 
   static func == (lhs: Message, rhs: Message) -> Bool {
-    return lhs.senderId == rhs.senderId && lhs.created == rhs.created
+    return lhs.senderId == rhs.senderId &&
+      lhs.created == rhs.created
+  }
+}
+
+// MARK: - Init from ChannelMO
+
+extension Message {
+  init(_ messageMO: MessageMO) {
+    self.content = messageMO.content ?? ""
+    self.created = messageMO.created ?? .distantPast
+    self.senderId = messageMO.senderId ?? ""
+    self.senderName = messageMO.senderName ?? ""
   }
 }

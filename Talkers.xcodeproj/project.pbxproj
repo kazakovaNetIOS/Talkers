@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		36C854EAF996DC7DAF061664 /* Pods_Talkers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */; };
+		56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56077068254D62250021DF4E /* ChannelMO+Extensions.swift */; };
+		5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */; };
 		560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D463E250AD21300E5A610 /* AppDelegate.swift */; };
 		560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4642250AD21300E5A610 /* ProfileViewController.swift */; };
 		560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 560D4644250AD21300E5A610 /* ProfileViewController.storyboard */; };
@@ -20,10 +22,12 @@
 		5612ED96252A725D003A5955 /* ThemesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED95252A725D003A5955 /* ThemesViewController.storyboard */; };
 		5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5612ED98252A76D2003A5955 /* ThemeButton.swift */; };
 		5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5612ED9B252A772D003A5955 /* ThemeButton.xib */; };
-		561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A4254AA8D20016E750 /* CoreDataStack.swift */; };
 		561418A8254AC0690016E750 /* ChannelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561418A7254AC0690016E750 /* ChannelsRequest.swift */; };
 		5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */; };
+		561B82F425549C2A00D9B21D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B82F325549C2A00D9B21D /* CoreDataStack.swift */; };
+		561B82FD2554B71A00D9B21D /* __GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 561B82FC2554B71A00D9B21D /* __GoogleService-Info.plist */; };
 		562F259E253F68C7008280B5 /* ConversationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F259D253F68C7008280B5 /* ConversationsManager.swift */; };
+		563C1E912555F9EA0026EA90 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C1E902555F9EA0026EA90 /* CoreDataManager.swift */; };
 		56481C3D2537375A00B52E20 /* UserProfileOperationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C3C2537375A00B52E20 /* UserProfileOperationDataManager.swift */; };
 		56481C4125373C1000B52E20 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4025373C1000B52E20 /* UserProfile.swift */; };
 		56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */; };
@@ -59,6 +63,8 @@
 /* Begin PBXFileReference section */
 		15051AC01A5EBDBF5498083C /* Pods-Talkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.release.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.release.xcconfig"; sourceTree = "<group>"; };
 		5591FED140C25ADA8BC81E46 /* Pods-Talkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.debug.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.debug.xcconfig"; sourceTree = "<group>"; };
+		56077068254D62250021DF4E /* ChannelMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelMO+Extensions.swift"; sourceTree = "<group>"; };
+		5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+Extensions.swift"; sourceTree = "<group>"; };
 		560D463B250AD21300E5A610 /* Talkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		560D463E250AD21300E5A610 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		560D4642250AD21300E5A610 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -73,10 +79,12 @@
 		5612ED95252A725D003A5955 /* ThemesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ThemesViewController.storyboard; sourceTree = "<group>"; };
 		5612ED98252A76D2003A5955 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		5612ED9B252A772D003A5955 /* ThemeButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThemeButton.xib; sourceTree = "<group>"; };
-		561418A4254AA8D20016E750 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		561418A7254AC0690016E750 /* ChannelsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsRequest.swift; sourceTree = "<group>"; };
 		5614C71A253337B20038464F /* UserProfileGCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileGCDDataManager.swift; sourceTree = "<group>"; };
+		561B82F325549C2A00D9B21D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		561B82FC2554B71A00D9B21D /* __GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "__GoogleService-Info.plist"; sourceTree = "<group>"; };
 		562F259D253F68C7008280B5 /* ConversationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsManager.swift; sourceTree = "<group>"; };
+		563C1E902555F9EA0026EA90 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		56481C3C2537375A00B52E20 /* UserProfileOperationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileOperationDataManager.swift; sourceTree = "<group>"; };
 		56481C4025373C1000B52E20 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		56481C442537A40F00B52E20 /* SaveUserProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserProfileOperation.swift; sourceTree = "<group>"; };
@@ -153,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				567F3D0D252372EA0078A709 /* App */,
-				567F3D08252266230078A709 /* Assets */,
 				569FE3872537B3A8002820CB /* Data managers */,
 				56107B29252E6D0D0049BFA7 /* Extensions */,
 				567F3D0E252373220078A709 /* Helpers */,
@@ -161,6 +168,7 @@
 				56481C432537A3DD00B52E20 /* Operations */,
 				567F3CFA252262240078A709 /* Screens */,
 				5614C719253337920038464F /* Storage */,
+				567F3D08252266230078A709 /* SupportingFiles */,
 				56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */,
 			);
 			path = Talkers;
@@ -170,8 +178,10 @@
 			isa = PBXGroup;
 			children = (
 				56CECC8625421AF600EFB86E /* String+Extensions.swift */,
-				56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */,
 				56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */,
+				56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */,
+				56077068254D62250021DF4E /* ChannelMO+Extensions.swift */,
+				5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,15 +285,16 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		567F3D08252266230078A709 /* Assets */ = {
+		567F3D08252266230078A709 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				560D4647250AD21A00E5A610 /* Assets.xcassets */,
 				568AE4BA251B1C4E001277F1 /* Fonts */,
 				56BB5C73253BA0E50067265D /* GoogleService-Info.plist */,
+				561B82FC2554B71A00D9B21D /* __GoogleService-Info.plist */,
 				560D464C250AD21A00E5A610 /* Info.plist */,
 			);
-			path = Assets;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		567F3D0D252372EA0078A709 /* App */ = {
@@ -324,8 +335,9 @@
 		5688675025478FF200996801 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				561418A4254AA8D20016E750 /* CoreDataStack.swift */,
+				561B82F325549C2A00D9B21D /* CoreDataStack.swift */,
 				56ED4E60254B2685005A66B9 /* Requests */,
+				563C1E902555F9EA0026EA90 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -465,6 +477,7 @@
 				5612ED9C252A772D003A5955 /* ThemeButton.xib in Resources */,
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
 				567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */,
+				561B82FD2554B71A00D9B21D /* __GoogleService-Info.plist in Resources */,
 				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
 				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
 				567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */,
@@ -544,7 +557,9 @@
 				5614C71B253337B20038464F /* UserProfileGCDDataManager.swift in Sources */,
 				560D4643250AD21300E5A610 /* ProfileViewController.swift in Sources */,
 				56481C4C2537AA1200B52E20 /* LoadUserProfileOperation.swift in Sources */,
-				561418A5254AA8D20016E750 /* CoreDataStack.swift in Sources */,
+				563C1E912555F9EA0026EA90 /* CoreDataManager.swift in Sources */,
+				561B82F425549C2A00D9B21D /* CoreDataStack.swift in Sources */,
+				56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */,
 				56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */,
 				56ED4E62254B26C1005A66B9 /* MessagesRequest.swift in Sources */,
 				56481C492537A59200B52E20 /* FileStorage.swift in Sources */,
@@ -554,6 +569,7 @@
 				56CECC6925403B8C00EFB86E /* Message.swift in Sources */,
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
+				5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */,
 				56107B15252D215A0049BFA7 /* ThemeManager.swift in Sources */,
 				56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */,
 				56481C452537A40F00B52E20 /* SaveUserProfileOperation.swift in Sources */,
@@ -719,7 +735,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;
-				INFOPLIST_FILE = Talkers/Assets/Info.plist;
+				INFOPLIST_FILE = Talkers/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -738,7 +754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;
-				INFOPLIST_FILE = Talkers/Assets/Info.plist;
+				INFOPLIST_FILE = Talkers/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

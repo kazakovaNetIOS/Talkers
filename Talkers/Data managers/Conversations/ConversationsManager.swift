@@ -24,7 +24,7 @@ class ConversationsDataManager {
     }
   }
 
-  init(channelId: String, completionHandler: @escaping () -> Void) {
+  func startLoading(channelId: String) {
     reference = reference.document(channelId).collection("messages")
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
@@ -49,19 +49,8 @@ class ConversationsDataManager {
             senderName: senderName)
         }
 
-        self.messages = self.messages.sorted { $0.created < $1.created }
-
-        DispatchQueue.main.async {
-          completionHandler()
-        }
-
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-
-        let messageRequest = MessagesRequest(coreDataStack: appDelegate.coreDataStack)
-        messageRequest.makeRequest(messages: self.messages)
+        let messageRequest = MessagesRequest()
+        messageRequest.makeRequest(messages: self.messages, in: channelId)
       }
     }
   }

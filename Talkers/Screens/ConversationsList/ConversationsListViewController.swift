@@ -8,10 +8,28 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class ConversationsListViewController: BaseViewController {
   private let cellIdentifier = String(describing: ConversationsListTableViewCell.self)
+
   private var dataManager = ConversationsListDataManager()
+  private lazy var coreDataStack = CoreDataStack.share
+
+  private lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
+    let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
+
+    let sortDescriptor = NSSortDescriptor(key: #keyPath(ChannelMO.lastActivity), ascending: false)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+
+    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                            managedObjectContext: self.coreDataStack.managedContext,
+                                                            sectionNameKeyPath: nil,
+                                                            cacheName: nil)
+    fetchResultsController.delegate = self
+
+    return fetchResultsController
+  }()
 
   @IBOutlet weak var conversationsListTableView: UITableView!
 
@@ -21,10 +39,6 @@ class ConversationsListViewController: BaseViewController {
     super.viewDidLoad()
 
     configureTableView()
-
-    dataManager.startLoading { [weak self] in
-      self?.conversationsListTableView.reloadData()
-    }
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -38,7 +52,15 @@ class ConversationsListViewController: BaseViewController {
     super.viewWillAppear(animated)
 
     changeColorsForTheme(with: ThemeManager.shared.themeSettings)
-    conversationsListTableView.reloadData()
+
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      let fetchError = error as NSError
+      print("\(fetchError), \(fetchError.localizedDescription)")
+    }
+
+    dataManager.startLoading()
 
     self.navigationItem.title = "Channels"
   }
@@ -81,18 +103,21 @@ class ConversationsListViewController: BaseViewController {
 
 extension ConversationsListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return dataManager.getConversationsCount()
+    guard let sections = fetchedResultsController.sections else { return 0 }
+
+    let sectionsInfo = sections[section]
+    return sectionsInfo.numberOfObjects
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let channel = dataManager.getConversation(by: indexPath)
+    let channelMO = fetchedResultsController.object(at: indexPath)
 
     guard let cell = tableView.dequeueReusableCell(
     withIdentifier: cellIdentifier, for: indexPath) as? ConversationsListTableViewCell else {
       return UITableViewCell()
     }
 
-    cell.configure(with: channel)
+    cell.configure(with: Channel(channelMO))
 
     return cell
   }
@@ -103,19 +128,65 @@ extension ConversationsListViewController: UITableViewDataSource {
 extension ConversationsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let conversationViewController = ConversationViewController.storyboardInstance() {
-      conversationViewController.channel = dataManager.getConversation(by: indexPath)
+      let channelMO = fetchedResultsController.object(at: indexPath)
+      conversationViewController.channel = Channel(channelMO)
 
       navigationController?.pushViewController(conversationViewController, animated: true)
     }
   }
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      let deletedChannel = fetchedResultsController.object(at: indexPath)
+      dataManager.deleteChannel(channel: deletedChannel)
+    }
+  }
 }
 
-// MARK: - Instantiation from storybord
+// MARK: - NSFetchedResultsControllerDelegate
 
-extension ConversationsListViewController {
-  static func storyboardInstance() -> ConversationsListViewController? {
-    let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-    return storyboard.instantiateInitialViewController() as? ConversationsListViewController
+extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
+  func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    conversationsListTableView.beginUpdates()
+  }
+
+  func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                  didChange anObject: Any,
+                  at indexPath: IndexPath?,
+                  for type: NSFetchedResultsChangeType,
+                  newIndexPath: IndexPath?) {
+    switch type {
+    case .insert:
+      guard let newIndexPath = newIndexPath else { return }
+      conversationsListTableView.insertRows(at: [newIndexPath], with: .automatic)
+      print("Добавлен новый канал")
+    case .delete:
+      guard let indexPath = indexPath else { return }
+      conversationsListTableView.deleteRows(at: [indexPath], with: .automatic)
+      print("Удален канал")
+    case .update:
+      guard let indexPath = indexPath,
+            let cell = conversationsListTableView.cellForRow(at: indexPath) as? ConversationsListTableViewCell else { return }
+      let channelMO = fetchedResultsController.object(at: indexPath)
+      cell.configure(with: Channel(channelMO))
+      print("Обновлен канал")
+    case .move:
+      guard let indexPath = indexPath,
+            let newIndexPath = newIndexPath else { return }
+      conversationsListTableView.deleteRows(at: [indexPath], with: .automatic)
+      conversationsListTableView.insertRows(at: [newIndexPath], with: .automatic)
+      print("Перемещен канал")
+    @unknown default:
+      print("Unexpected NSFetchedResultsChangeType")
+    }
+  }
+
+  func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    conversationsListTableView.endUpdates()
   }
 }
 
@@ -139,5 +210,14 @@ private extension ConversationsListViewController {
     setNavigationBarForTheme()
 
     conversationsListTableView.backgroundColor = settings.chatBackgroundColor
+  }
+}
+
+// MARK: - Instantiation from storybord
+
+extension ConversationsListViewController {
+  static func storyboardInstance() -> ConversationsListViewController? {
+    let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+    return storyboard.instantiateInitialViewController() as? ConversationsListViewController
   }
 }

@@ -16,11 +16,11 @@ class ConversationsListDataManager {
 
   private var channels = [Channel]()
 
-  func startLoading(completionHandler: @escaping () -> Void) {
+  func startLoading() {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self = self else { return }
 
-      self.reference.addSnapshotListener {snapshot, error in
+      self.reference.addSnapshotListener { snapshot, error in
         guard let snapshot = snapshot else {
           if let error = error {
             print(error.localizedDescription)
@@ -41,18 +41,7 @@ class ConversationsListDataManager {
                        lastActivity: lastActivity)
         }
 
-        self.channels = self.channels.sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
-
-        DispatchQueue.main.async {
-          completionHandler()
-        }
-
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-
-        let chatRequest = ChannelsRequest(coreDataStack: appDelegate.coreDataStack)
+        let chatRequest = ChannelsRequest()
         chatRequest.makeRequest(channels: self.channels)
       }
     }
@@ -69,6 +58,21 @@ class ConversationsListDataManager {
   func addChannel(withName channelName: String) {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       self?.reference.addDocument(data: [ChannelKeys.name: channelName])
+      print("Добавлен новый канал")
+    }
+  }
+
+  func deleteChannel(channel: ChannelMO) {
+    guard let id = channel.identifier else { return }
+    let channelReference = reference.document(id)
+    channelReference.delete { error in
+      if let error = error {
+        print("Error deleting channel, \(error)")
+        return
+      }
+
+      CoreDataStack.share.managedContext.delete(channel)
+      CoreDataStack.share.saveContext()
     }
   }
 }
