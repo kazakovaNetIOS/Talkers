@@ -19,7 +19,6 @@ protocol ChannelsServiceProtocol {
 
 protocol ChannelsServiceDelegateProtocol: class {
   func processError(with message: String)
-  func didFinishDeleting()
 }
 
 class ChannelsService {
@@ -68,7 +67,6 @@ extension ChannelsService: ChannelsFirebaseServiceDelegateProtocol {
 
   func firebaseDidFinishDeleting(channel: ChannelMO) {
     coreDataService.deleteChannel(channel: channel)
-    self.delegate?.didFinishDeleting()
   }
 }
 

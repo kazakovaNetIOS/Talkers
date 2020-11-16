@@ -23,11 +23,11 @@ protocol MessagesCoreDataServiceDelegateProtocol: class {
 
 class MessagesCoreDataService {
   weak var delegate: MessagesCoreDataServiceDelegateProtocol?
-  private var coreDataStack: CoreDataStack
+  private var coreDataStack: CoreDataStackProtocol
   private var channelsCoreDataService: ChannelsCoreDataServiceProtocol
   private var fetchedResultsController: NSFetchedResultsController<MessageMO>?
 
-  init(coreDataStack: CoreDataStack,
+  init(coreDataStack: CoreDataStackProtocol,
        channelsCoreDataService: ChannelsCoreDataServiceProtocol) {
     self.coreDataStack = coreDataStack
     self.channelsCoreDataService = channelsCoreDataService

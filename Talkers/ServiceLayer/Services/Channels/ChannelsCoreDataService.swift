@@ -24,7 +24,7 @@ protocol ChannelsCoreDataServiceDelegateProtocol: class {
 }
 
 class ChannelsCoreDataService {
-  private var coreDataStack: CoreDataStack
+  private var coreDataStack: CoreDataStackProtocol
   weak var delegate: ChannelsCoreDataServiceDelegateProtocol?
   lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
     let fetchRequest: NSFetchRequest<ChannelMO> = ChannelMO.fetchRequest()
@@ -38,7 +38,7 @@ class ChannelsCoreDataService {
                                       cacheName: nil)
   }()
 
-  init(coreDataStack: CoreDataStack) {
+  init(coreDataStack: CoreDataStackProtocol) {
     self.coreDataStack = coreDataStack
   }
 }

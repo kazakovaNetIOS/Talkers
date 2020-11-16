@@ -20,6 +20,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivh-PP-8a2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gqb-RS-D3n">
+                                        <rect key="frame" x="197" y="421" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WTX-5z-wBe">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="780"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -49,6 +52,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" id="1as-f8-2Ty"/>
+                                    <constraint firstItem="gqb-RS-D3n" firstAttribute="centerX" secondItem="ivh-PP-8a2" secondAttribute="centerX" id="2zd-WP-vQH"/>
                                     <constraint firstItem="KVt-RL-7GV" firstAttribute="top" secondItem="WTX-5z-wBe" secondAttribute="bottom" constant="17" id="712-Qn-5Fm"/>
                                     <constraint firstItem="WTX-5z-wBe" firstAttribute="top" secondItem="ivh-PP-8a2" secondAttribute="top" id="7eZ-dd-i1G"/>
                                     <constraint firstItem="UeC-1T-VZb" firstAttribute="leading" secondItem="KVt-RL-7GV" secondAttribute="trailing" constant="8" id="L1W-fs-WCC"/>
@@ -57,6 +61,7 @@
                                     <constraint firstAttribute="trailing" secondItem="WTX-5z-wBe" secondAttribute="trailing" id="fdf-vD-5Km"/>
                                     <constraint firstItem="KVt-RL-7GV" firstAttribute="leading" secondItem="ivh-PP-8a2" secondAttribute="leading" constant="19" id="iCU-vk-XsT"/>
                                     <constraint firstAttribute="trailing" secondItem="UeC-1T-VZb" secondAttribute="trailing" constant="19" id="o3d-Jp-7ux"/>
+                                    <constraint firstItem="gqb-RS-D3n" firstAttribute="centerY" secondItem="ivh-PP-8a2" secondAttribute="centerY" id="oDf-NZ-J1A"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -72,6 +77,7 @@
                     <navigationItem key="navigationItem" id="WBi-PI-eqq"/>
                     <connections>
                         <outlet property="conversationTableView" destination="WTX-5z-wBe" id="ONW-ls-CTA"/>
+                        <outlet property="loadingIndicator" destination="gqb-RS-D3n" id="jd0-Lo-aoB"/>
                         <outlet property="messageTextField" destination="KVt-RL-7GV" id="ImD-TB-T2r"/>
                         <outlet property="parentView" destination="ivh-PP-8a2" id="FLw-6e-uSv"/>
                         <outlet property="rootViewBottomConstraint" destination="sQx-Ts-Add" id="1hV-b7-DA6"/>

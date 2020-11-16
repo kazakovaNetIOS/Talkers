@@ -20,7 +20,8 @@ class ConversationViewController: BaseViewController {
   @IBOutlet weak var rootViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var sendButton: UIButton!
   @IBOutlet weak var parentView: UIView!
-
+  @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+  
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
@@ -87,6 +88,7 @@ extension ConversationViewController: ConversationModelDelegateProtocol {
 
 extension ConversationViewController: NSFetchedResultsControllerDelegate {
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    loadingIndicator.startAnimating()
     conversationTableView.beginUpdates()
   }
 
@@ -124,6 +126,7 @@ extension ConversationViewController: NSFetchedResultsControllerDelegate {
   }
 
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    loadingIndicator.stopAnimating()
     conversationTableView.endUpdates()
     scrollToBottom()
   }
@@ -174,6 +177,8 @@ private extension ConversationViewController {
       UIView.animate(withDuration: 1.0) {
         self.view.layoutIfNeeded()
       }
+
+      scrollToBottom()
     }
   }
 

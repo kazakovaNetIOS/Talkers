@@ -9,6 +9,11 @@
 import Foundation
 import CoreData
 
+protocol CoreDataStackProtocol {
+  var managedContext: NSManagedObjectContext { get }
+  func performSave(_ block: @escaping (NSManagedObjectContext) -> Void)
+}
+
 class CoreDataStack {
   private let modelName = "Chats"
 
@@ -26,7 +31,11 @@ class CoreDataStack {
     container.viewContext.automaticallyMergesChangesFromParent = true
     return container
   }()
+}
 
+// MARK: - CoreDataStackProtocol
+
+extension CoreDataStack: CoreDataStackProtocol {
   func performSave(_ block: @escaping (NSManagedObjectContext) -> Void) {
     storeContainer.performBackgroundTask { (context) in
       context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
@@ -40,8 +49,12 @@ class CoreDataStack {
       }
     }
   }
+}
 
-  private func performSave(in context: NSManagedObjectContext) throws {
+// MARK: - Private
+
+private extension CoreDataStack {
+  func performSave(in context: NSManagedObjectContext) throws {
     try context.save()
     if let parent = context.parent {
       try performSave(in: parent)

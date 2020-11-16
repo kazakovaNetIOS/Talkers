@@ -21,7 +21,6 @@ protocol PresentationAssemblyProtocol {
 
 class PresentationAssembly: PresentationAssemblyProtocol {
   private let serviceAssembly: ServiceAssemblyProtocol
-  private var conversationsListVC: ConversationsListViewController?
 
   init(serviceAssembly: ServiceAssemblyProtocol) {
     self.serviceAssembly = serviceAssembly
@@ -43,8 +42,6 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     model.delegate = conversationsListVC
     model.setFRCDelegate(delegate: conversationsListVC)
     conversationsListVC.model = model
-
-    self.conversationsListVC = conversationsListVC
 
     return navVC
   }

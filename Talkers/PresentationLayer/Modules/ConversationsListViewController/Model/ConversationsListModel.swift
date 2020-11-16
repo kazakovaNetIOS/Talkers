@@ -99,8 +99,4 @@ extension ConversationsListModel: ChannelsServiceDelegateProtocol {
   func processError(with message: String) {
     delegate?.show(error: message)
   }
-
-  func didFinishDeleting() {
-    // todo
-  }
 }

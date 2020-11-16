@@ -10,13 +10,13 @@ import Foundation
 import CoreData
 
 protocol CoreDataStorageProtocol {
-  var coreDataStack: CoreDataStack { get }
+  var coreDataStack: CoreDataStackProtocol { get }
 }
 
 class CoreDataStorage: CoreDataStorageProtocol {
-  var coreDataStack: CoreDataStack
+  var coreDataStack: CoreDataStackProtocol
 
-  init(coreDataStack: CoreDataStack) {
+  init(coreDataStack: CoreDataStackProtocol) {
     self.coreDataStack = coreDataStack
   }
 }

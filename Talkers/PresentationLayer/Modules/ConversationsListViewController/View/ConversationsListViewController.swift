@@ -146,7 +146,6 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
 
 private extension ConversationsListViewController {
   func createNewChannel(withName channelName: String) {
-    // todo
     model?.addChannel(withName: channelName)
   }
 
