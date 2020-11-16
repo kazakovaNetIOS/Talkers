@@ -8,26 +8,41 @@
 
 import Foundation
 
+protocol FileStorageProtocol {
+  func saveToFile(profile: Profile) throws
+  func loadFromFile() throws -> Profile?
+}
+
 class FileStorage {
   enum FileStorageError: Error {
     case runtimeError
   }
+}
 
-  static let shared = FileStorage()
+// MARK: - FileStorageProtocol
 
-  private init() {}
+extension FileStorage: FileStorageProtocol {
+  func saveToFile(profile: Profile) throws {
+    guard let path = Profile.ArchiveURL else { throw FileStorageError.runtimeError }
 
-  func saveToFile(userProfile: UserProfile) throws {
-    guard let path = UserProfile.ArchiveURL else { throw FileStorageError.runtimeError }
-
-    let data = try NSKeyedArchiver.archivedData(withRootObject: userProfile, requiringSecureCoding: false)
+    let data = try NSKeyedArchiver.archivedData(withRootObject: profile, requiringSecureCoding: false)
     try data.write(to: path)
   }
 
-  func loadFromFile() throws -> UserProfile? {
-    guard let path = UserProfile.ArchiveURL else { throw FileStorageError.runtimeError }
+  func loadFromFile() throws -> Profile? {
+    guard let url = Profile.ArchiveURL else { throw FileStorageError.runtimeError }
 
-    let data = try Data(contentsOf: path)
-    return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UserProfile
+    if FileManager.default.fileExists(atPath: url.path) {
+      let data = try Data(contentsOf: url)
+      return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Profile
+    }
+
+    return nil
+  }
+}
+
+private extension FileStorage {
+  func checkFile(url: URL) {
+
   }
 }

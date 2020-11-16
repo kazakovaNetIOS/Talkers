@@ -30,7 +30,7 @@ protocol ConversationModelDelegateProtocol: class {
 class ConversationModel {
   weak var delegate: ConversationModelDelegateProtocol?
   private var messagesService: MessagesServiceProtocol
-  private var userProfileService: UserProfileServiceProtocol
+  private var profileService: ProfileServiceProtocol
   private var themesService: ThemesServiceProtocol
   var channel: ChannelMO
 
@@ -49,11 +49,11 @@ class ConversationModel {
   }
 
   init(messagesService: MessagesServiceProtocol,
-       userProfileService: UserProfileServiceProtocol,
+       profileService: ProfileServiceProtocol,
        themesService: ThemesServiceProtocol,
        channel: ChannelMO) {
     self.messagesService = messagesService
-    self.userProfileService = userProfileService
+    self.profileService = profileService
     self.themesService = themesService
     self.channel = channel
     self.messagesService.delegate = self
@@ -64,30 +64,36 @@ class ConversationModel {
 
 extension ConversationModel: ConversationModelProtocol {
   func addMessage(with messageText: String) {
-    let mySenderId = userProfileService.getSenderId()
-    let userProfile = userProfileService.getUserProfile()
-    let newMessage = Message(content: messageText,
-                             created: Date(),
-                             senderId: mySenderId,
-                             senderName: userProfile.name ?? "",
-                             isMyMessage: true)
+    let mySenderId = profileService.getSenderId()
+    profileService.loadProfile {[weak self] (result) in
+      switch result {
+      case .success(let profile):
+        let newMessage = Message(content: messageText,
+                                 created: Date(),
+                                 senderId: mySenderId,
+                                 senderName: profile.name ?? "",
+                                 isMyMessage: true)
 
-    guard let channelId = channel.identifier else {
-      fatalError("Can't initialize model for conversation")
+        guard let channelId = self?.channel.identifier else {
+          fatalError("Can't initialize model for conversation")
+        }
+
+        self?.messagesService.addMessage(with: newMessage, in: channelId)
+      case .failure(let error):
+        fatalError("Can't initialize model for conversation, \(error)")
+      }
     }
-
-    messagesService.addMessage(with: newMessage, in: channelId)
   }
 
   func fetchMessages() {
     guard let channelId = channel.identifier else { return }
-    messagesService.fetchMessages(in: channelId, mySenderId: userProfileService.getSenderId())
+    messagesService.fetchMessages(in: channelId, mySenderId: profileService.getSenderId())
   }
 
   func getMessage(at indexPath: IndexPath) -> Message {
     let messageMO = fetchedResultsController.object(at: indexPath)
     let senderId = messageMO.senderId
-    let mySenderId = userProfileService.getSenderId()
+    let mySenderId = profileService.getSenderId()
     return Message(messageMO, isMyMessage: senderId == mySenderId)
   }
 

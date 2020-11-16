@@ -48,8 +48,7 @@ class ConversationsListViewController: BaseViewController {
   // MARK: - IBAction
 
   @IBAction func profileIconTapped(_ sender: Any) {
-    // todo
-    if let profileViewController = ProfileViewController.storyboardInstance() {
+    if let profileViewController = presentationAssembly?.profileViewController() {
       present(profileViewController, animated: true)
     }
   }

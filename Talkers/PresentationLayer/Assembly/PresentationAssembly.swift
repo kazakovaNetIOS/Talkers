@@ -15,6 +15,8 @@ protocol PresentationAssemblyProtocol {
   func conversationViewController(with channel: ChannelMO) -> ConversationViewController
   // Создает экран упрвления темами
   func themesViewController() -> ThemesViewController
+  // Создает экран профиля
+  func profileViewController() -> UINavigationController
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -74,6 +76,24 @@ class PresentationAssembly: PresentationAssemblyProtocol {
 
     return themesVC
   }
+
+  // MARK: - ProfileViewController
+  func profileViewController() -> UINavigationController {
+    var model = profileModel()
+
+    guard let navVC = ProfileViewController.storyboardInstance() else {
+      fatalError("Can't initialize ProfileViewController from storyboard")
+    }
+
+    guard let profileVC = navVC.topViewController as? ProfileViewController else {
+      fatalError("Can't initialize ProfileViewController from storyboard")
+    }
+
+    model.delegate = profileVC
+    profileVC.model = model
+
+    return navVC
+  }
 }
 
 // MARK: - Private
@@ -86,12 +106,17 @@ private extension PresentationAssembly {
 
   func conversationModel(with channel: ChannelMO) -> ConversationModelProtocol {
     return ConversationModel(messagesService: serviceAssembly.messagesService,
-                             userProfileService: serviceAssembly.userProfileService,
+                             profileService: serviceAssembly.profileService,
                              themesService: serviceAssembly.themesService,
                              channel: channel)
   }
 
   func themesModel() -> ThemesModelProtocol {
     return ThemesModel(themesService: serviceAssembly.themesService)
+  }
+
+  func profileModel() -> ProfileModelProtocol {
+    return ProfileModel(profileService: serviceAssembly.profileService,
+                        themesService: serviceAssembly.themesService)
   }
 }

@@ -1,5 +1,5 @@
 //
-//  LoadUserProfileOperation.swift
+//  SaveProfileOperation.swift
 //  Talkers
 //
 //  Created by Natalia Kazakova on 15.10.2020.
@@ -9,19 +9,19 @@
 import Foundation
 
 class SaveProfileOperation: AsyncOperation {
-  var userProfile: Profile
+  var profile: Profile
   var isError = false
   private var fileStorage: FileStorageProtocol
 
-  init(userProfile: Profile,
+  init(profile: Profile,
        fileStorage: FileStorageProtocol) {
-    self.userProfile = userProfile
+    self.profile = profile
     self.fileStorage = fileStorage
   }
 
   override func main() {
     do {
-      try fileStorage.saveToFile(profile: userProfile)
+      try fileStorage.saveToFile(profile: profile)
     } catch {
       isError = true
     }

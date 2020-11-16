@@ -17,7 +17,9 @@ protocol ServiceAssemblyProtocol {
   var messagesFirebaseService: MessagesFirebaseServiceProtocol { get }
   var messagesCoreDataService: MessagesCoreDataServiceProtocol { get }
 
-  var userProfileService: UserProfileServiceProtocol { get }
+  var profileService: ProfileServiceProtocol { get }
+  var profileGCDService: ProfileGCDServiceProtocol { get }
+  var profileOperationService: ProfileOperationServiceProtocol { get }
 
   var themesService: ThemesService { get }
 }
@@ -40,7 +42,10 @@ class ServiceAssembly: ServiceAssemblyProtocol {
   lazy var messagesService: MessagesServiceProtocol = MessagesService(firebaseService: messagesFirebaseService,
                                                                       coreDataService: messagesCoreDataService)
 
-  lazy var userProfileService: UserProfileServiceProtocol = UserProfileService(dataManager: UserProfileOperationDataManager())
+  lazy var profileGCDService: ProfileGCDServiceProtocol = ProfileGCDService(fileStorage: coreAssembly.fileStorage)
+  lazy var profileOperationService: ProfileOperationServiceProtocol = ProfileOperationService(fileStorage: coreAssembly.fileStorage)
+  lazy var profileService: ProfileServiceProtocol = ProfileService(profileGSDService: profileGCDService,
+                                                                   profileOperationService: profileOperationService)
 
   lazy var themesService: ThemesService = ThemesService()
 }

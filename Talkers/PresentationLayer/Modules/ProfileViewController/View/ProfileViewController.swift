@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileViewController: BaseViewController {
+  var model: ProfileModelProtocol?
+
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profilePositionTextView: UITextView!
   @IBOutlet weak var profileInitialsLabel: UILabel!
@@ -19,9 +21,6 @@ class ProfileViewController: BaseViewController {
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet weak var profileEditButton: UIBarButtonItem!
   @IBOutlet weak var closeButton: UIBarButtonItem!
-
-  var userProfile: UserProfile?
-  var dataManager = DataManager()
 
   // MARK: - Lifecycle
 
@@ -37,13 +36,16 @@ class ProfileViewController: BaseViewController {
     operationSaveButton.layer.cornerRadius = 14
     operationSaveButton.layer.masksToBounds = true
 
+    model?.useGCDServiceType()
     loadingWillStarted()
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-// todo
-//    changeColorsForTheme(with: ThemesService.shared.themeSettings)
+
+    if let themeSettings = model?.currentThemeSettings {
+      changeColorsForTheme(with: themeSettings)
+    }
 
     NotificationCenter.default.addObserver(
       self,
@@ -81,12 +83,12 @@ class ProfileViewController: BaseViewController {
   }
 
   @IBAction func profileGSDSaveAction(_ sender: Any) {
-    dataManager.managerType = .gcd
+    model?.useGCDServiceType()
     savingWillStarted()
   }
 
   @IBAction func profileOperationSaveAction(_ sender: Any) {
-    dataManager.managerType = .operation
+    model?.useOperationServiceType()
     savingWillStarted()
   }
 
@@ -99,6 +101,22 @@ class ProfileViewController: BaseViewController {
   }
 }
 
+// MARK: - ProfileModelDelegateProtocol
+
+extension ProfileViewController: ProfileModelDelegateProtocol {
+  func profileDidLoaded(_ profile: Profile?) {
+    loadingDidFinish(with: profile)
+  }
+
+  func savingDidFinish() {
+    savingDidFinish(withError: false, nil)
+  }
+
+  func showError(with message: String) {
+    savingDidFinish(withError: true, message)
+  }
+}
+
 // MARK: - Private
 
 private extension ProfileViewController {
@@ -107,37 +125,31 @@ private extension ProfileViewController {
     isButtonsEnabled(false)
     isServiceButtonsEnabled(false)
     progressWillShow(on: true)
-    loadUserProfile()
+    model?.loadProfile()
   }
 
-  func loadUserProfile() {
-    dataManager.load { [weak self] userProfile in
-      self?.loadingDidFinish(with: userProfile)
-    }
-  }
-
-  func loadingDidFinish(with userProfile: UserProfile?) {
+  func loadingDidFinish(with profile: Profile?) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
 
-    if let userProfile = userProfile {
-      bindUserProfileData(for: userProfile)
+    if let profile = profile {
+      bindProfileData(for: profile)
     } else {
-      bindUserProfileData(for: UserProfile(name: "", position: "", avatar: nil))
+      bindProfileData(for: Profile(name: "", position: "", avatar: nil))
     }
   }
 
-  func bindUserProfileData(for userProfile: UserProfile) {
-    if let avatar = userProfile.avatar {
+  func bindProfileData(for profile: Profile) {
+    if let avatar = profile.avatar {
       profileInitialsLabel.isHidden = true
       profileImage.image = avatar
     } else {
       profileInitialsLabel.isHidden = false
-      profileInitialsLabel.text = userProfile.initials
+      profileInitialsLabel.text = profile.initials
     }
 
-    profileNameTextField.text = userProfile.name ?? "Your name"
-    profilePositionTextView.text = userProfile.position ?? "Your position"
+    profileNameTextField.text = profile.name ?? "Your name"
+    profilePositionTextView.text = profile.position ?? "Your position"
   }
 
   func savingWillStarted() {
@@ -145,25 +157,17 @@ private extension ProfileViewController {
     isButtonsEnabled(false)
     isServiceButtonsEnabled(false)
     progressWillShow(on: true)
-    saveUserProfile()
+    model?.saveProfile(getProfileData())
   }
 
-  func saveUserProfile() {
-    let profile = getProfileData()
-
-    dataManager.save(profile: profile) {[weak self] error in
-      self?.savingDidFinish(withError: error)
-    }
-  }
-
-  func getProfileData() -> UserProfile {
-    return UserProfile(
+  func getProfileData() -> Profile {
+    return Profile(
       name: profileNameTextField.text,
       position: profilePositionTextView.text,
       avatar: profileImage.image)
   }
 
-  func savingDidFinish(withError: Bool) {
+  func savingDidFinish(withError: Bool, _ message: String?) {
     progressWillShow(on: false)
     isServiceButtonsEnabled(true)
     isButtonsEnabled(false)
@@ -171,7 +175,7 @@ private extension ProfileViewController {
     if withError {
       let alertSettings = AlertMessageSettings(
         title: "Ошибка",
-        message: "Не удалось сохранить данные",
+        message: message,
         defaultActionTitle: "Повторить",
         defaultActionHandler: { [weak self] _ in
           self?.savingWillStarted()
@@ -197,6 +201,9 @@ private extension ProfileViewController {
   func profileNameFieldStateChange(isEditing: Bool) {
     profileNameTextField.isUserInteractionEnabled = isEditing
     profileNameTextField.borderStyle = isEditing ? .roundedRect : .none
+    profileNameTextField.layer.borderWidth = isEditing ? 0.25 : 0.0
+    profileNameTextField.layer.borderColor = isEditing ? UIColor.lightGray.cgColor : .none
+    profileNameTextField.layer.cornerRadius = 5.0
     if isEditing {
       profileNameTextField.becomeFirstResponder()
     }
@@ -210,8 +217,8 @@ private extension ProfileViewController {
   }
 
   func isButtonsEnabled(_ isEnable: Bool) {
-    operationSaveButton.isEnabled = isEnable
-    GCDSaveButton.isEnabled = isEnable
+    operationSaveButton.isHidden = !isEnable
+    GCDSaveButton.isHidden = !isEnable
   }
 
   func isServiceButtonsEnabled(_ isEditing: Bool) {
@@ -275,12 +282,19 @@ private extension ProfileViewController {
     setNavigationBarForTheme(themeSettings: settings)
 
     view.backgroundColor = settings.chatBackgroundColor
+
+    profileNameTextField.backgroundColor = settings.chatBackgroundColor
     profileNameTextField.textColor = settings.labelColor
+
+    profilePositionTextView.backgroundColor = settings.chatBackgroundColor
     profilePositionTextView.textColor = settings.labelColor
+
     GCDSaveButton.titleLabel?.tintColor = settings.labelColor
-    GCDSaveButton.backgroundColor = settings.incomingColor
+    GCDSaveButton.backgroundColor = settings.outgoingColor
+
     operationSaveButton.titleLabel?.tintColor = settings.labelColor
-    operationSaveButton.backgroundColor = settings.incomingColor
+    operationSaveButton.backgroundColor = settings.outgoingColor
+
     profileImageEditButton.titleLabel?.tintColor = settings.labelColor
   }
 }

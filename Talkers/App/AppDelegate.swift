@@ -17,8 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let rootAssembly = RootAssembly()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // todo remove
-    Logger.printInLog("Application moved from initialize to launch: \(#function)")
     FirebaseApp.configure()
 
     self.window = UIWindow(frame: UIScreen.main.bounds)
