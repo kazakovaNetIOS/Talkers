@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileViewController: BaseViewController {
+  var presentationAssembly: PresentationAssemblyProtocol?
   var model: ProfileModelProtocol?
 
   @IBOutlet weak var profileImage: UIImageView!
@@ -250,6 +251,10 @@ private extension ProfileViewController {
       actionSheet.addAction(photo)
     }
 
+    // todo check connection
+    let loadAction = initLoadAction()
+    actionSheet.addAction(loadAction)
+
     let cancel = UIAlertAction(title: "Отменить", style: .cancel)
     actionSheet.addAction(cancel)
 
@@ -276,6 +281,18 @@ private extension ProfileViewController {
     photoAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
 
     return photoAction
+  }
+
+  func initLoadAction() -> UIAlertAction {
+    let loadAction = UIAlertAction(title: "Загрузить", style: .default) {[weak self] _ in
+      if let viewController = self?.presentationAssembly?.profileImagesViewController() {
+        self?.present(viewController, animated: true, completion: nil)
+      }
+    }
+    loadAction.setValue(#imageLiteral(resourceName: "download"), forKey: "image")
+    loadAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+    return loadAction
   }
 
   func changeColorsForTheme(with settings: ThemeSettings) {

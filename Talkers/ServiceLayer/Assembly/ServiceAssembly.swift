@@ -22,6 +22,8 @@ protocol ServiceAssemblyProtocol {
   var profileOperationService: ProfileOperationServiceProtocol { get }
 
   var themesService: ThemesService { get }
+
+  var profileImagesService: ProfileImagesServiceProtocol { get }
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -48,4 +50,6 @@ class ServiceAssembly: ServiceAssemblyProtocol {
                                                                    profileOperationService: profileOperationService)
 
   lazy var themesService: ThemesService = ThemesService()
+
+  lazy var profileImagesService: ProfileImagesServiceProtocol = ProfileImagesService()
 }

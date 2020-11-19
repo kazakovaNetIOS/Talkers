@@ -9,7 +9,6 @@
 import UIKit
 
 class ConversationsListTableViewCell: UITableViewCell {
-
   var model: Channel?
 
   @IBOutlet weak var nameLabel: UILabel!
