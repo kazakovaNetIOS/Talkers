@@ -19,11 +19,15 @@ protocol ProfileImagesCellModelDelegateProtocol: class {
 
 class ProfileImagesCellModel {
   weak var delegate: ProfileImagesCellModelDelegateProtocol?
-  let imageUrlString: String
+  private let previewImageUrlString: String
+  private let fullHDImageUrlString: String
   private let profileImagesService: ProfileImagesServiceProtocol
 
-  init(_ imageUrlString: String, service: ProfileImagesServiceProtocol) {
-    self.imageUrlString = imageUrlString
+  init(_ previewImageUrlString: String,
+       _ fullHDImageUrlString: String,
+       _ service: ProfileImagesServiceProtocol) {
+    self.previewImageUrlString = previewImageUrlString
+    self.fullHDImageUrlString = fullHDImageUrlString
     self.profileImagesService = service
   }
 }
@@ -32,13 +36,12 @@ class ProfileImagesCellModel {
 
 extension ProfileImagesCellModel: ProfileImagesCellModelProtocol {
   func loadImage() {
-    self.profileImagesService.loadImage(by: self.imageUrlString) { (result) in
+    self.profileImagesService.loadImage(by: self.previewImageUrlString) { (result) in
       switch result {
       case .success(let image):
         self.delegate?.downloadImageDidFinished(with: image)
       case _:
-        // todo error image
-        self.delegate?.downloadImageDidFinished(with: UIImage(named: "download"))
+        self.delegate?.downloadImageDidFinished(with: UIImage(named: "broken_image"))
       }
     }
   }

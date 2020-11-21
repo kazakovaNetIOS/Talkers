@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-qk-6lx">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture" translatesAutoresizingMaskIntoConstraints="NO" id="TR3-qk-6lx">
                         <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="0fD-gN-HV9">
@@ -42,6 +42,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="image" width="21" height="21"/>
+        <image name="picture" width="85" height="85"/>
     </resources>
 </document>

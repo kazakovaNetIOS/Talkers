@@ -67,9 +67,12 @@ extension ProfileImagesModel: ProfileImagesModelProtocol {
 
   func getCellModel(at position: Int) -> ProfileImagesCellModelProtocol? {
     guard let hit = images?[position],
-          let imageUrlString = hit.fullHDURL else { return nil }
+          let previewImageUrlString = hit.previewURL,
+          let fullHDImageUrlString = hit.fullHDURL else { return nil }
 
-    return ProfileImagesCellModel(imageUrlString, service: profileImagesService)
+    return ProfileImagesCellModel(previewImageUrlString,
+                                  fullHDImageUrlString,
+                                  profileImagesService)
   }
 }
 

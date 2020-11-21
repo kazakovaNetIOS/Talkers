@@ -14,7 +14,7 @@ class ProfileImagesCollectionViewCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    imageView.image = UIImage(named: "image")
+    imageView.image = UIImage(named: "picture")
   }
 }
 
@@ -34,8 +34,7 @@ extension ProfileImagesCollectionViewCell: ConfigurableView {
 
 extension ProfileImagesCollectionViewCell: ProfileImagesCellModelDelegateProtocol {
   func downloadImageDidFinished(with image: UIImage?) {
-    // todo error image
-    imageView.image = image != nil ? image : UIImage(named: "download")
+    imageView.image = image != nil ? image : UIImage(named: "broken_image")
     activityIndicator.stopAnimating()
   }
 }
