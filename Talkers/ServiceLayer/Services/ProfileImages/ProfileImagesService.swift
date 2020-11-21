@@ -14,7 +14,7 @@ protocol ProfileImagesServiceProtocol {
 }
 
 protocol ProfileImagesServiceDelegateProtocol: class {
-  func downloadImagesDidFinish(images: PixabayImages)
+  func downloadImagesDidFinish(images: PixabayImages?)
   func processError(with message: String)
 }
 
@@ -39,6 +39,11 @@ class ProfileImagesService {
     ]
 
     return components.url
+  }
+  private var pixabayDecoder: JsonDecoderProtocol
+
+  init(pixabayDecoder: JsonDecoderProtocol) {
+    self.pixabayDecoder = pixabayDecoder
   }
 }
 
@@ -66,12 +71,7 @@ extension ProfileImagesService: ProfileImagesServiceProtocol {
 
       if let jsonData = data {
         do {
-          let json = try JSONSerialization.jsonObject(with: jsonData, options: [])
-          // todo
-          print(json)
-
-          let decoder = JSONDecoder()
-          let pixabayImages = try decoder.decode(PixabayImages.self, from: jsonData)
+          let pixabayImages: PixabayImages? = try self?.pixabayDecoder.decode(jsonData)
 
           DispatchQueue.main.async {
             self?.delegate?.downloadImagesDidFinish(images: pixabayImages)

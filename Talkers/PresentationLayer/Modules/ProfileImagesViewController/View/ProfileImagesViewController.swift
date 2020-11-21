@@ -11,6 +11,9 @@ import UIKit
 class ProfileImagesViewController: UIViewController {
   var model: ProfileImagesModelProtocol?
 
+  private let cellIdentifier = String(describing: ProfileImagesCollectionViewCell.self)
+
+  @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
   @IBOutlet weak var collection: UICollectionView!
   @IBOutlet weak var collectionActivityIndicator: UIActivityIndicatorView!
 }
@@ -54,10 +57,26 @@ extension ProfileImagesViewController {
   }
 }
 
+// MARK: - Private
+
 private extension ProfileImagesViewController {
   func configureCollectionView() {
+    configureFlowLayout()
     collection.delegate = model?.collectionViewDelegate
     collection.dataSource = model?.collectionViewDataSource
+    collection.register(UINib(nibName: cellIdentifier, bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+  }
+
+  func configureFlowLayout() {
+    let cellPadding: CGFloat = 2
+    collectionViewFlowLayout.scrollDirection = .vertical
+    collectionViewFlowLayout.minimumLineSpacing = cellPadding
+    collectionViewFlowLayout.minimumInteritemSpacing = cellPadding
+    collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
+    let itemsPerRow: CGFloat = 3
+    let itemWidth = (view.frame.width - 4 * cellPadding) / itemsPerRow
+    let itemSize = CGSize(width: itemWidth, height: itemWidth)
+    collectionViewFlowLayout.itemSize = itemSize
   }
 }
 

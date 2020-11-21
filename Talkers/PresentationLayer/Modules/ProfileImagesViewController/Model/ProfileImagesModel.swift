@@ -72,8 +72,8 @@ extension ProfileImagesModel: ProfileImagesModelProtocol {
 // MARK: - ProfileImagesServiceDelegateProtocol
 
 extension ProfileImagesModel: ProfileImagesServiceDelegateProtocol {
-  func downloadImagesDidFinish(images: PixabayImages) {
-    self.images = images.hits
+  func downloadImagesDidFinish(images: PixabayImages?) {
+    self.images = images?.hits
     self.delegate?.downloadImagesDidFinish(self.images)
   }
 

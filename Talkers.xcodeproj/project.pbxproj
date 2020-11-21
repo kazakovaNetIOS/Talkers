@@ -49,6 +49,7 @@
 		5679C274256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C273256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift */; };
 		5679C277256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C276256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift */; };
 		5679C27B25673AB900989F43 /* ProfileImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */; };
+		5679C27E25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */; };
 		567E07D52537BC91007133D1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567E07D42537BC91007133D1 /* ProfileService.swift */; };
 		567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ECB6A255DEBF500DD292A /* ConversationModel.swift */; };
 		567ECB6E255DED3500DD292A /* ConversationTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ECB6D255DED3500DD292A /* ConversationTableViewDataSource.swift */; };
@@ -81,6 +82,7 @@
 		56C06A2A255D9E6C00CE20C0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C06A29255D9E6C00CE20C0 /* Channel.swift */; };
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
+		56DFBA552568349C00DC2C65 /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA542568349C00DC2C65 /* JsonDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +131,7 @@
 		5679C273256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		5679C276256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		567E07D42537BC91007133D1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		567ECB6A255DEBF500DD292A /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		567ECB6D255DED3500DD292A /* ConversationTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -161,6 +164,7 @@
 		56C06A29255D9E6C00CE20C0 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		56DFBA542568349C00DC2C65 /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -323,10 +327,11 @@
 			isa = PBXGroup;
 			children = (
 				567244CC2558B4B600B8967F /* Assembly */,
-				5645D23B255947910085285C /* Storage */,
 				56C06A16255BEE8A00CE20C0 /* CoreDataStack */,
-				56481C432537A3DD00B52E20 /* Operations */,
 				567F3D0E252373220078A709 /* Logger */,
+				56DFBA532568346800DC2C65 /* Network */,
+				56481C432537A3DD00B52E20 /* Operations */,
+				5645D23B255947910085285C /* Storage */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */,
+				5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -618,6 +624,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		56DFBA532568346800DC2C65 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				56DFBA542568349C00DC2C65 /* JsonDecoder.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		56EA9382255DD78300F043CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +722,7 @@
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
 				567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */,
 				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
+				5679C27E25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib in Resources */,
 				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
 				567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */,
 				568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */,
@@ -822,6 +837,7 @@
 				563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */,
 				56481C4125373C1000B52E20 /* Profile.swift in Sources */,
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
+				56DFBA552568349C00DC2C65 /* JsonDecoder.swift in Sources */,
 				561E5B742559F62C00C0B13F /* CoreDataStorage.swift in Sources */,
 				567244D72558B61F00B8967F /* PresentationAssembly.swift in Sources */,
 				5679C269256726CB00989F43 /* ProfileImagesService.swift in Sources */,
