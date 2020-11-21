@@ -6,24 +6,28 @@
 //  Copyright © 2020 Natalia Kazakova. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+enum DownloadingImagesError: Error {
+  case invalidURL
+}
 
 protocol ProfileImagesServiceProtocol {
   var delegate: ProfileImagesServiceDelegateProtocol? { get set }
-  func getAvatarList()
+  func loadAvatarList()
+  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void)
 }
 
 protocol ProfileImagesServiceDelegateProtocol: class {
-  func downloadImagesDidFinish(images: PixabayImages?)
+  func downloadAvatarListDidFinish(images: PixabayImages?)
   func processError(with message: String)
 }
 
 class ProfileImagesService {
   private let key = "9665918-5c24fd510db60ddcbef834d2e"
-  // https://pixabay.com/api/?key=9665918-5c24fd510db60ddcbef834d2e&q=cat&image_type=photo&pretty=true&safesearch=true&order=popular&per_page=200
   weak var delegate: ProfileImagesServiceDelegateProtocol?
   private let session = URLSession.shared
-  private var url: URL? {
+  private var avatarListUrl: URL? {
     var components = URLComponents()
     components.scheme = "https"
     components.host = "pixabay.com"
@@ -50,31 +54,28 @@ class ProfileImagesService {
 // MARK: - ProfileImagesServiceProtocol
 
 extension ProfileImagesService: ProfileImagesServiceProtocol {
-  func getAvatarList() {
-    guard let url = url else { return }
+  func loadAvatarList() {
+    guard let url = avatarListUrl else { return }
 
     let task = session.dataTask(with: url) {[weak self] data, response, error in
-      if error != nil || data == nil {
-        self?.delegate?.processError(with: "Client error!")
-        return
-      }
-
-      guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-        self?.delegate?.processError(with: "Server error!")
-        return
-      }
-
-      guard let mime = response.mimeType, mime == "application/json" else {
+      guard let mime = response?.mimeType, mime == "application/json" else {
         self?.delegate?.processError(with: "Wrong MIME type!")
         return
       }
 
-      if let jsonData = data {
+      guard let isRequestSuccess = self?.processDataTaskResult(data, response, error),
+            let jsonData = data else {
+        self?.delegate?.downloadAvatarListDidFinish(images: nil)
+        return
+      }
+
+      if isRequestSuccess {
+        // todo save to cache
         do {
           let pixabayImages: PixabayImages? = try self?.pixabayDecoder.decode(jsonData)
 
           DispatchQueue.main.async {
-            self?.delegate?.downloadImagesDidFinish(images: pixabayImages)
+            self?.delegate?.downloadAvatarListDidFinish(images: pixabayImages)
           }
 
         } catch {
@@ -84,5 +85,48 @@ extension ProfileImagesService: ProfileImagesServiceProtocol {
     }
 
     task.resume()
+  }
+
+  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void) {
+    guard let url = URL(string: urlString) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+
+    let task = session.dataTask(with: url) {[weak self] data, response, error in
+      guard let isRequestSuccess = self?.processDataTaskResult(data, response, error),
+            let data = data else {
+        completion(.success(nil))
+        return
+      }
+
+      if isRequestSuccess,
+         let downloadedImage = UIImage(data: data) {
+        // todo save to cache
+        DispatchQueue.main.async {
+          completion(.success(downloadedImage))
+        }
+      }
+    }
+
+    task.resume()
+  }
+}
+
+// MARK: - Private
+
+private extension ProfileImagesService {
+  func processDataTaskResult(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Bool {
+    if error != nil || data == nil {
+      self.delegate?.processError(with: "Client error!")
+      return false
+    }
+
+    guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+      self.delegate?.processError(with: "Server error!")
+      return false
+    }
+
+    return true
   }
 }

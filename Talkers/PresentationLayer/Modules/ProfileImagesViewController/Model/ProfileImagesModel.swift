@@ -15,7 +15,7 @@ protocol ProfileImagesModelProtocol {
   var currentThemeSettings: ThemeSettings { get }
 
   func fetchImages()
-  func getImage(at position: Int) -> Hit?
+  func getCellModel(at position: Int) -> ProfileImagesCellModelProtocol?
   func getNumbersOfObjects() -> Int
   func selectImage(at indexPath: IndexPath)
 }
@@ -32,7 +32,8 @@ class ProfileImagesModel {
   private var images: [Hit]? = [Hit]()
 
   lazy var collectionViewDataSource: ProfileImagesCollectionViewDataSource = {
-    return ProfileImagesCollectionViewDataSource(model: self)
+    return ProfileImagesCollectionViewDataSource(model: self,
+                                                 themeSettings: currentThemeSettings)
   }()
   lazy var collectionViewDelegate: ProfileImagesCollectionViewDelegate = {
     return ProfileImagesCollectionViewDelegate(model: self)
@@ -53,7 +54,7 @@ class ProfileImagesModel {
 
 extension ProfileImagesModel: ProfileImagesModelProtocol {
   func fetchImages() {
-    profileImagesService.getAvatarList()
+    profileImagesService.loadAvatarList()
   }
 
   func getNumbersOfObjects() -> Int {
@@ -64,15 +65,18 @@ extension ProfileImagesModel: ProfileImagesModelProtocol {
     // todo
   }
 
-  func getImage(at position: Int) -> Hit? {
-    return images?[position]
+  func getCellModel(at position: Int) -> ProfileImagesCellModelProtocol? {
+    guard let hit = images?[position],
+          let imageUrlString = hit.fullHDURL else { return nil }
+
+    return ProfileImagesCellModel(imageUrlString, service: profileImagesService)
   }
 }
 
 // MARK: - ProfileImagesServiceDelegateProtocol
 
 extension ProfileImagesModel: ProfileImagesServiceDelegateProtocol {
-  func downloadImagesDidFinish(images: PixabayImages?) {
+  func downloadAvatarListDidFinish(images: PixabayImages?) {
     self.images = images?.hits
     self.delegate?.downloadImagesDidFinish(self.images)
   }

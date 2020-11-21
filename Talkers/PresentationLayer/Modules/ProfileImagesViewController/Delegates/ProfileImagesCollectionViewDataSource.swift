@@ -10,10 +10,13 @@ import UIKit
 
 class ProfileImagesCollectionViewDataSource: NSObject {
   private let model: ProfileImagesModelProtocol
+  private let currentThemeSettings: ThemeSettings
   private let cellIdentifier = String(describing: ProfileImagesCollectionViewCell.self)
 
-  init(model: ProfileImagesModelProtocol) {
+  init(model: ProfileImagesModelProtocol,
+       themeSettings: ThemeSettings) {
     self.model = model
+    self.currentThemeSettings = themeSettings
   }
 }
 
@@ -25,13 +28,17 @@ extension ProfileImagesCollectionViewDataSource: UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let hit = self.model.getImage(at: indexPath.row),
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ProfileImagesCollectionViewCell else {
-      return UICollectionViewCell()
+    var cellModel = self.model.getCellModel(at: indexPath.row)
+    let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ProfileImagesCollectionViewCell
+
+    cellModel?.delegate = collectionViewCell
+
+    if let cell = collectionViewCell,
+       let model = cellModel {
+      cell.configure(with: model, themeSettings: currentThemeSettings)
+      return cell
     }
 
-    cell.configure(with: hit, themeSettings: model.currentThemeSettings)
-    
-    return cell
+    return UICollectionViewCell()
   }
 }

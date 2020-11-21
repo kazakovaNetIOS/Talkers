@@ -9,16 +9,34 @@
 import UIKit
 
 class ProfileImagesCollectionViewCell: UICollectionViewCell {
-  var model: Hit?
+  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    imageView.image = UIImage(named: "image")
+  }
 }
 
 // MARK: - ConfigurableView
 
 extension ProfileImagesCollectionViewCell: ConfigurableView {
-  typealias ConfigurationModel = Hit
+  typealias ConfigurationModel = ProfileImagesCellModelProtocol
 
-  func configure(with model: Hit, themeSettings: ThemeSettings) {
+  func configure(with model: ConfigurationModel, themeSettings: ThemeSettings) {
+    activityIndicator.startAnimating()
+    model.loadImage()
     changeColorsForTheme(with: themeSettings)
+  }
+}
+
+// MARK: - ProfileImagesCellModelDelegateProtocol
+
+extension ProfileImagesCollectionViewCell: ProfileImagesCellModelDelegateProtocol {
+  func downloadImageDidFinished(with image: UIImage?) {
+    // todo error image
+    imageView.image = image != nil ? image : UIImage(named: "download")
+    activityIndicator.stopAnimating()
   }
 }
 

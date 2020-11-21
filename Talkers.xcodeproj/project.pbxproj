@@ -83,6 +83,7 @@
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
 		56DFBA552568349C00DC2C65 /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA542568349C00DC2C65 /* JsonDecoder.swift */; };
+		56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +166,7 @@
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		56DFBA542568349C00DC2C65 /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
+		56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCellModel.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -376,6 +378,7 @@
 				5679C25B256717AB00989F43 /* Hit.swift */,
 				5679C25C256717AB00989F43 /* PixabayImages.swift */,
 				5679C26D25672A8800989F43 /* ProfileImagesModel.swift */,
+				56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				56481C492537A59200B52E20 /* FileStorage.swift in Sources */,
 				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
 				5682E5E725335B24009CE1BE /* BaseViewController.swift in Sources */,
+				56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */,
 				5679C262256717AB00989F43 /* PixabayImages.swift in Sources */,
 				56CECC6925403B8C00EFB86E /* Message.swift in Sources */,
 				567ECB6E255DED3500DD292A /* ConversationTableViewDataSource.swift in Sources */,
