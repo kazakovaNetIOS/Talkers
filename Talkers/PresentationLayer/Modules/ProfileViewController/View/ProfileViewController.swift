@@ -285,8 +285,23 @@ private extension ProfileViewController {
 
   func initLoadAction() -> UIAlertAction {
     let loadAction = UIAlertAction(title: "Загрузить", style: .default) {[weak self] _ in
-      if let viewController = self?.presentationAssembly?.profileImagesViewController() {
-        self?.present(viewController, animated: true, completion: nil)
+      let viewController = self?.presentationAssembly?.profileImagesViewController { (urlString) in
+        self?.model?.loadProfileImage(by: urlString) { (result) in
+          switch result {
+          case .success(let image):
+            self?.profileInitialsLabel.isHidden = true
+            self?.profileImage.image = image
+            self?.isButtonsEnabled(true)
+          case .failure(let error):
+            // todo
+            self?.profileInitialsLabel.isHidden = false
+            self?.showError(with: "Error loading profile image, \(error)")
+          }
+        }
+      }
+
+      if let vc = viewController {
+        self?.present(vc, animated: true, completion: nil)
       }
     }
     loadAction.setValue(#imageLiteral(resourceName: "download"), forKey: "image")

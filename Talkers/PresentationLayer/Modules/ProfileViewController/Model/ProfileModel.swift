@@ -6,15 +6,17 @@
 //  Copyright © 2020 Natalia Kazakova. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ProfileModelProtocol {
   var delegate: ProfileModelDelegateProtocol? { get set }
   var currentThemeSettings: ThemeSettings { get }
+
   func useGCDServiceType()
   func useOperationServiceType()
   func loadProfile()
   func saveProfile(_ profile: Profile)
+  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void)
 }
 
 protocol ProfileModelDelegateProtocol: class {
@@ -27,15 +29,18 @@ class ProfileModel {
   weak var delegate: ProfileModelDelegateProtocol?
   private var profileService: ProfileServiceProtocol
   private var themesService: ThemesServiceProtocol
+  private var profileImagesService: ProfileImagesServiceProtocol
 
   var currentThemeSettings: ThemeSettings {
     return themesService.currentThemeSettings
   }
 
   init(profileService: ProfileServiceProtocol,
-       themesService: ThemesServiceProtocol) {
+       themesService: ThemesServiceProtocol,
+       profileImagesService: ProfileImagesServiceProtocol) {
     self.profileService = profileService
     self.themesService = themesService
+    self.profileImagesService = profileImagesService
     self.profileService.delegate = self
   }
 }
@@ -57,6 +62,10 @@ extension ProfileModel: ProfileModelProtocol {
 
   func useOperationServiceType() {
     profileService.useServiceType(.operation)
+  }
+
+  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void) {
+    profileImagesService.loadImage(by: urlString, completion: completion)
   }
 }
 

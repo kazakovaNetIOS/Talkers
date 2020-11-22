@@ -18,7 +18,7 @@ protocol PresentationAssemblyProtocol {
   // Создает экран профиля
   func profileViewController() -> UINavigationController
   // Создает экран выбора изображения профиля
-  func profileImagesViewController() -> ProfileImagesViewController
+  func profileImagesViewController(imageDidSelected: @escaping (String) -> Void) -> ProfileImagesViewController
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -96,7 +96,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
   }
 
   // MARK: - ProfileImagesViewController
-  func profileImagesViewController() -> ProfileImagesViewController {
+  func profileImagesViewController(imageDidSelected: @escaping (String) -> Void) -> ProfileImagesViewController {
     var model = profileImagesModel()
 
     guard let profileImagesVC = ProfileImagesViewController.storyboardInstance() else {
@@ -105,6 +105,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
 
     model.delegate = profileImagesVC
     profileImagesVC.model = model
+    profileImagesVC.imageDidSelected = imageDidSelected
 
     return profileImagesVC
   }
@@ -131,7 +132,8 @@ private extension PresentationAssembly {
 
   func profileModel() -> ProfileModelProtocol {
     return ProfileModel(profileService: serviceAssembly.profileService,
-                        themesService: serviceAssembly.themesService)
+                        themesService: serviceAssembly.themesService,
+                        profileImagesService: serviceAssembly.profileImagesService)
   }
 
   func profileImagesModel() -> ProfileImagesModelProtocol {

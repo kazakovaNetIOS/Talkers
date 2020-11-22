@@ -20,10 +20,6 @@ class JsonDecoder {
 
 extension JsonDecoder: JsonDecoderProtocol {
   func decode<Object: Decodable>(_ jsonData: Data) throws -> Object? {
-    let json = try JSONSerialization.jsonObject(with: jsonData, options: [])
-    // todo
-    print(json)
-
     let decoder = JSONDecoder()
     let object = try decoder.decode(Object.self, from: jsonData)
 

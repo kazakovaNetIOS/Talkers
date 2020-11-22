@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileImagesViewController: UIViewController {
   var model: ProfileImagesModelProtocol?
+  var imageDidSelected: ((String) -> Void)?
 
   private let cellIdentifier = String(describing: ProfileImagesCollectionViewCell.self)
 
@@ -32,6 +33,16 @@ extension ProfileImagesViewController {
 // MARK: - ProfileImagesModelDelegateProtocol
 
 extension ProfileImagesViewController: ProfileImagesModelDelegateProtocol {
+  func didImageSelected(with urlString: String?) {
+    guard let urlString = urlString else {
+      showError(with: "Error selecting image")
+      return
+    }
+    
+    imageDidSelected?(urlString)
+    dismiss(animated: true)
+  }
+
   func downloadImagesDidFinish(_ images: [Hit]?) {
     guard let images = images else { return }
 

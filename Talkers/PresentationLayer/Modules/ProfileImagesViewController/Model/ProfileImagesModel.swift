@@ -22,6 +22,7 @@ protocol ProfileImagesModelProtocol {
 
 protocol ProfileImagesModelDelegateProtocol: class {
   func downloadImagesDidFinish(_ images: [Hit]?)
+  func didImageSelected(with urlString: String?)
   func showError(with message: String)
 }
 
@@ -29,7 +30,7 @@ class ProfileImagesModel {
   weak var delegate: ProfileImagesModelDelegateProtocol?
   private var profileImagesService: ProfileImagesServiceProtocol
   private var themesService: ThemesServiceProtocol
-  private var images: [Hit]? = [Hit]()
+  private var images: [Hit]?
 
   lazy var collectionViewDataSource: ProfileImagesCollectionViewDataSource = {
     return ProfileImagesCollectionViewDataSource(model: self,
@@ -62,7 +63,7 @@ extension ProfileImagesModel: ProfileImagesModelProtocol {
   }
 
   func selectImage(at indexPath: IndexPath) {
-    // todo
+    self.delegate?.didImageSelected(with: self.images?[indexPath.row].fullHDURL)
   }
 
   func getCellModel(at position: Int) -> ProfileImagesCellModelProtocol? {

@@ -70,7 +70,6 @@ extension ProfileImagesService: ProfileImagesServiceProtocol {
       }
 
       if isRequestSuccess {
-        // todo save to cache
         do {
           let pixabayImages: PixabayImages? = try self?.pixabayDecoder.decode(jsonData)
 
@@ -102,7 +101,6 @@ extension ProfileImagesService: ProfileImagesServiceProtocol {
 
       if isRequestSuccess,
          let downloadedImage = UIImage(data: data) {
-        // todo save to cache
         DispatchQueue.main.async {
           completion(.success(downloadedImage))
         }
