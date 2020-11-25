@@ -91,6 +91,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
 
     model.delegate = profileVC
     profileVC.model = model
+    profileVC.buttonAnimator = TremblingButtonAnimator()
 
     return navVC
   }

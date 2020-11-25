@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: BaseViewController {
   var presentationAssembly: PresentationAssemblyProtocol?
   var model: ProfileModelProtocol?
+  var buttonAnimator: TremblingButtonAnimatorProtocol?
 
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profilePositionTextView: UITextView!
@@ -36,6 +37,8 @@ class ProfileViewController: BaseViewController {
 
     operationSaveButton.layer.cornerRadius = 14
     operationSaveButton.layer.masksToBounds = true
+
+    buttonAnimator?.animate(profileImageEditButton)
 
     model?.useGCDServiceType()
     loadingWillStarted()

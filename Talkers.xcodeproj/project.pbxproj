@@ -89,6 +89,7 @@
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
 		56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */; };
+		56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -177,6 +178,7 @@
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCellModel.swift; sourceTree = "<group>"; };
+		56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremblingButtonAnimator.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -320,6 +322,7 @@
 		567244C22558B3D800B8967F /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56E060F2256F17BC006BDA4A /* Animations */,
 				567244D52558B60E00B8967F /* Assembly */,
 				5645D2302559333F0085285C /* Modules */,
 			);
@@ -674,6 +677,22 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		56E060F2256F17BC006BDA4A /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				56E060F3256F1804006BDA4A /* TremblingButton */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		56E060F3256F1804006BDA4A /* TremblingButton */ = {
+			isa = PBXGroup;
+			children = (
+				56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */,
+			);
+			path = TremblingButton;
+			sourceTree = "<group>";
+		};
 		56EA9382255DD78300F043CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +911,7 @@
 				5690FC50256D87DC003CC198 /* ParserProtocol.swift in Sources */,
 				567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
+				56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
 				5679C261256717AB00989F43 /* Hit.swift in Sources */,
 				5645D239255945F30085285C /* ChannelsService.swift in Sources */,
