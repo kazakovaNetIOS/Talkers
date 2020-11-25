@@ -9,12 +9,12 @@
 import UIKit
 
 extension UIViewController {
-  func setNavigationBarForTheme() {
+  func setNavigationBarForTheme(themeSettings: ThemeSettings) {
     navigationController?.navigationBar.barStyle =
-      ThemeManager.shared.themeSettings.theme == .night ? .black : .default
+      themeSettings.theme == .night ? .black : .default
     navigationController?.navigationBar.tintColor =
-      ThemeManager.shared.themeSettings.labelColor
+      themeSettings.labelColor
     navigationController?.navigationBar.titleTextAttributes =
-      [NSAttributedString.Key.foregroundColor: ThemeManager.shared.themeSettings.labelColor]
+      [NSAttributedString.Key.foregroundColor: themeSettings.labelColor]
   }
 }
