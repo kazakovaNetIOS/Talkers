@@ -51,5 +51,5 @@ class ServiceAssembly: ServiceAssemblyProtocol {
 
   lazy var themesService: ThemesService = ThemesService()
 
-  lazy var profileImagesService: ProfileImagesServiceProtocol = ProfileImagesService(pixabayDecoder: coreAssembly.jsonDecoder)
+  lazy var profileImagesService: ProfileImagesServiceProtocol = ProfileImagesService(requestSender: coreAssembly.requestSender)
 }

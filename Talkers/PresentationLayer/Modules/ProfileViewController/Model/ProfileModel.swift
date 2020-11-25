@@ -16,7 +16,7 @@ protocol ProfileModelProtocol {
   func useOperationServiceType()
   func loadProfile()
   func saveProfile(_ profile: Profile)
-  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void)
+  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, RequestSenderError>) -> Void)
 }
 
 protocol ProfileModelDelegateProtocol: class {
@@ -64,7 +64,7 @@ extension ProfileModel: ProfileModelProtocol {
     profileService.useServiceType(.operation)
   }
 
-  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void) {
+  func loadProfileImage(by urlString: String, completion: @escaping (Result<UIImage?, RequestSenderError>) -> Void) {
     profileImagesService.loadImage(by: urlString, completion: completion)
   }
 }

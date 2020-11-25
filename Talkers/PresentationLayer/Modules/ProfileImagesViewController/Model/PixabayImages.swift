@@ -8,7 +8,6 @@
 
 import Foundation
 
-// MARK: - PixabayImage
 struct PixabayImages: Codable {
     
     let total, totalHits: Int?

@@ -8,14 +8,10 @@
 
 import UIKit
 
-enum DownloadingImagesError: Error {
-  case invalidURL
-}
-
 protocol ProfileImagesServiceProtocol {
   var delegate: ProfileImagesServiceDelegateProtocol? { get set }
   func loadAvatarList()
-  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void)
+  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, RequestSenderError>) -> Void)
 }
 
 protocol ProfileImagesServiceDelegateProtocol: class {
@@ -44,10 +40,10 @@ class ProfileImagesService {
 
     return components.url
   }
-  private var pixabayDecoder: JsonDecoderProtocol
+  private var requestSender: RequestSenderProtocol
 
-  init(pixabayDecoder: JsonDecoderProtocol) {
-    self.pixabayDecoder = pixabayDecoder
+  init(requestSender: RequestSenderProtocol) {
+    self.requestSender = requestSender
   }
 }
 
@@ -55,40 +51,23 @@ class ProfileImagesService {
 
 extension ProfileImagesService: ProfileImagesServiceProtocol {
   func loadAvatarList() {
-    guard let url = avatarListUrl else { return }
+    let requestConfig = RequestsFactory.PixabayRequests.pixabayImagesConfig()
 
-    let task = session.dataTask(with: url) {[weak self] data, response, error in
-      guard let mime = response?.mimeType, mime == "application/json" else {
-        self?.delegate?.processError(with: "Wrong MIME type!")
-        return
-      }
-
-      guard let isRequestSuccess = self?.processDataTaskResult(data, response, error),
-            let jsonData = data else {
-        self?.delegate?.downloadAvatarListDidFinish(images: nil)
-        return
-      }
-
-      if isRequestSuccess {
-        do {
-          let pixabayImages: PixabayImages? = try self?.pixabayDecoder.decode(jsonData)
-
-          DispatchQueue.main.async {
-            self?.delegate?.downloadAvatarListDidFinish(images: pixabayImages)
-          }
-
-        } catch {
-          self?.delegate?.processError(with: "JSON error: \(error.localizedDescription)")
+    requestSender.send(requestConfig: requestConfig) { [weak self] result in
+      switch result {
+      case .success(let images):
+        DispatchQueue.main.async {
+          self?.delegate?.downloadAvatarListDidFinish(images: images)
         }
+      case.failure(let error):
+        self?.delegate?.processError(with: error.localizedDescription)
       }
     }
-
-    task.resume()
   }
 
-  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, DownloadingImagesError>) -> Void) {
+  func loadImage(by urlString: String, completion: @escaping (Result<UIImage?, RequestSenderError>) -> Void) {
     guard let url = URL(string: urlString) else {
-      completion(.failure(.invalidURL))
+      completion(.failure(.errorResponce("invalid Url")))
       return
     }
 
