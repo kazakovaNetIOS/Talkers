@@ -38,8 +38,6 @@ class ProfileViewController: BaseViewController {
     operationSaveButton.layer.cornerRadius = 14
     operationSaveButton.layer.masksToBounds = true
 
-    buttonAnimator?.animate(profileImageEditButton)
-
     model?.useGCDServiceType()
     loadingWillStarted()
   }
@@ -73,6 +71,7 @@ class ProfileViewController: BaseViewController {
   // MARK: - IBActions
 
   @IBAction func profileImageEditAction(_ sender: Any) {
+    buttonAnimator?.animate(profileImageEditButton, editMode: false)
     if !isImageSourcesAvailable() {
       let alertSettings = AlertMessageSettings(
         title: "Ошибка",
@@ -198,6 +197,7 @@ private extension ProfileViewController {
   }
 
   func editingModeDidChange(to isEditing: Bool) {
+    buttonAnimator?.animate(profileImageEditButton, editMode: isEditing)
     profileNameFieldStateChange(isEditing: isEditing)
     profilePositionFieldStateChange(isEditing: isEditing)
   }

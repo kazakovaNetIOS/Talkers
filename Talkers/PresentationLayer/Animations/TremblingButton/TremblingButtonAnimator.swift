@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TremblingButtonAnimatorProtocol {
-  func animate(_ button: UIButton)
+  func animate(_ button: UIButton, editMode: Bool)
 }
 
 class TremblingButtonAnimator {
@@ -17,24 +17,38 @@ class TremblingButtonAnimator {
 }
 
 extension TremblingButtonAnimator: TremblingButtonAnimatorProtocol {
-  func animate(_ button: UIButton) {
-    button.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+  func animate(_ button: UIButton, editMode: Bool) {
+    guard editMode else {
+      button.layer.removeAllAnimations()
+      return
+    }
+    
+    let rotateAngle: CGFloat = 18 * .pi / 180
 
-    let rotate = CABasicAnimation(keyPath: "transform.rotation")
-    rotate.fromValue = -.pi / 180.0 * 18.0
-    rotate.toValue = .pi / 180.0 * 18.0
+    let rotate = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+    rotate.values = [-rotateAngle, 0, rotateAngle]
+    rotate.autoreverses = true
+    rotate.duration = 0.15
+    rotate.keyTimes = [0, 0.5, 1]
+    rotate.repeatCount = .infinity
 
-    let upDownMove = CABasicAnimation(keyPath: "position.y")
-    upDownMove.fromValue = button.layer.position.y + 1.33 * 5.0
-    upDownMove.fromValue = button.layer.position.y - 1.33 * 5.0
+    let upDownMove = CAKeyframeAnimation(keyPath: "transform.translation.y")
+    upDownMove.values = [0, 5.0, 0.0, -5.0]
+    upDownMove.autoreverses = true
+    upDownMove.duration = 0.15
+    upDownMove.keyTimes = [0, 0.4, 0.8, 1.0]
+    upDownMove.repeatCount = .infinity
 
-    let leftRightMove = CABasicAnimation(keyPath: "position.x")
-    leftRightMove.fromValue = button.layer.position.x + 1.33 * 5.0
-    leftRightMove.fromValue = button.layer.position.x - 1.33 * 5.0
+    let leftRightMove = CAKeyframeAnimation(keyPath: "transform.translation.x")
+    leftRightMove.values = [0, 5.0, 0.0, -5.0]
+    leftRightMove.autoreverses = true
+    leftRightMove.duration = 0.15
+    leftRightMove.keyTimes = [0, 0.4, 0.8, 1.0]
+    leftRightMove.repeatCount = .infinity
 
     let groupAnimation = CAAnimationGroup()
     groupAnimation.duration = 0.3
-    groupAnimation.animations = [rotate, upDownMove]
+    groupAnimation.animations = [rotate, upDownMove, leftRightMove]
     groupAnimation.repeatCount = .infinity
     groupAnimation.autoreverses = true
 
