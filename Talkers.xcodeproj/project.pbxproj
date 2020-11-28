@@ -28,6 +28,7 @@
 		563CF09F25610A1000E164C3 /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF09E25610A1000E164C3 /* ThemesModel.swift */; };
 		563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF0A2256119AC00E164C3 /* ThemeSettings.swift */; };
 		563CF0A72561C12100E164C3 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF0A62561C12100E164C3 /* ProfileModel.swift */; };
+		5643F5BE2571ABB600BFB672 /* TinkoffEmblemAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */; };
 		5645D2332559340A0085285C /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D2322559340A0085285C /* ConversationsListModel.swift */; };
 		5645D239255945F30085285C /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D238255945F30085285C /* ChannelsService.swift */; };
 		5645D240255947F50085285C /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D23F255947F50085285C /* FirebaseStorage.swift */; };
@@ -36,6 +37,7 @@
 		56481C452537A40F00B52E20 /* SaveProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C442537A40F00B52E20 /* SaveProfileOperation.swift */; };
 		56481C492537A59200B52E20 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C482537A59200B52E20 /* FileStorage.swift */; };
 		56481C4C2537AA1200B52E20 /* LoadProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */; };
+		5667A1322572CC3A00FE3999 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */; };
 		567244CA2558B44F00B8967F /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244C92558B44F00B8967F /* RootAssembly.swift */; };
 		567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244CD2558B4C600B8967F /* CoreAssembly.swift */; };
 		567244D22558B56200B8967F /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244D12558B56200B8967F /* ServiceAssembly.swift */; };
@@ -117,6 +119,7 @@
 		563CF09E25610A1000E164C3 /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
 		563CF0A2256119AC00E164C3 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		563CF0A62561C12100E164C3 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffEmblemAnimator.swift; sourceTree = "<group>"; };
 		5645D2322559340A0085285C /* ConversationsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		5645D238255945F30085285C /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		5645D23F255947F50085285C /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		56481C442537A40F00B52E20 /* SaveProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileOperation.swift; sourceTree = "<group>"; };
 		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileOperation.swift; sourceTree = "<group>"; };
+		5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		567244C92558B44F00B8967F /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		567244CD2558B4C600B8967F /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		567244D12558B56200B8967F /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				56CECC8625421AF600EFB86E /* String+Extensions.swift */,
 				56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */,
 				56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */,
+				5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -261,6 +266,14 @@
 				5612ED9B252A772D003A5955 /* ThemeButton.xib */,
 			);
 			path = ThemeButton;
+			sourceTree = "<group>";
+		};
+		5643F5BC2571AB8F00BFB672 /* TinkoffEmblem */ = {
+			isa = PBXGroup;
+			children = (
+				5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */,
+			);
+			path = TinkoffEmblem;
 			sourceTree = "<group>";
 		};
 		5645D2302559333F0085285C /* Modules */ = {
@@ -680,6 +693,7 @@
 		56E060F2256F17BC006BDA4A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				5643F5BC2571AB8F00BFB672 /* TinkoffEmblem */,
 				56E060F3256F1804006BDA4A /* TremblingButton */,
 			);
 			path = Animations;
@@ -912,12 +926,14 @@
 				567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 				56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */,
+				5643F5BE2571ABB600BFB672 /* TinkoffEmblemAnimator.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
 				5679C261256717AB00989F43 /* Hit.swift in Sources */,
 				5645D239255945F30085285C /* ChannelsService.swift in Sources */,
 				567244CA2558B44F00B8967F /* RootAssembly.swift in Sources */,
 				567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */,
 				5679C27B25673AB900989F43 /* ProfileImagesCollectionViewCell.swift in Sources */,
+				5667A1322572CC3A00FE3999 /* UIView+Extensions.swift in Sources */,
 				567E07D52537BC91007133D1 /* ProfileService.swift in Sources */,
 				5690FC48256D85A3003CC198 /* RequestsFactory.swift in Sources */,
 				5679C277256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift in Sources */,

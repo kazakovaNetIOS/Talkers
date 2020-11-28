@@ -20,6 +20,7 @@ extension TremblingButtonAnimator: TremblingButtonAnimatorProtocol {
   func animate(_ button: UIButton, editMode: Bool) {
     guard editMode else {
       button.layer.removeAllAnimations()
+      button.transform = CGAffineTransform.identity
       return
     }
     
