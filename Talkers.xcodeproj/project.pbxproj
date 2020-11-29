@@ -337,12 +337,12 @@
 			path = Operations;
 			sourceTree = "<group>";
 		};
-		5667A1342572F08500FE3999 /* FlipPresentAnimations */ = {
+		5667A1342572F08500FE3999 /* CircleTransitionAnimator */ = {
 			isa = PBXGroup;
 			children = (
 				5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */,
 			);
-			path = FlipPresentAnimations;
+			path = CircleTransitionAnimator;
 			sourceTree = "<group>";
 		};
 		567244C22558B3D800B8967F /* PresentationLayer */ = {
@@ -706,7 +706,7 @@
 		56E060F2256F17BC006BDA4A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				5667A1342572F08500FE3999 /* FlipPresentAnimations */,
+				5667A1342572F08500FE3999 /* CircleTransitionAnimator */,
 				5643F5BC2571AB8F00BFB672 /* TinkoffEmblem */,
 				56E060F3256F1804006BDA4A /* TremblingButton */,
 			);
