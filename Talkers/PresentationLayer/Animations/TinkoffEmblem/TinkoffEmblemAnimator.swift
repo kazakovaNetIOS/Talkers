@@ -36,16 +36,16 @@ extension TinkoffEmblemAnimator: TinkoffEmblemAnimatorProtocol {
   func addEmitterLayer(to view: UIView, in position: CGPoint) {
     guard let layer = emblemEmitterLayer else { return }
 
-    layer.position = position
     view.layer.addSublayer(layer)
+    layer.position = position
   }
 
   func startAnimation() {
-    emblemEmitterLayer?.birthRate = 5
+    emblemEmitterLayer?.birthRate = 5.0
   }
 
   func stopAnimation() {
-    emblemEmitterLayer?.birthRate = 0
+    emblemEmitterLayer?.birthRate = 0.0
     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {[weak self] in
       self?.emblemEmitterLayer?.removeFromSuperlayer()
     }
@@ -62,15 +62,13 @@ private extension TinkoffEmblemAnimator {
     tinkoffEmblemCell.contents = image
     tinkoffEmblemCell.emissionRange = .pi
     tinkoffEmblemCell.lifetime = 1.0
-    tinkoffEmblemCell.birthRate = 2.0
+    tinkoffEmblemCell.birthRate = 5.0
     tinkoffEmblemCell.scale = 0.05
     tinkoffEmblemCell.scaleRange = 0.1
     tinkoffEmblemCell.velocity = 80.0
     tinkoffEmblemCell.velocityRange = 60.0
     tinkoffEmblemCell.spin = -0.5
     tinkoffEmblemCell.spinRange = 10.0
-    tinkoffEmblemCell.yAcceleration = 30.0
-    tinkoffEmblemCell.xAcceleration = 5.0
 
     return tinkoffEmblemCell
   }
