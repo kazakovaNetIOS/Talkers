@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="conversationsListTableView" destination="IGV-L3-QxH" id="udI-tt-iqa"/>
                         <outlet property="loadingIndicator" destination="Dcf-ck-e8x" id="GTS-hd-Gkk"/>
+                        <outlet property="profileButton" destination="7h9-CN-kl5" id="Yd6-sa-alC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RlW-R7-xCz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

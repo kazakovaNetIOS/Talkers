@@ -17,7 +17,8 @@ class ConversationsListViewController: BaseViewController {
 
   @IBOutlet weak var conversationsListTableView: UITableView!
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-
+  @IBOutlet weak var profileButton: UIBarButtonItem!
+  
   // MARK: - Lifecycle
 
   override func viewDidLoad() {
@@ -49,7 +50,9 @@ class ConversationsListViewController: BaseViewController {
 
   @IBAction func profileIconTapped(_ sender: Any) {
     if let profileViewController = presentationAssembly?.profileViewController() {
-      present(profileViewController, animated: true)
+      profileViewController.transitioningDelegate = self
+      profileViewController.modalPresentationStyle = .fullScreen
+      self.present(profileViewController, animated: true)
     }
   }
 
@@ -142,6 +145,24 @@ extension ConversationsListViewController: NSFetchedResultsControllerDelegate {
   }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate
+
+extension ConversationsListViewController: UIViewControllerTransitioningDelegate {
+  func animationController(forPresented presented: UIViewController,
+                           presenting: UIViewController,
+                           source: UIViewController)
+  -> UIViewControllerAnimatedTransitioning? {
+    guard let button = self.profileButton.view else { return nil }
+    return CircleTransitionAnimator(presentationStartButton: button, isPresenting: true)
+  }
+
+  func animationController(forDismissed dismissed: UIViewController)
+  -> UIViewControllerAnimatedTransitioning? {
+    guard let button = self.profileButton.view else { return nil }
+    return CircleTransitionAnimator(presentationStartButton: button, isPresenting: false)
+  }
+}
+
 // MARK: - Private
 
 private extension ConversationsListViewController {
@@ -161,6 +182,7 @@ private extension ConversationsListViewController {
   func changeColorsForTheme(with settings: ThemeSettings) {
     setNavigationBarForTheme(themeSettings: settings)
     conversationsListTableView.backgroundColor = settings.chatBackgroundColor
+    conversationsListTableView.reloadData()
   }
 }
 
