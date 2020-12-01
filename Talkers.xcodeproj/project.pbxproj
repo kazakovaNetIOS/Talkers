@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36C854EAF996DC7DAF061664 /* Pods_Talkers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */; };
+		560231142574341A00FBA863 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */; };
 		56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56077068254D62250021DF4E /* ChannelMO+Extensions.swift */; };
 		5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */; };
 		560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D463E250AD21300E5A610 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		563CF09F25610A1000E164C3 /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF09E25610A1000E164C3 /* ThemesModel.swift */; };
 		563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF0A2256119AC00E164C3 /* ThemeSettings.swift */; };
 		563CF0A72561C12100E164C3 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563CF0A62561C12100E164C3 /* ProfileModel.swift */; };
+		5643F5BE2571ABB600BFB672 /* TinkoffEmblemAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */; };
 		5645D2332559340A0085285C /* ConversationsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D2322559340A0085285C /* ConversationsListModel.swift */; };
 		5645D239255945F30085285C /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D238255945F30085285C /* ChannelsService.swift */; };
 		5645D240255947F50085285C /* FirebaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5645D23F255947F50085285C /* FirebaseStorage.swift */; };
@@ -36,6 +38,8 @@
 		56481C452537A40F00B52E20 /* SaveProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C442537A40F00B52E20 /* SaveProfileOperation.swift */; };
 		56481C492537A59200B52E20 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C482537A59200B52E20 /* FileStorage.swift */; };
 		56481C4C2537AA1200B52E20 /* LoadProfileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */; };
+		5667A1322572CC3A00FE3999 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */; };
+		5667A1362572F0BB00FE3999 /* CircleTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */; };
 		567244CA2558B44F00B8967F /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244C92558B44F00B8967F /* RootAssembly.swift */; };
 		567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244CD2558B4C600B8967F /* CoreAssembly.swift */; };
 		567244D22558B56200B8967F /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244D12558B56200B8967F /* ServiceAssembly.swift */; };
@@ -89,11 +93,13 @@
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
 		56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */; };
+		56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15051AC01A5EBDBF5498083C /* Pods-Talkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.release.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.release.xcconfig"; sourceTree = "<group>"; };
 		5591FED140C25ADA8BC81E46 /* Pods-Talkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.debug.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.debug.xcconfig"; sourceTree = "<group>"; };
+		560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		56077068254D62250021DF4E /* ChannelMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelMO+Extensions.swift"; sourceTree = "<group>"; };
 		5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+Extensions.swift"; sourceTree = "<group>"; };
 		560D463B250AD21300E5A610 /* Talkers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +122,7 @@
 		563CF09E25610A1000E164C3 /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
 		563CF0A2256119AC00E164C3 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 		563CF0A62561C12100E164C3 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffEmblemAnimator.swift; sourceTree = "<group>"; };
 		5645D2322559340A0085285C /* ConversationsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListModel.swift; sourceTree = "<group>"; };
 		5645D238255945F30085285C /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		5645D23F255947F50085285C /* FirebaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorage.swift; sourceTree = "<group>"; };
@@ -124,6 +131,8 @@
 		56481C442537A40F00B52E20 /* SaveProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileOperation.swift; sourceTree = "<group>"; };
 		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileOperation.swift; sourceTree = "<group>"; };
+		5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTransitionAnimator.swift; sourceTree = "<group>"; };
 		567244C92558B44F00B8967F /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		567244CD2558B4C600B8967F /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		567244D12558B56200B8967F /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
@@ -177,6 +186,7 @@
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCellModel.swift; sourceTree = "<group>"; };
+		56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremblingButtonAnimator.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -240,6 +250,8 @@
 				56CECC8625421AF600EFB86E /* String+Extensions.swift */,
 				56107B26252E61CA0049BFA7 /* UIColor+Extentions.swift */,
 				56107B1C252E37A20049BFA7 /* UIViewController+Extentions.swift */,
+				5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */,
+				560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +271,14 @@
 				5612ED9B252A772D003A5955 /* ThemeButton.xib */,
 			);
 			path = ThemeButton;
+			sourceTree = "<group>";
+		};
+		5643F5BC2571AB8F00BFB672 /* TinkoffEmblem */ = {
+			isa = PBXGroup;
+			children = (
+				5643F5BD2571ABB600BFB672 /* TinkoffEmblemAnimator.swift */,
+			);
+			path = TinkoffEmblem;
 			sourceTree = "<group>";
 		};
 		5645D2302559333F0085285C /* Modules */ = {
@@ -317,9 +337,18 @@
 			path = Operations;
 			sourceTree = "<group>";
 		};
+		5667A1342572F08500FE3999 /* CircleTransitionAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */,
+			);
+			path = CircleTransitionAnimator;
+			sourceTree = "<group>";
+		};
 		567244C22558B3D800B8967F /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				56E060F2256F17BC006BDA4A /* Animations */,
 				567244D52558B60E00B8967F /* Assembly */,
 				5645D2302559333F0085285C /* Modules */,
 			);
@@ -674,6 +703,24 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		56E060F2256F17BC006BDA4A /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				5667A1342572F08500FE3999 /* CircleTransitionAnimator */,
+				5643F5BC2571AB8F00BFB672 /* TinkoffEmblem */,
+				56E060F3256F1804006BDA4A /* TremblingButton */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		56E060F3256F1804006BDA4A /* TremblingButton */ = {
+			isa = PBXGroup;
+			children = (
+				56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */,
+			);
+			path = TremblingButton;
+			sourceTree = "<group>";
+		};
 		56EA9382255DD78300F043CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +913,7 @@
 				567ECB6E255DED3500DD292A /* ConversationTableViewDataSource.swift in Sources */,
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
+				5667A1362572F0BB00FE3999 /* CircleTransitionAnimator.swift in Sources */,
 				5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */,
 				5679C26E25672A8800989F43 /* ProfileImagesModel.swift in Sources */,
 				5679C274256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift in Sources */,
@@ -884,6 +932,7 @@
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
 				5690FC5C256DB75A003CC198 /* PixabayImageRequest.swift in Sources */,
 				5690FC58256DB71C003CC198 /* RequestProtocol.swift in Sources */,
+				560231142574341A00FBA863 /* UIBarButtonItem+Extensions.swift in Sources */,
 				561E5B742559F62C00C0B13F /* CoreDataStorage.swift in Sources */,
 				567244D72558B61F00B8967F /* PresentationAssembly.swift in Sources */,
 				5679C269256726CB00989F43 /* ProfileImagesService.swift in Sources */,
@@ -892,12 +941,15 @@
 				5690FC50256D87DC003CC198 /* ParserProtocol.swift in Sources */,
 				567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
+				56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */,
+				5643F5BE2571ABB600BFB672 /* TinkoffEmblemAnimator.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
 				5679C261256717AB00989F43 /* Hit.swift in Sources */,
 				5645D239255945F30085285C /* ChannelsService.swift in Sources */,
 				567244CA2558B44F00B8967F /* RootAssembly.swift in Sources */,
 				567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */,
 				5679C27B25673AB900989F43 /* ProfileImagesCollectionViewCell.swift in Sources */,
+				5667A1322572CC3A00FE3999 /* UIView+Extensions.swift in Sources */,
 				567E07D52537BC91007133D1 /* ProfileService.swift in Sources */,
 				5690FC48256D85A3003CC198 /* RequestsFactory.swift in Sources */,
 				5679C277256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift in Sources */,

@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: BaseViewController {
   var presentationAssembly: PresentationAssemblyProtocol?
   var model: ProfileModelProtocol?
+  var buttonAnimator: TremblingButtonAnimatorProtocol?
 
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profilePositionTextView: UITextView!
@@ -70,6 +71,7 @@ class ProfileViewController: BaseViewController {
   // MARK: - IBActions
 
   @IBAction func profileImageEditAction(_ sender: Any) {
+    buttonAnimator?.animate(profileImageEditButton, editMode: false)
     if !isImageSourcesAvailable() {
       let alertSettings = AlertMessageSettings(
         title: "Ошибка",
@@ -195,6 +197,7 @@ private extension ProfileViewController {
   }
 
   func editingModeDidChange(to isEditing: Bool) {
+    buttonAnimator?.animate(profileImageEditButton, editMode: isEditing)
     profileNameFieldStateChange(isEditing: isEditing)
     profilePositionFieldStateChange(isEditing: isEditing)
   }
