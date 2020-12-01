@@ -17,6 +17,8 @@ protocol PresentationAssemblyProtocol {
   func themesViewController() -> ThemesViewController
   // Создает экран профиля
   func profileViewController() -> UINavigationController
+  // Создает экран выбора изображения профиля
+  func profileImagesViewController(imageDidSelected: @escaping (String) -> Void) -> ProfileImagesViewController
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -85,11 +87,27 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     guard let profileVC = navVC.topViewController as? ProfileViewController else {
       fatalError("Can't initialize ProfileViewController from storyboard")
     }
+    profileVC.presentationAssembly = self
 
     model.delegate = profileVC
     profileVC.model = model
 
     return navVC
+  }
+
+  // MARK: - ProfileImagesViewController
+  func profileImagesViewController(imageDidSelected: @escaping (String) -> Void) -> ProfileImagesViewController {
+    var model = profileImagesModel()
+
+    guard let profileImagesVC = ProfileImagesViewController.storyboardInstance() else {
+      fatalError("Can't initialize ProfileImagesViewController from storyboard")
+    }
+
+    model.delegate = profileImagesVC
+    profileImagesVC.model = model
+    profileImagesVC.imageDidSelected = imageDidSelected
+
+    return profileImagesVC
   }
 }
 
@@ -114,6 +132,11 @@ private extension PresentationAssembly {
 
   func profileModel() -> ProfileModelProtocol {
     return ProfileModel(profileService: serviceAssembly.profileService,
-                        themesService: serviceAssembly.themesService)
+                        themesService: serviceAssembly.themesService,
+                        profileImagesService: serviceAssembly.profileImagesService)
+  }
+
+  func profileImagesModel() -> ProfileImagesModelProtocol {
+    return ProfileImagesModel(profileImagesService: serviceAssembly.profileImagesService, themesService: serviceAssembly.themesService)
   }
 }

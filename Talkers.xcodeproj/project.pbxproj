@@ -40,6 +40,16 @@
 		567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244CD2558B4C600B8967F /* CoreAssembly.swift */; };
 		567244D22558B56200B8967F /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244D12558B56200B8967F /* ServiceAssembly.swift */; };
 		567244D72558B61F00B8967F /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567244D62558B61F00B8967F /* PresentationAssembly.swift */; };
+		5679C261256717AB00989F43 /* Hit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C25B256717AB00989F43 /* Hit.swift */; };
+		5679C262256717AB00989F43 /* PixabayImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C25C256717AB00989F43 /* PixabayImages.swift */; };
+		5679C263256717AB00989F43 /* ProfileImagesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5679C25E256717AB00989F43 /* ProfileImagesViewController.storyboard */; };
+		5679C264256717AB00989F43 /* ProfileImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C25F256717AB00989F43 /* ProfileImagesViewController.swift */; };
+		5679C269256726CB00989F43 /* ProfileImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C268256726CB00989F43 /* ProfileImagesService.swift */; };
+		5679C26E25672A8800989F43 /* ProfileImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C26D25672A8800989F43 /* ProfileImagesModel.swift */; };
+		5679C274256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C273256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift */; };
+		5679C277256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C276256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift */; };
+		5679C27B25673AB900989F43 /* ProfileImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */; };
+		5679C27E25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */; };
 		567E07D52537BC91007133D1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567E07D42537BC91007133D1 /* ProfileService.swift */; };
 		567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ECB6A255DEBF500DD292A /* ConversationModel.swift */; };
 		567ECB6E255DED3500DD292A /* ConversationTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567ECB6D255DED3500DD292A /* ConversationTableViewDataSource.swift */; };
@@ -61,6 +71,12 @@
 		568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */; };
 		568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */; };
 		568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 568AE50B251B3315001277F1 /* Roboto-Regular.otf */; };
+		5690FC48256D85A3003CC198 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC47256D85A3003CC198 /* RequestsFactory.swift */; };
+		5690FC4C256D8683003CC198 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC4B256D8683003CC198 /* RequestSender.swift */; };
+		5690FC50256D87DC003CC198 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC4F256D87DC003CC198 /* ParserProtocol.swift */; };
+		5690FC54256D8866003CC198 /* PixabayParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC53256D8866003CC198 /* PixabayParser.swift */; };
+		5690FC58256DB71C003CC198 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC57256DB71C003CC198 /* RequestProtocol.swift */; };
+		5690FC5C256DB75A003CC198 /* PixabayImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5690FC5B256DB75A003CC198 /* PixabayImageRequest.swift */; };
 		569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569FE3832537ADC9002820CB /* AsyncOperation.swift */; };
 		56B78B8C254B40A800055F1E /* Chats.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */; };
 		56BB5C74253BA0E50067265D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56BB5C73253BA0E50067265D /* GoogleService-Info.plist */; };
@@ -72,6 +88,7 @@
 		56C06A2A255D9E6C00CE20C0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C06A29255D9E6C00CE20C0 /* Channel.swift */; };
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
+		56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +128,16 @@
 		567244CD2558B4C600B8967F /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		567244D12558B56200B8967F /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		567244D62558B61F00B8967F /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
+		5679C25B256717AB00989F43 /* Hit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hit.swift; sourceTree = "<group>"; };
+		5679C25C256717AB00989F43 /* PixabayImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixabayImages.swift; sourceTree = "<group>"; };
+		5679C25E256717AB00989F43 /* ProfileImagesViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileImagesViewController.storyboard; sourceTree = "<group>"; };
+		5679C25F256717AB00989F43 /* ProfileImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImagesViewController.swift; sourceTree = "<group>"; };
+		5679C268256726CB00989F43 /* ProfileImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesService.swift; sourceTree = "<group>"; };
+		5679C26D25672A8800989F43 /* ProfileImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesModel.swift; sourceTree = "<group>"; };
+		5679C273256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		5679C276256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCollectionViewCell.swift; sourceTree = "<group>"; };
+		5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		567E07D42537BC91007133D1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		567ECB6A255DEBF500DD292A /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		567ECB6D255DED3500DD292A /* ConversationTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -132,6 +159,12 @@
 		568AE4CB251B1DCE001277F1 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		568AE4CE251B1DCF001277F1 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		568AE50B251B3315001277F1 /* Roboto-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.otf"; sourceTree = "<group>"; };
+		5690FC47256D85A3003CC198 /* RequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
+		5690FC4B256D8683003CC198 /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		5690FC4F256D87DC003CC198 /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
+		5690FC53256D8866003CC198 /* PixabayParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayParser.swift; sourceTree = "<group>"; };
+		5690FC57256DB71C003CC198 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		5690FC5B256DB75A003CC198 /* PixabayImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayImageRequest.swift; sourceTree = "<group>"; };
 		569FE3832537ADC9002820CB /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		56B78B8B254B40A800055F1E /* Chats.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chats.xcdatamodel; sourceTree = "<group>"; };
 		56BB5C73253BA0E50067265D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -143,6 +176,7 @@
 		56C06A29255D9E6C00CE20C0 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCellModel.swift; sourceTree = "<group>"; };
 		BA4AB299D8675D0189EE000E /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -230,6 +264,7 @@
 		5645D2302559333F0085285C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5679C257256717AB00989F43 /* ProfileImagesViewController */,
 				567ECB65255DE9D100DD292A /* ConversationViewController */,
 				5645D231255933690085285C /* ConversationsListViewController */,
 				56B96E52255E90AC00ED3CF3 /* ProfileViewController */,
@@ -253,6 +288,7 @@
 		5645D237255945CB0085285C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5679C2672567269C00989F43 /* ProfileImages */,
 				567ECB75255DEF1900DD292A /* Messages */,
 				567ECB73255DEF0D00DD292A /* Channels */,
 				56BB5C7A253D7CF00067265D /* Profile */,
@@ -303,10 +339,11 @@
 			isa = PBXGroup;
 			children = (
 				567244CC2558B4B600B8967F /* Assembly */,
-				5645D23B255947910085285C /* Storage */,
 				56C06A16255BEE8A00CE20C0 /* CoreDataStack */,
-				56481C432537A3DD00B52E20 /* Operations */,
 				567F3D0E252373220078A709 /* Logger */,
+				56DFBA532568346800DC2C65 /* Network */,
+				56481C432537A3DD00B52E20 /* Operations */,
+				5645D23B255947910085285C /* Storage */,
 			);
 			path = CoreLayer;
 			sourceTree = "<group>";
@@ -333,6 +370,63 @@
 				567244D62558B61F00B8967F /* PresentationAssembly.swift */,
 			);
 			path = Assembly;
+			sourceTree = "<group>";
+		};
+		5679C257256717AB00989F43 /* ProfileImagesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5679C25A256717AB00989F43 /* Model */,
+				5679C25D256717AB00989F43 /* View */,
+				5679C2722567348000989F43 /* Delegates */,
+			);
+			path = ProfileImagesViewController;
+			sourceTree = "<group>";
+		};
+		5679C25A256717AB00989F43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5679C25B256717AB00989F43 /* Hit.swift */,
+				5679C25C256717AB00989F43 /* PixabayImages.swift */,
+				5679C26D25672A8800989F43 /* ProfileImagesModel.swift */,
+				56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5679C25D256717AB00989F43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5679C27925673A8A00989F43 /* Cell */,
+				5679C25F256717AB00989F43 /* ProfileImagesViewController.swift */,
+				5679C25E256717AB00989F43 /* ProfileImagesViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5679C2672567269C00989F43 /* ProfileImages */ = {
+			isa = PBXGroup;
+			children = (
+				5679C268256726CB00989F43 /* ProfileImagesService.swift */,
+			);
+			path = ProfileImages;
+			sourceTree = "<group>";
+		};
+		5679C2722567348000989F43 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				5679C273256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift */,
+				5679C276256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		5679C27925673A8A00989F43 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5679C27A25673AB900989F43 /* ProfileImagesCollectionViewCell.swift */,
+				5679C27D25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		567ECB65255DE9D100DD292A /* ConversationViewController */ = {
@@ -451,6 +545,32 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		5690FC4A256D8663003CC198 /* RequestSender */ = {
+			isa = PBXGroup;
+			children = (
+				5690FC4B256D8683003CC198 /* RequestSender.swift */,
+			);
+			path = RequestSender;
+			sourceTree = "<group>";
+		};
+		5690FC4E256D87CC003CC198 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				5690FC4F256D87DC003CC198 /* ParserProtocol.swift */,
+				5690FC53256D8866003CC198 /* PixabayParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		5690FC56256DB6D4003CC198 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				5690FC57256DB71C003CC198 /* RequestProtocol.swift */,
+				5690FC5B256DB75A003CC198 /* PixabayImageRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		56B96E52255E90AC00ED3CF3 /* ProfileViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +663,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		56DFBA532568346800DC2C65 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5690FC56256DB6D4003CC198 /* Request */,
+				5690FC4E256D87CC003CC198 /* Parser */,
+				5690FC4A256D8663003CC198 /* RequestSender */,
+				5690FC47256D85A3003CC198 /* RequestsFactory.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		56EA9382255DD78300F043CB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +755,7 @@
 			files = (
 				567F3D2B2524CA3E0078A709 /* OutgoingConversationTableViewCell.xib in Resources */,
 				568AE4EF251B1DD7001277F1 /* SF-Pro-Display-Bold.otf in Resources */,
+				5679C263256717AB00989F43 /* ProfileImagesViewController.storyboard in Resources */,
 				56BB5C74253BA0E50067265D /* GoogleService-Info.plist in Resources */,
 				560D464B250AD21A00E5A610 /* LaunchScreen.storyboard in Resources */,
 				567F3CF2252260B10078A709 /* ConversationsListViewController.storyboard in Resources */,
@@ -632,6 +764,7 @@
 				560D4648250AD21A00E5A610 /* Assets.xcassets in Resources */,
 				567F3D272524C7CF0078A709 /* IncomingConversationTableViewCell.xib in Resources */,
 				560D4646250AD21300E5A610 /* ProfileViewController.storyboard in Resources */,
+				5679C27E25673E0E00989F43 /* ProfileImagesCollectionViewCell.xib in Resources */,
 				568AE50C251B3316001277F1 /* Roboto-Regular.otf in Resources */,
 				567F3CFE252262D70078A709 /* ConversationViewController.storyboard in Resources */,
 				568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */,
@@ -717,18 +850,25 @@
 				56C06A19255D358300CE20C0 /* ChannelsFirebaseService.swift in Sources */,
 				56481C4C2537AA1200B52E20 /* LoadProfileOperation.swift in Sources */,
 				561B82F425549C2A00D9B21D /* CoreDataStack.swift in Sources */,
+				5679C264256717AB00989F43 /* ProfileImagesViewController.swift in Sources */,
 				56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */,
 				567ECB7E255DEF5500DD292A /* MessagesCoreDataService.swift in Sources */,
 				56107B1D252E37A20049BFA7 /* UIViewController+Extentions.swift in Sources */,
+				5690FC4C256D8683003CC198 /* RequestSender.swift in Sources */,
 				567ECB77255DEF2A00DD292A /* MessagesService.swift in Sources */,
 				56481C492537A59200B52E20 /* FileStorage.swift in Sources */,
 				567F3CF6252261B40078A709 /* ConversationsListViewController.swift in Sources */,
+				5690FC54256D8866003CC198 /* PixabayParser.swift in Sources */,
 				5682E5E725335B24009CE1BE /* BaseViewController.swift in Sources */,
+				56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */,
+				5679C262256717AB00989F43 /* PixabayImages.swift in Sources */,
 				56CECC6925403B8C00EFB86E /* Message.swift in Sources */,
 				567ECB6E255DED3500DD292A /* ConversationTableViewDataSource.swift in Sources */,
 				567F3D33252508470078A709 /* ConfigurableView.swift in Sources */,
 				569FE3842537ADC9002820CB /* AsyncOperation.swift in Sources */,
 				5607706E254EBA0D0021DF4E /* MessageMO+Extensions.swift in Sources */,
+				5679C26E25672A8800989F43 /* ProfileImagesModel.swift in Sources */,
+				5679C274256734C800989F43 /* ProfileImagesCollectionViewDataSource.swift in Sources */,
 				56107B15252D215A0049BFA7 /* ThemesService.swift in Sources */,
 				56C06A1C255D3DBC00CE20C0 /* ChannelsCoreDataService.swift in Sources */,
 				56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */,
@@ -742,17 +882,25 @@
 				563CF0A3256119AC00E164C3 /* ThemeSettings.swift in Sources */,
 				56481C4125373C1000B52E20 /* Profile.swift in Sources */,
 				56107B27252E61CA0049BFA7 /* UIColor+Extentions.swift in Sources */,
+				5690FC5C256DB75A003CC198 /* PixabayImageRequest.swift in Sources */,
+				5690FC58256DB71C003CC198 /* RequestProtocol.swift in Sources */,
 				561E5B742559F62C00C0B13F /* CoreDataStorage.swift in Sources */,
 				567244D72558B61F00B8967F /* PresentationAssembly.swift in Sources */,
+				5679C269256726CB00989F43 /* ProfileImagesService.swift in Sources */,
 				567244D22558B56200B8967F /* ServiceAssembly.swift in Sources */,
 				5645D2332559340A0085285C /* ConversationsListModel.swift in Sources */,
+				5690FC50256D87DC003CC198 /* ParserProtocol.swift in Sources */,
 				567ECB6B255DEBF500DD292A /* ConversationModel.swift in Sources */,
 				560D463F250AD21300E5A610 /* AppDelegate.swift in Sources */,
 				5612ED99252A76D2003A5955 /* ThemeButton.swift in Sources */,
+				5679C261256717AB00989F43 /* Hit.swift in Sources */,
 				5645D239255945F30085285C /* ChannelsService.swift in Sources */,
 				567244CA2558B44F00B8967F /* RootAssembly.swift in Sources */,
 				567244CE2558B4C600B8967F /* CoreAssembly.swift in Sources */,
+				5679C27B25673AB900989F43 /* ProfileImagesCollectionViewCell.swift in Sources */,
 				567E07D52537BC91007133D1 /* ProfileService.swift in Sources */,
+				5690FC48256D85A3003CC198 /* RequestsFactory.swift in Sources */,
+				5679C277256737C700989F43 /* ProfileImagesCollectionViewDelegate.swift in Sources */,
 				56B78B8C254B40A800055F1E /* Chats.xcdatamodeld in Sources */,
 				56481C3D2537375A00B52E20 /* ProfileOperationService.swift in Sources */,
 			);

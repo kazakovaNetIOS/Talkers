@@ -12,10 +12,12 @@ protocol CoreAssemblyProtocol {
   var firebaseStorage: FirebaseStorageProtocol { get }
   var coreDataStorage: CoreDataStorageProtocol { get }
   var fileStorage: FileStorageProtocol { get }
+  var requestSender: RequestSenderProtocol { get }
 }
 
 class CoreAssembly: CoreAssemblyProtocol {
   lazy var firebaseStorage: FirebaseStorageProtocol = FirebaseStorage()
   lazy var coreDataStorage: CoreDataStorageProtocol = CoreDataStorage(coreDataStack: CoreDataStack())
   lazy var fileStorage: FileStorageProtocol = FileStorage()
+  lazy var requestSender: RequestSenderProtocol = RequestSender()
 }
