@@ -29,8 +29,8 @@ protocol ConversationModelDelegateProtocol: class {
 
 class ConversationModel {
   weak var delegate: ConversationModelDelegateProtocol?
-  private var messagesService: MessagesServiceProtocol
-  private var profileService: ProfileServiceProtocol
+  private var messagesService: MessagesServiceFacadeProtocol
+  private var profileService: ProfileServiceFacadeProtocol
   private var themesService: ThemesServiceProtocol
   var channel: ChannelMO
 
@@ -48,8 +48,8 @@ class ConversationModel {
     return themesService.currentThemeSettings
   }
 
-  init(messagesService: MessagesServiceProtocol,
-       profileService: ProfileServiceProtocol,
+  init(messagesService: MessagesServiceFacadeProtocol,
+       profileService: ProfileServiceFacadeProtocol,
        themesService: ThemesServiceProtocol,
        channel: ChannelMO) {
     self.messagesService = messagesService

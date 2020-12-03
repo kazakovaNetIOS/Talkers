@@ -1,5 +1,5 @@
 //
-//  ChannelsService.swift
+//  ChannelsServiceFacade.swift
 //  Talkers
 //
 //  Created by Natalia Kazakova on 09.11.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-protocol ChannelsServiceProtocol {
+protocol ChannelsServiceFacadeProtocol {
   var delegate: ChannelsServiceDelegateProtocol? { get set }
   var fetchedResultsController: NSFetchedResultsController<ChannelMO> { get }
   func addChannel(withName channelName: String)
@@ -21,7 +21,7 @@ protocol ChannelsServiceDelegateProtocol: class {
   func processError(with message: String)
 }
 
-class ChannelsService {
+class ChannelsServiceFacade {
   weak var delegate: ChannelsServiceDelegateProtocol?
   private var firebaseService: ChannelsFirebaseServiceProtocol
   private var coreDataService: ChannelsCoreDataServiceProtocol
@@ -40,7 +40,7 @@ class ChannelsService {
 
 // MARK: - ChannelsServiceProtocol
 
-extension ChannelsService: ChannelsServiceProtocol {
+extension ChannelsServiceFacade: ChannelsServiceFacadeProtocol {
   func addChannel(withName channelName: String) {
     firebaseService.addChannel(withName: channelName)
   }
@@ -56,7 +56,7 @@ extension ChannelsService: ChannelsServiceProtocol {
 
 // MARK: - ChannelsFirebaseServiceDelegateProtocol
 
-extension ChannelsService: ChannelsFirebaseServiceDelegateProtocol {
+extension ChannelsServiceFacade: ChannelsFirebaseServiceDelegateProtocol {
   func firebaseDidFinishFetching() {
     coreDataService.upsert(firebaseService.channels)
   }
@@ -72,7 +72,7 @@ extension ChannelsService: ChannelsFirebaseServiceDelegateProtocol {
 
 // MARK: - ChannelsCoreDataServiceDelegateProtocol
 
-extension ChannelsService: ChannelsCoreDataServiceDelegateProtocol {
+extension ChannelsServiceFacade: ChannelsCoreDataServiceDelegateProtocol {
   func processCoreDataError(with message: String) {
     self.delegate?.processError(with: "Error in CoreData, \(message)")
   }
