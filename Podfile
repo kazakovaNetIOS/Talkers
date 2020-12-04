@@ -21,6 +21,10 @@ target 'Talkers' do
   target 'TalkersTests' do
     inherit! :search_paths
   end
+
+  target 'TalkersUITests' do
+    inherit! :search_paths
+  end
 end
 
 

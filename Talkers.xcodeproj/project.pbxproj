@@ -100,12 +100,20 @@
 		56C06A2A255D9E6C00CE20C0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C06A29255D9E6C00CE20C0 /* Channel.swift */; };
 		56CECC6925403B8C00EFB86E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC6825403B8C00EFB86E /* Message.swift */; };
 		56CECC8725421AF600EFB86E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CECC8625421AF600EFB86E /* String+Extensions.swift */; };
+		56D5183F257ADE4A007F7DC9 /* ProfileViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5183E257ADE4A007F7DC9 /* ProfileViewControllerUITests.swift */; };
 		56DFBA592569A8B500DC2C65 /* ProfileImagesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */; };
 		56E060F5256F1904006BDA4A /* TremblingButtonAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */; };
 		68875600CF64A62948C5788A /* Pods_Talkers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7659CD1767238E9F4EFC767 /* Pods_Talkers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		56D51841257ADE4B007F7DC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 560D4633250AD21300E5A610 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 560D463A250AD21300E5A610;
+			remoteInfo = Talkers;
+		};
 		56DFF85225763FDD003A1AB4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 560D4633250AD21300E5A610 /* Project object */;
@@ -118,6 +126,7 @@
 /* Begin PBXFileReference section */
 		20B62A7FF73E0732E696BAFC /* Pods-Talkers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.release.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.release.xcconfig"; sourceTree = "<group>"; };
 		226E1FD79CF245A94E7E1353 /* Pods-TalkersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkersTests.debug.xcconfig"; path = "Target Support Files/Pods-TalkersTests/Pods-TalkersTests.debug.xcconfig"; sourceTree = "<group>"; };
+		38A7BE699092488D88AD6A9F /* Pods_TalkersUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkersUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		56077068254D62250021DF4E /* ChannelMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelMO+Extensions.swift"; sourceTree = "<group>"; };
 		5607706D254EBA0D0021DF4E /* MessageMO+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageMO+Extensions.swift"; sourceTree = "<group>"; };
@@ -139,6 +148,8 @@
 		5614C71A253337B20038464F /* ProfileGCDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGCDService.swift; sourceTree = "<group>"; };
 		561B82F325549C2A00D9B21D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		561E5B732559F62C00C0B13F /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		56298CB7257A3BD3006034E7 /* ProfileViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerUITests.swift; sourceTree = "<group>"; };
+		56298CB9257A3BD3006034E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562FD7382579667D0033F15A /* ProfileGCDServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGCDServiceTests.swift; sourceTree = "<group>"; };
 		562FD73E2579672B0033F15A /* FileStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageMock.swift; sourceTree = "<group>"; };
 		563362C72576D23300FB97BE /* ChannelsFirebaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsFirebaseServiceTests.swift; sourceTree = "<group>"; };
@@ -212,11 +223,16 @@
 		56C06A29255D9E6C00CE20C0 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		56CECC6825403B8C00EFB86E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		56CECC8625421AF600EFB86E /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		56D5183C257ADE4A007F7DC9 /* TalkersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56D5183E257ADE4A007F7DC9 /* ProfileViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerUITests.swift; sourceTree = "<group>"; };
+		56D51840257ADE4B007F7DC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56DFBA582569A8B500DC2C65 /* ProfileImagesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagesCellModel.swift; sourceTree = "<group>"; };
 		56DFF84D25763FDC003A1AB4 /* TalkersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TalkersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56DFF85125763FDD003A1AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56E060F4256F1904006BDA4A /* TremblingButtonAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TremblingButtonAnimator.swift; sourceTree = "<group>"; };
 		77CE560EC1CD955D380D217E /* Pods-Talkers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Talkers.debug.xcconfig"; path = "Target Support Files/Pods-Talkers/Pods-Talkers.debug.xcconfig"; sourceTree = "<group>"; };
+		7CED94B2CFD319737AF88AB5 /* Pods-TalkersUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkersUITests.release.xcconfig"; path = "Target Support Files/Pods-TalkersUITests/Pods-TalkersUITests.release.xcconfig"; sourceTree = "<group>"; };
+		88731DAC9DEA103D4F8CAB0D /* Pods-TalkersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkersUITests.debug.xcconfig"; path = "Target Support Files/Pods-TalkersUITests/Pods-TalkersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8D1AD4DE5120AE3A488D503 /* Pods-TalkersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TalkersTests.release.xcconfig"; path = "Target Support Files/Pods-TalkersTests/Pods-TalkersTests.release.xcconfig"; sourceTree = "<group>"; };
 		E7659CD1767238E9F4EFC767 /* Pods_Talkers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Talkers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE39EA7B5DFC32FBB967C84 /* Pods_TalkersTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TalkersTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +244,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				68875600CF64A62948C5788A /* Pods_Talkers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56D51839257ADE4A007F7DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +272,8 @@
 				20B62A7FF73E0732E696BAFC /* Pods-Talkers.release.xcconfig */,
 				226E1FD79CF245A94E7E1353 /* Pods-TalkersTests.debug.xcconfig */,
 				D8D1AD4DE5120AE3A488D503 /* Pods-TalkersTests.release.xcconfig */,
+				88731DAC9DEA103D4F8CAB0D /* Pods-TalkersUITests.debug.xcconfig */,
+				7CED94B2CFD319737AF88AB5 /* Pods-TalkersUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -258,6 +283,8 @@
 			children = (
 				560D463D250AD21300E5A610 /* Talkers */,
 				56DFF84E25763FDD003A1AB4 /* TalkersTests */,
+				56298CB6257A3BD3006034E7 /* TalkersUITests */,
+				56D5183D257ADE4A007F7DC9 /* TalkersUITests */,
 				560D463C250AD21300E5A610 /* Products */,
 				338968455562CD1386CEF658 /* Pods */,
 				807132F155207779429B0208 /* Frameworks */,
@@ -269,6 +296,7 @@
 			children = (
 				560D463B250AD21300E5A610 /* Talkers.app */,
 				56DFF84D25763FDC003A1AB4 /* TalkersTests.xctest */,
+				56D5183C257ADE4A007F7DC9 /* TalkersUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +343,15 @@
 				5612ED9B252A772D003A5955 /* ThemeButton.xib */,
 			);
 			path = ThemeButton;
+			sourceTree = "<group>";
+		};
+		56298CB6257A3BD3006034E7 /* TalkersUITests */ = {
+			isa = PBXGroup;
+			children = (
+				56298CB7257A3BD3006034E7 /* ProfileViewControllerUITests.swift */,
+				56298CB9257A3BD3006034E7 /* Info.plist */,
+			);
+			path = TalkersUITests;
 			sourceTree = "<group>";
 		};
 		562FD737257966550033F15A /* Profile */ = {
@@ -782,6 +819,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		56D5183D257ADE4A007F7DC9 /* TalkersUITests */ = {
+			isa = PBXGroup;
+			children = (
+				56D5183E257ADE4A007F7DC9 /* ProfileViewControllerUITests.swift */,
+				56D51840257ADE4B007F7DC9 /* Info.plist */,
+			);
+			path = TalkersUITests;
+			sourceTree = "<group>";
+		};
 		56DFBA532568346800DC2C65 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +882,7 @@
 			children = (
 				E7659CD1767238E9F4EFC767 /* Pods_Talkers.framework */,
 				EDE39EA7B5DFC32FBB967C84 /* Pods_TalkersTests.framework */,
+				38A7BE699092488D88AD6A9F /* Pods_TalkersUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -862,6 +909,24 @@
 			productName = Talkers;
 			productReference = 560D463B250AD21300E5A610 /* Talkers.app */;
 			productType = "com.apple.product-type.application";
+		};
+		56D5183B257ADE4A007F7DC9 /* TalkersUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56D51843257ADE4B007F7DC9 /* Build configuration list for PBXNativeTarget "TalkersUITests" */;
+			buildPhases = (
+				56D51838257ADE4A007F7DC9 /* Sources */,
+				56D51839257ADE4A007F7DC9 /* Frameworks */,
+				56D5183A257ADE4A007F7DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56D51842257ADE4B007F7DC9 /* PBXTargetDependency */,
+			);
+			name = TalkersUITests;
+			productName = TalkersUITests;
+			productReference = 56D5183C257ADE4A007F7DC9 /* TalkersUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		56DFF84C25763FDC003A1AB4 /* TalkersTests */ = {
 			isa = PBXNativeTarget;
@@ -895,6 +960,10 @@
 					560D463A250AD21300E5A610 = {
 						CreatedOnToolsVersion = 11.7;
 					};
+					56D5183B257ADE4A007F7DC9 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 560D463A250AD21300E5A610;
+					};
 					56DFF84C25763FDC003A1AB4 = {
 						CreatedOnToolsVersion = 12.2;
 						LastSwiftMigration = 1220;
@@ -917,6 +986,7 @@
 			targets = (
 				560D463A250AD21300E5A610 /* Talkers */,
 				56DFF84C25763FDC003A1AB4 /* TalkersTests */,
+				56D5183B257ADE4A007F7DC9 /* TalkersUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -943,6 +1013,13 @@
 				568AE4E2251B1DD7001277F1 /* SF-Pro-Text-Regular.otf in Resources */,
 				567F3D1A2523EB440078A709 /* ConversationsListTableViewCell.xib in Resources */,
 				568AE4F2251B1DD7001277F1 /* SF-Pro-Text-Semibold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56D5183A257ADE4A007F7DC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,6 +1190,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		56D51838257ADE4A007F7DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56D5183F257ADE4A007F7DC9 /* ProfileViewControllerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		56DFF84925763FDC003A1AB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1131,6 +1216,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		56D51842257ADE4B007F7DC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 560D463A250AD21300E5A610 /* Talkers */;
+			targetProxy = 56D51841257ADE4B007F7DC9 /* PBXContainerItemProxy */;
+		};
 		56DFF85325763FDD003A1AB4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 560D463A250AD21300E5A610 /* Talkers */;
@@ -1312,6 +1402,46 @@
 			};
 			name = Release;
 		};
+		56D51844257ADE4B007F7DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DLVL4AD94D;
+				INFOPLIST_FILE = TalkersUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.kazakova-net.TalkersUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Talkers;
+			};
+			name = Debug;
+		};
+		56D51845257ADE4B007F7DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DLVL4AD94D;
+				INFOPLIST_FILE = TalkersUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.kazakova-net.TalkersUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Talkers;
+			};
+			name = Release;
+		};
 		56DFF85425763FDD003A1AB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 226E1FD79CF245A94E7E1353 /* Pods-TalkersTests.debug.xcconfig */;
@@ -1388,6 +1518,15 @@
 			buildConfigurations = (
 				560D4650250AD21A00E5A610 /* Debug */,
 				560D4651250AD21A00E5A610 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56D51843257ADE4B007F7DC9 /* Build configuration list for PBXNativeTarget "TalkersUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56D51844257ADE4B007F7DC9 /* Debug */,
+				56D51845257ADE4B007F7DC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Talkers.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "56D5183B257ADE4A007F7DC9"
+               BuildableName = "TalkersUITests.xctest"
+               BlueprintName = "TalkersUITests"
+               ReferencedContainer = "container:Talkers.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

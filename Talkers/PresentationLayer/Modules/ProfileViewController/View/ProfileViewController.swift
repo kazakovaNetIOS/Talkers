@@ -29,6 +29,14 @@ class ProfileViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    profileNameTextField.isAccessibilityElement = true
+    profileNameTextField.accessibilityIdentifier = "textField--profileNameField"
+//    profileNameTextField.accessibilityLabel = "textField--profileNameField"
+//
+    profilePositionTextView.isAccessibilityElement = true
+    profilePositionTextView.accessibilityIdentifier = "textView--profilePositionTextView"
+//    profilePositionTextView.accessibilityLabel = "textView--profilePositionTextView"
+
     shapeIntoCircle(for: profileInitialsLabel)
     shapeIntoCircle(for: profileImage)
 
