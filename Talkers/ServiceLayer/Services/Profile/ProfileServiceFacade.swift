@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ProfileServiceProtocol {
+protocol ProfileServiceFacadeProtocol {
   var delegate: ProfileServiceDelegateProtocol? { get set }
   func getSenderId() -> String
   func useServiceType(_ type: BackgroundMethod)
@@ -23,7 +23,7 @@ protocol ProfileServiceDelegateProtocol: class {
   func processError(with message: String)
 }
 
-class ProfileService {
+class ProfileServiceFacade {
   weak var delegate: ProfileServiceDelegateProtocol?
   private var profileGSDService: ProfileGCDServiceProtocol
   private var profileOperationService: ProfileOperationServiceProtocol
@@ -38,9 +38,9 @@ class ProfileService {
   }
 }
 
-// MARK: - ProfileServiceProtocol
+// MARK: - ProfileServiceFacadeProtocol
 
-extension ProfileService: ProfileServiceProtocol {
+extension ProfileServiceFacade: ProfileServiceFacadeProtocol {
   func saveProfile(_ profile: Profile) {
     switch self.serviceType {
     case .gcd:
@@ -84,7 +84,7 @@ extension ProfileService: ProfileServiceProtocol {
 
 // MARK: - ProfileServiceDelegateProtocol
 
-extension ProfileService: ProfileServiceDelegateProtocol {
+extension ProfileServiceFacade: ProfileServiceDelegateProtocol {
   func savingDidFinish() {
     self.delegate?.savingDidFinish()
   }

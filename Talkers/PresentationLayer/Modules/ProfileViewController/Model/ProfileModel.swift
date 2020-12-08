@@ -27,7 +27,7 @@ protocol ProfileModelDelegateProtocol: class {
 
 class ProfileModel {
   weak var delegate: ProfileModelDelegateProtocol?
-  private var profileService: ProfileServiceProtocol
+  private var profileService: ProfileServiceFacadeProtocol
   private var themesService: ThemesServiceProtocol
   private var profileImagesService: ProfileImagesServiceProtocol
 
@@ -35,7 +35,7 @@ class ProfileModel {
     return themesService.currentThemeSettings
   }
 
-  init(profileService: ProfileServiceProtocol,
+  init(profileService: ProfileServiceFacadeProtocol,
        themesService: ThemesServiceProtocol,
        profileImagesService: ProfileImagesServiceProtocol) {
     self.profileService = profileService

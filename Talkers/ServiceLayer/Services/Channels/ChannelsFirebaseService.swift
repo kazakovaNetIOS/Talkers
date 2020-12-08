@@ -37,7 +37,7 @@ class ChannelsFirebaseService {
 
 extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
   func addChannel(withName channelName: String) {
-    firebaseStorage.reference.addDocument(data: [ChannelKeys.name: channelName])
+    firebaseStorage.addChannel(with: [ChannelKeys.name: channelName])
   }
 
   func deleteChannel(channel: ChannelMO) {
@@ -46,15 +46,13 @@ extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
       return
     }
 
-    let channelReference = self.firebaseStorage.reference.document(id)
-    channelReference.delete { [weak self] error in
+    self.firebaseStorage.deleteChannel(with: id) { [weak self] error in
       guard let self = self else { return }
 
       if let error = error {
         self.delegate?.processFirebaseError(with: "Error while deleting channel, \(error)")
         return
       }
-
       self.delegate?.firebaseDidFinishDeleting(channel: channel)
     }
   }
@@ -63,31 +61,15 @@ extension ChannelsFirebaseService: ChannelsFirebaseServiceProtocol {
     DispatchQueue.global(qos: .userInitiated).async {[weak self] in
       guard let self = self else { return }
 
-      self.firebaseStorage.reference.addSnapshotListener {[weak self] snapshot, error in
-        guard let self = self else { return }
-
-        guard let snapshot = snapshot else {
-          if let error = error {
-            self.delegate?.processFirebaseError(with: error.localizedDescription)
-          }
-          return
-        }
-
-        self.channels = snapshot.documents.compactMap { document -> Channel? in
-          let lastMessage = document[ChannelKeys.lastMessage] as? String
-          let timestamp = document[ChannelKeys.lastActivity] as? Timestamp
-          let lastActivity = timestamp?.dateValue()
-          guard let name = document[ChannelKeys.name] as? String,
-                !name.isEmptyOrConsistWhitespaces else { return nil }
-
-          return Channel(identifier: document.documentID,
-                         name: name,
-                         lastMessage: lastMessage,
-                         lastActivity: lastActivity)
-        }
-        
+      self.firebaseStorage.addChannelChangesListener { (result) in
         DispatchQueue.main.async {
-          self.delegate?.firebaseDidFinishFetching()
+          switch result {
+          case .failure(let error):
+            self.delegate?.processFirebaseError(with: error.localizedDescription)
+          case .success(let channels):
+            self.channels = channels
+            self.delegate?.firebaseDidFinishFetching()
+          }
         }
       }
     }

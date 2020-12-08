@@ -32,7 +32,7 @@ protocol ConversationsListModelDelegateProtocol: class {
 
 class ConversationsListModel {
   weak var delegate: ConversationsListModelDelegateProtocol?
-  private var channelsService: ChannelsServiceProtocol
+  private var channelsService: ChannelsServiceFacadeProtocol
   private var themesService: ThemesServiceProtocol
 
   lazy var fetchedResultsController: NSFetchedResultsController<ChannelMO> = {
@@ -48,7 +48,7 @@ class ConversationsListModel {
     return themesService.currentThemeSettings
   }
 
-  init(channelsService: ChannelsServiceProtocol,
+  init(channelsService: ChannelsServiceFacadeProtocol,
        themesService: ThemesServiceProtocol) {
     self.channelsService = channelsService
     self.themesService = themesService
