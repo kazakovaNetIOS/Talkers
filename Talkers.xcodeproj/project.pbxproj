@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15594C6881D8D8AC2B7749F1 /* Pods_TalkersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A7BE699092488D88AD6A9F /* Pods_TalkersUITests.framework */; };
 		2A29CD4F57CCDD380499ADAB /* Pods_TalkersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE39EA7B5DFC32FBB967C84 /* Pods_TalkersTests.framework */; };
 		560231142574341A00FBA863 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */; };
 		56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56077068254D62250021DF4E /* ChannelMO+Extensions.swift */; };
@@ -251,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15594C6881D8D8AC2B7749F1 /* Pods_TalkersUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +916,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D51843257ADE4B007F7DC9 /* Build configuration list for PBXNativeTarget "TalkersUITests" */;
 			buildPhases = (
+				8BCA265D3F8A3127F68229D7 /* [CP] Check Pods Manifest.lock */,
 				56D51838257ADE4A007F7DC9 /* Sources */,
 				56D51839257ADE4A007F7DC9 /* Frameworks */,
 				56D5183A257ADE4A007F7DC9 /* Resources */,
@@ -1066,6 +1069,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Talkers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BCA265D3F8A3127F68229D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TalkersUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1404,6 +1429,7 @@
 		};
 		56D51844257ADE4B007F7DC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88731DAC9DEA103D4F8CAB0D /* Pods-TalkersUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;
@@ -1424,6 +1450,7 @@
 		};
 		56D51845257ADE4B007F7DC9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CED94B2CFD319737AF88AB5 /* Pods-TalkersUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;
