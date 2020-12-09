@@ -135,3 +135,7 @@ iOSInjectionProject/
 fastlane/.env
 
 Talkers/Config.xcconfig
+
+Talkers/Config.debug.xcconfig
+
+Talkers/Config.release.xcconfig
