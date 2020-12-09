@@ -170,6 +170,7 @@
 		56481C442537A40F00B52E20 /* SaveProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileOperation.swift; sourceTree = "<group>"; };
 		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileOperation.swift; sourceTree = "<group>"; };
+		5658D9D925818899002B30EB /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTransitionAnimator.swift; sourceTree = "<group>"; };
 		567244C92558B44F00B8967F /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 				567F3D08252266230078A709 /* SupportingFiles */,
 				56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */,
 				567244C92558B44F00B8967F /* RootAssembly.swift */,
+				5658D9D925818899002B30EB /* Config.xcconfig */,
 			);
 			path = Talkers;
 			sourceTree = "<group>";
@@ -1391,7 +1393,7 @@
 		};
 		560D4650250AD21A00E5A610 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77CE560EC1CD955D380D217E /* Pods-Talkers.debug.xcconfig */;
+			baseConfigurationReference = 5658D9D925818899002B30EB /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -1410,7 +1412,7 @@
 		};
 		560D4651250AD21A00E5A610 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B62A7FF73E0732E696BAFC /* Pods-Talkers.release.xcconfig */;
+			baseConfigurationReference = 5658D9D925818899002B30EB /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
