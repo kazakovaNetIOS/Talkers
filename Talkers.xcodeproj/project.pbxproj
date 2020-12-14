@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15594C6881D8D8AC2B7749F1 /* Pods_TalkersUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A7BE699092488D88AD6A9F /* Pods_TalkersUITests.framework */; };
 		2A29CD4F57CCDD380499ADAB /* Pods_TalkersTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE39EA7B5DFC32FBB967C84 /* Pods_TalkersTests.framework */; };
 		560231142574341A00FBA863 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560231132574341A00FBA863 /* UIBarButtonItem+Extensions.swift */; };
 		56077069254D62250021DF4E /* ChannelMO+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56077068254D62250021DF4E /* ChannelMO+Extensions.swift */; };
@@ -169,6 +170,8 @@
 		56481C442537A40F00B52E20 /* SaveProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileOperation.swift; sourceTree = "<group>"; };
 		56481C482537A59200B52E20 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		56481C4B2537AA1200B52E20 /* LoadProfileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileOperation.swift; sourceTree = "<group>"; };
+		5658D9D925818899002B30EB /* Config.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.debug.xcconfig; sourceTree = "<group>"; };
+		5658D9E32581973E002B30EB /* Config.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.release.xcconfig; sourceTree = "<group>"; };
 		5667A1312572CC3A00FE3999 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		5667A1352572F0BB00FE3999 /* CircleTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleTransitionAnimator.swift; sourceTree = "<group>"; };
 		567244C92558B44F00B8967F /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
@@ -251,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15594C6881D8D8AC2B7749F1 /* Pods_TalkersUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +316,8 @@
 				567F3D08252266230078A709 /* SupportingFiles */,
 				56B78B8A254B40A800055F1E /* Chats.xcdatamodeld */,
 				567244C92558B44F00B8967F /* RootAssembly.swift */,
+				5658D9D925818899002B30EB /* Config.debug.xcconfig */,
+				5658D9E32581973E002B30EB /* Config.release.xcconfig */,
 			);
 			path = Talkers;
 			sourceTree = "<group>";
@@ -914,6 +920,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D51843257ADE4B007F7DC9 /* Build configuration list for PBXNativeTarget "TalkersUITests" */;
 			buildPhases = (
+				8BCA265D3F8A3127F68229D7 /* [CP] Check Pods Manifest.lock */,
 				56D51838257ADE4A007F7DC9 /* Sources */,
 				56D51839257ADE4A007F7DC9 /* Frameworks */,
 				56D5183A257ADE4A007F7DC9 /* Resources */,
@@ -1066,6 +1073,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Talkers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BCA265D3F8A3127F68229D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TalkersUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1404,6 +1433,7 @@
 		};
 		56D51844257ADE4B007F7DC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88731DAC9DEA103D4F8CAB0D /* Pods-TalkersUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;
@@ -1424,6 +1454,7 @@
 		};
 		56D51845257ADE4B007F7DC9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CED94B2CFD319737AF88AB5 /* Pods-TalkersUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLVL4AD94D;

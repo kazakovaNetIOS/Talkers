@@ -66,22 +66,27 @@ extension ConversationModel: ConversationModelProtocol {
   func addMessage(with messageText: String) {
     let mySenderId = profileService.getSenderId()
     profileService.loadProfile {[weak self] (result) in
+      var profileName: String?
+
       switch result {
       case .success(let profile):
-        let newMessage = Message(content: messageText,
-                                 created: Date(),
-                                 senderId: mySenderId,
-                                 senderName: profile.name ?? "",
-                                 isMyMessage: true)
-
-        guard let channelId = self?.channel.identifier else {
-          fatalError("Can't initialize model for conversation")
-        }
-
-        self?.messagesService.addMessage(with: newMessage, in: channelId)
+        profileName = profile.name
       case .failure(let error):
-        fatalError("Can't initialize model for conversation, \(error)")
+        profileName = nil
+        print(error.localizedDescription)
       }
+
+      let newMessage = Message(content: messageText,
+                               created: Date(),
+                               senderId: mySenderId,
+                               senderName: profileName ?? "Mysterious raccoon",
+                               isMyMessage: true)
+
+      guard let channelId = self?.channel.identifier else {
+        fatalError("Can't initialize model for conversation")
+      }
+
+      self?.messagesService.addMessage(with: newMessage, in: channelId)
     }
   }
 

@@ -1,0 +1,69 @@
+desc "Hello!"
+lane :hello do
+  puts 'Hello, world!'
+end
+
+desc "Install pods by project"
+lane :install_pods do
+    cocoapods
+end
+
+desc "Build without testing"
+lane :build_for_testing do
+  install_pods
+  scan(
+    clean: true,
+    build_for_testing: true
+  )
+  notify_about_result(
+    is_successing: true,
+    phase: "Building"
+  )
+end
+
+desc "Run tests without building"
+lane :run_tests_without_building do
+  begin
+    scan(
+      derived_data_path: "./DerivedData",
+      test_without_building: true
+    )
+    notify_about_result(
+      is_successing: true,
+      phase: "Testing"
+    )
+    rescue
+      notify_about_result(
+        is_successing: false,
+        phase: "Testing"
+      )  
+      UI.crash!("Testing failed")
+    next
+  end
+end
+
+desc "Build and test"
+lane :build_and_test do
+  build_for_testing
+  run_tests_without_building
+end
+
+private_lane :notify_about_result do |options|
+  is_successing = options[:is_successing]
+  phase = options[:phase]
+
+  result_string = is_successing ? "Success" : "Failure"
+  title = "Result " + phase + " - " + result_string
+
+  discord_notifier(
+    webhook_url: ENV['DISCORD_WEBHOOK_URL'],
+    title: title,
+    description: "",
+    success: is_successing,
+    thumbnail_url: "https://acdn.tinkoff.ru/static/documents/97c3c8a7-4e2c-44d7-b6ac-d13b41096b42.png",
+    fields: [{
+      name: "Performed by: ",
+      value: "Natalia Kazakova"
+      }]
+    )
+end

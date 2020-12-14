@@ -132,3 +132,10 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,macos
+fastlane/.env
+
+Talkers/Config.xcconfig
+
+Talkers/Config.debug.xcconfig
+
+Talkers/Config.release.xcconfig
